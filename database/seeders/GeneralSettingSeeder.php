@@ -14,7 +14,7 @@ class GeneralSettingSeeder extends Seeder
     public function run(): void
     {
         GeneralSetting::create([
-            'site_title' => 'Ready POS',
+            'site_title' => 'Ready SOS',
             'currency_id' => 1,
             'currency_position' => 'Prefix',
             'date_format' => 'd m Y',

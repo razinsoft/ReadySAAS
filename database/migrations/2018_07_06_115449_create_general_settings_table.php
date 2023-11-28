@@ -22,6 +22,7 @@ class CreateGeneralSettingsTable extends Migration
             $table->foreignId('fav_id')->nullable()->constrained((new Media())->getTable());
             $table->foreignId('currency_id')->constrained('currencies');
             $table->string('currency_position')->nullable();
+            $table->string('date_with_time');
             $table->string('date_format')->nullable();
             $table->string('developed_by')->nullable();
             $table->string('address')->nullable();

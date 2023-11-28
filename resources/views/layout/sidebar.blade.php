@@ -1,8 +1,5 @@
 @php
     $request = request();
-    $general_settings = App\Repositories\GeneralSettingRepository::query()
-        ->latest()
-        ->first();
 @endphp
 <div class="app-sidebar">
     <div class="scrollbar-sidebar">
@@ -24,6 +21,29 @@
                         </span>
                     </a>
                 </li>
+                @canany(['subscription.index'])
+                    <li>
+                        <a class="menu {{ $request->routeIs('subscription.*') ? 'active' : '' }}" data-bs-toggle="collapse"
+                            href="#productMenu">
+                            <span>
+                                <img src="/icons/subscription.svg" class="menu-icon" alt="icon" />
+                                {{ __('subscriptions') }}
+                            </span>
+                            <img src="/icons/arrowDown.svg" alt="" class="downIcon">
+                        </a>
+                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('subscription.*') ? 'show' : '' }}"
+                            id="productMenu">
+                            <div class="listBar">
+                                @can('subscription.index')
+                                    <a href="{{ route('subscription.index') }}"
+                                        class="subMenu {{ $request->routeIs('subscription.index') ? 'active' : '' }}">
+                                        {{ __('list') }}
+                                    </a>
+                                @endcan
+                            </div>
+                        </div>
+                    </li>
+                @endcanany
                 @canany(['category.index', 'product.index', 'barcode.print'])
                     <li>
                         <a class="menu {{ $request->routeIs('category.*', 'product.*', 'barcode.print') ? 'active' : '' }}"
@@ -157,8 +177,8 @@
                 @endcanany
                 @canany(['sale_returns.index'])
                     <li>
-                        <a class="menu {{ $request->routeIs('sale_returns.*') ? 'active' : '' }}" data-bs-toggle="collapse"
-                            href="#saleReturnsMenu">
+                        <a class="menu {{ $request->routeIs('sale_returns.*') ? 'active' : '' }}"
+                            data-bs-toggle="collapse" href="#saleReturnsMenu">
                             <span>
                                 <img src="/icons/return.svg" class="menu-icon" alt="icon" />
                                 {{ __('returns') }}

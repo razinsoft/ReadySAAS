@@ -21,6 +21,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleReturnController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StockCountController;
+use App\Http\Controllers\SuperAdmin\SubscriptionController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UnitController;
@@ -46,7 +47,14 @@ Route::controller(LoginController::class)->middleware('guest')->group(function (
 Route::middleware(['auth', 'check_permission'])->group(function () {
     Route::get('/signout', [LoginController::class, 'logout'])->middleware('auth')->name('signout');
     Route::get('/', [DashboardController::class, 'index'])->name('root');
-
+    //subscriptions
+    Route::controller(SubscriptionController::class)->group(function () {
+        Route::get('subscriptions', 'index')->name('subscription.index');
+        Route::get('subscription/create', 'create')->name('subscription.create');
+        Route::post('subscription/store', 'store')->name('subscription.store');
+        Route::get('subscription/edit/{subscription}', 'edit')->name('subscriptions.edit');
+        Route::put('subscription/update/{subscription}', 'update')->name('subscriptions.update');
+    });
     //Role Permissions
     Route::controller(RoleController::class)->group(function () {
         Route::get('role', 'index')->name('role.index');
@@ -246,15 +254,15 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
         Route::post('currency/update/{currency}', 'update')->name('currency.update');
         Route::get('currency/delete/{currency}', 'delete')->name('currency.delete');
     });
-});
-// Language
-Route::controller(LanguageController::class)->group(function () {
-    Route::get('language', 'index')->name('language.index');
-    Route::get('language/create', 'create')->name('language.create');
-    Route::post('language/store', 'store')->name('language.store');
-    Route::get('language/{language}/edit', 'edit')->name('language.edit');
-    Route::put('language/{language}/update', 'update')->name('language.update');
-    Route::get('language/{language}/delete', 'delete')->name('language.delete');
+    // Language
+    Route::controller(LanguageController::class)->group(function () {
+        Route::get('language', 'index')->name('language.index');
+        Route::get('language/create', 'create')->name('language.create');
+        Route::post('language/store', 'store')->name('language.store');
+        Route::get('language/{language}/edit', 'edit')->name('language.edit');
+        Route::put('language/{language}/update', 'update')->name('language.update');
+        Route::get('language/{language}/delete', 'delete')->name('language.delete');
+    });
 });
 
 // Change Language

@@ -44,6 +44,7 @@ class CreatePurchasesTable extends Migration
             $table->longText('note')->nullable();
             $table->date('date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

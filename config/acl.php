@@ -1,8 +1,14 @@
 <?php
 return [
     'permissions' => [
-        'root' => ['admin', 'owner', 'store', 'customer'],
-        'signout' => ['admin', 'owner', 'store', 'customer'],
+        'root' => ['super admin', 'admin', 'owner', 'store', 'customer'],
+        'signout' => ['super admin', 'admin', 'owner', 'store', 'customer'],
+        //Subscriptions
+        'subscription.index' => ['super admin'],
+        'subscription.create' => ['super admin'],
+        'subscription.store' => ['super admin'],
+        'subscription.edit' => ['super admin'],
+        'subscription.update' => ['super admin'],
         //Product route
         'product.index' => ['admin', 'owner'],
         'product.create' => ['admin', 'owner'],
@@ -164,5 +170,12 @@ return [
         'settings.general.store' => ['admin'],
         'settings.mail' => ['admin'],
         'settings.mail.store' => ['admin'],
+        // Language
+        'language.index' => ['super admin'],
+        'language.create' => ['super admin'],
+        'language.store' => ['super admin'],
+        'language.edit' => ['super admin'],
+        'language.update' => ['super admin'],
+        'language.delete' => ['super admin'],
     ]
 ];
