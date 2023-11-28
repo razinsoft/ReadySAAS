@@ -1,0 +1,42 @@
+name: Deploy
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches:
+      - dev
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Deployment
+        uses: appleboy/ssh-action@master
+        with:
+          host: 64.227.191.10
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: root
+          port: 22
+          script: |
+            cd /var/www/html/ReadyPOS/
+            git pull origin dev
+            php artisan config:clear
+            php artisan cache:clear
+            #========your custom command here===========
+
+            #------>uncomment the command for migrate
+            #php artisan migrate --force
+
+            #------>if you run a seeder class just replace the seeder class name
+            #php artisan db:seed PermissionSeeder --force
+            #php artisan db:seed RolePermissionSeeder --force
+
+            #------>if set public permission any directory just replace directory path on the command
+            #chmod -R 777 lang
+            #chmod -R 777 .env
+            #chmod -R 777 storage
