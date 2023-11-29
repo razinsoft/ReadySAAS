@@ -50,10 +50,9 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
     //subscriptions
     Route::controller(SubscriptionController::class)->group(function () {
         Route::get('subscriptions', 'index')->name('subscription.index');
-        Route::get('subscription/create', 'create')->name('subscription.create');
+        Route::get('subscription/status-chanage/{subscription}/{status}', 'statusChanage')->name('subscription.status.chanage');
         Route::post('subscription/store', 'store')->name('subscription.store');
-        Route::get('subscription/edit/{subscription}', 'edit')->name('subscriptions.edit');
-        Route::put('subscription/update/{subscription}', 'update')->name('subscriptions.update');
+        Route::put('subscription/update/{subscription}', 'update')->name('subscription.update');
     });
     //Role Permissions
     Route::controller(RoleController::class)->group(function () {

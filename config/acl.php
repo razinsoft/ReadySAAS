@@ -5,9 +5,8 @@ return [
         'signout' => ['super admin', 'admin', 'owner', 'store', 'customer'],
         //Subscriptions
         'subscription.index' => ['super admin'],
-        'subscription.create' => ['super admin'],
         'subscription.store' => ['super admin'],
-        'subscription.edit' => ['super admin'],
+        'subscription.status.chanage' => ['super admin'],
         'subscription.update' => ['super admin'],
         //Product route
         'product.index' => ['admin', 'owner'],
