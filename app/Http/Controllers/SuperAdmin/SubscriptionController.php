@@ -37,4 +37,12 @@ class SubscriptionController extends Controller
         SubscriptionRepository::statusChanageByRequest($subscription, $status);
         return back()->with('success', 'Subscription successfully chanaged');
     }
+
+    public function requests()
+    {
+    }
+
+    public function statusUpdate()
+    {
+    }
 }

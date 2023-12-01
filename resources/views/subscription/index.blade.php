@@ -2,22 +2,6 @@
 @section('title', __('subscription'))
 @section('content')
     <style>
-        .description-content {
-            max-height: 20px;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        #see-more {
-            display: block;
-            margin-top: 10px;
-            cursor: pointer;
-            border: none;
-            background-color: transparent;
-            color: #29aae1;
-            text-decoration: underline;
-        }
-
         .switch {
             position: relative;
             display: inline-block;

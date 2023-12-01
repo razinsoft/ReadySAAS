@@ -44,6 +44,29 @@
                         </div>
                     </li>
                 @endcanany
+                @canany(['subscription-purchase.index'])
+                    <li>
+                        <a class="menu {{ $request->routeIs('subscription-purchase.*') ? 'active' : '' }}" data-bs-toggle="collapse"
+                            href="#productMenu">
+                            <span>
+                                <img src="/icons/subscription.svg" class="menu-icon" alt="icon" />
+                                {{ __('subscriptions') }}
+                            </span>
+                            <img src="/icons/arrowDown.svg" alt="" class="downIcon">
+                        </a>
+                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('subscription-purchase.*') ? 'show' : '' }}"
+                            id="productMenu">
+                            <div class="listBar">
+                                @can('subscription-purchase.index')
+                                    <a href="{{ route('subscription-purchase.index') }}"
+                                        class="subMenu {{ $request->routeIs('subscription-purchase.index') ? 'active' : '' }}">
+                                        {{ __('list') }}
+                                    </a>
+                                @endcan
+                            </div>
+                        </div>
+                    </li>
+                @endcanany
                 @canany(['category.index', 'product.index', 'barcode.print'])
                     <li>
                         <a class="menu {{ $request->routeIs('category.*', 'product.*', 'barcode.print') ? 'active' : '' }}"
@@ -350,17 +373,17 @@
                         </div>
                     </li>
                 @endcanany
-
-                <li>
-                    <a class="menu {{ $request->routeIs('language.*') ? 'active' : '' }}"
-                        href="{{ route('language.index') }}">
-                        <span>
-                            <img src="/icons/language.svg" class="menu-icon" alt="icon" />
-                            {{ __('language') }}
-                        </span>
-                    </a>
-                </li>
-
+                @can('language.index')
+                    <li>
+                        <a class="menu {{ $request->routeIs('language.*') ? 'active' : '' }}"
+                            href="{{ route('language.index') }}">
+                            <span>
+                                <img src="/icons/language.svg" class="menu-icon" alt="icon" />
+                                {{ __('language') }}
+                            </span>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
         <div class="sideBarfooter">

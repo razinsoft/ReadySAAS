@@ -21,6 +21,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleReturnController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StockCountController;
+use App\Http\Controllers\SubscriptionPurchaseController;
 use App\Http\Controllers\SuperAdmin\SubscriptionController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TaxController;
@@ -53,6 +54,13 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
         Route::get('subscription/status-chanage/{subscription}/{status}', 'statusChanage')->name('subscription.status.chanage');
         Route::post('subscription/store', 'store')->name('subscription.store');
         Route::put('subscription/update/{subscription}', 'update')->name('subscription.update');
+        Route::get('subscription/requests', 'requests')->name('subscription.requests');
+        Route::put('subscription/status-update', 'statusUpdate')->name('subscription.status.update');
+    });
+    // Unit
+    Route::controller(SubscriptionPurchaseController::class)->group(function () {
+        Route::get('subscription-purchase', 'index')->name('subscription-purchase.index');
+        Route::get('subscription-purchase/update/{subscription}', 'update')->name('subscription-purchase.update');
     });
     //Role Permissions
     Route::controller(RoleController::class)->group(function () {
