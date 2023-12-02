@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CurrencySeeder::class);
         $this->call(GeneralSettingSeeder::class);
         $this->call(SubscriptionSeeder::class);
+        $this->call(PaymentGatewaySeeder::class);
         
-
         if (app()->environment('local')) {
             $this->call([
                 CustomerGroupSeeder::class,

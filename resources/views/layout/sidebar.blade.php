@@ -46,8 +46,8 @@
                 @endcanany
                 @canany(['subscription-purchase.index'])
                     <li>
-                        <a class="menu {{ $request->routeIs('subscription-purchase.*') ? 'active' : '' }}" data-bs-toggle="collapse"
-                            href="#productMenu">
+                        <a class="menu {{ $request->routeIs('subscription-purchase.*') ? 'active' : '' }}"
+                            data-bs-toggle="collapse" href="#productMenu">
                             <span>
                                 <img src="/icons/subscription.svg" class="menu-icon" alt="icon" />
                                 {{ __('subscriptions') }}
@@ -309,9 +309,9 @@
                     </li>
                 @endcanany
                 @canany(['role.index', 'warehouse.index', 'customer_group.index', 'brand.index', 'coupons.index',
-                    'unit.index', 'currency.index', 'tax.index', 'profile.index', 'settings.general'])
+                    'unit.index', 'currency.index', 'tax.index', 'profile.index', 'settings.general','payment-gateway'])
                     <li>
-                        <a class="menu {{ $request->routeIs('role.*', 'warehouse.*', 'customer_group.*', 'brand.*', 'coupons.*', 'unit.*', 'currency.*', 'tax.*', 'profile.*', 'settings.*') ? 'active' : '' }}"
+                        <a class="menu {{ $request->routeIs('role.*', 'warehouse.*', 'customer_group.*', 'brand.*', 'coupons.*', 'unit.*', 'currency.*', 'tax.*', 'profile.*', 'settings.*','payment-gateway.*') ? 'active' : '' }}"
                             data-bs-toggle="collapse" href="#SettingMenu">
                             <span>
                                 <img src="/icons/Setting.svg" class="menu-icon" alt="icon" />
@@ -319,7 +319,7 @@
                             </span>
                             <img src="/icons/arrowDown.svg" alt="" class="downIcon">
                         </a>
-                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('role.*', 'warehouse.*', 'customer_group.*', 'brand.*', 'coupons.*', 'unit.*', 'currency.*', 'tax.*', 'profile.*', 'settings.*') ? 'show' : '' }}"
+                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('role.*', 'warehouse.*', 'customer_group.*', 'brand.*', 'coupons.*', 'unit.*', 'currency.*', 'tax.*', 'profile.*', 'settings.*','payment-gateway.*') ? 'show' : '' }}"
                             id="SettingMenu">
                             <div class="listBar">
                                 @can('role.index')
@@ -360,7 +360,10 @@
                                     <a href="{{ route('profile.index', auth()->id()) }}"
                                         class="subMenu {{ $request->routeIs('profile.index') ? 'active' : '' }}">{{ __('profile') }}</a>
                                 @endcan
-
+                                @can('payment-gateway.index')
+                                    <a href="{{ route('payment-gateway.index') }}"
+                                        class="subMenu {{ $request->routeIs('payment-gateway.index') ? 'active' : '' }}">{{ __('payment_gateway') }}</a>
+                                @endcan
                                 @can('settings.mail')
                                     <a href="{{ route('settings.mail') }}"
                                         class="subMenu {{ $request->routeIs('settings.mail') ? 'active' : '' }}">{{ __('smtp_configure') }}</a>

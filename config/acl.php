@@ -10,6 +10,9 @@ return [
         'subscription.update' => ['super admin'],
         'subscription.requests' => ['super admin'],
         'subscription.status.update' => ['super admin'],
+        //Payment Gateway
+        'payment-gateway.index' => ['super admin'],
+        'payment-gateway.update' => ['super admin'],
         //Subscriptions
         'subscription-purchase.index' => ['owner'],
         'subscription-purchase.update' => ['owner'],
@@ -170,10 +173,10 @@ return [
         'tax.update' => ['admin'],
         'tax.delete' => ['admin'],
         //Settings route
-        'settings.general' => ['admin'],
-        'settings.general.store' => ['admin'],
-        'settings.mail' => ['admin'],
-        'settings.mail.store' => ['admin'],
+        'settings.general' => ['super admin'],
+        'settings.general.store' => ['super admin'],
+        'settings.mail' => ['super admin'],
+        'settings.mail.store' => ['super admin'],
         // Language
         'language.index' => ['super admin'],
         'language.create' => ['super admin'],

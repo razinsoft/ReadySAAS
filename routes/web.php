@@ -22,6 +22,7 @@ use App\Http\Controllers\SaleReturnController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StockCountController;
 use App\Http\Controllers\SubscriptionPurchaseController;
+use App\Http\Controllers\SuperAdmin\PaymentGatewayController;
 use App\Http\Controllers\SuperAdmin\SubscriptionController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TaxController;
@@ -61,6 +62,11 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
     Route::controller(SubscriptionPurchaseController::class)->group(function () {
         Route::get('subscription-purchase', 'index')->name('subscription-purchase.index');
         Route::get('subscription-purchase/update/{subscription}', 'update')->name('subscription-purchase.update');
+    });
+     // Payment Gateway
+     Route::controller(PaymentGatewayController::class)->group(function () {
+        Route::get('payment-gateways', 'index')->name('payment-gateway.index');
+        Route::put('payment-gateway/update/{paymentGateway}', 'update')->name('payment-gateway.update');
     });
     //Role Permissions
     Route::controller(RoleController::class)->group(function () {
