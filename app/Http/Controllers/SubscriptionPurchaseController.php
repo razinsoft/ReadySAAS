@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subscription;
 use App\Repositories\SubscriptionRepository;
+use App\Repositories\SubscriptionRequestRepository;
 use Illuminate\Http\Request;
 
 class SubscriptionPurchaseController extends Controller
@@ -16,6 +17,8 @@ class SubscriptionPurchaseController extends Controller
 
     public function update(Subscription $subscription)
     {
-        dd($subscription);
+        // $subscriptionRequest = SubscriptionRequestRepository::storeByRequest($subscription);
+        // dd($subscription);
+        return to_route('payment.method');
     }
 }

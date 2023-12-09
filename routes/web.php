@@ -66,7 +66,9 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
      // Payment Gateway
      Route::controller(PaymentGatewayController::class)->group(function () {
         Route::get('payment-gateways', 'index')->name('payment-gateway.index');
-        Route::put('payment-gateway/update/{paymentGateway}', 'update')->name('payment-gateway.update');
+        Route::put('payment-gateway/update', 'update')->name('payment-gateway.update');
+        Route::get('payment', 'payment')->name('payment.method');
+        Route::get('payment/process', 'process')->name('payment.process');
     });
     //Role Permissions
     Route::controller(RoleController::class)->group(function () {

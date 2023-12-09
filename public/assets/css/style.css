@@ -5871,6 +5871,7 @@ table.dataTable {
     width: 100%;
     font-weight: 500;
     transition: 0.2s ease;
+    border: 1px solid;
 }
 
 .subscribe-button:hover {

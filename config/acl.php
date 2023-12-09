@@ -13,6 +13,8 @@ return [
         //Payment Gateway
         'payment-gateway.index' => ['super admin'],
         'payment-gateway.update' => ['super admin'],
+        'payment.method' => ['owner'],
+        'payment.process' => ['owner'],
         //Subscriptions
         'subscription-purchase.index' => ['owner'],
         'subscription-purchase.update' => ['owner'],
