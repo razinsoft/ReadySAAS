@@ -15,8 +15,10 @@ class Select extends Component
         public $name,
         public $title,
         public $placeholder,
+        public $id = null,
         public $required = true
-    ){}
+    ) {
+    }
 
     /**
      * Get the view / contents that represent the component.

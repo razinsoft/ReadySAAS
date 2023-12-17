@@ -5879,7 +5879,7 @@ table.dataTable {
 }
 
 .description-content {
-    max-height: 100px;
+    max-height: 40px;
     overflow: hidden;
     transition: max-height 0.3s ease;
 }

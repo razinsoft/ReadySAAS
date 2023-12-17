@@ -115,6 +115,29 @@
                         </div>
                     </li>
                 @endcanany
+                @canany(['shop.category.index'])
+                    <li>
+                        <a class="menu {{ $request->routeIs('shop.category.*') ? 'active' : '' }}" data-bs-toggle="collapse"
+                            href="#shopCategoryMenu">
+                            <span>
+                                <img src="/icons/product.svg" class="menu-icon" alt="icon" />
+                                {{ __('shop') }}
+                            </span>
+                            <img src="/icons/arrowDown.svg" alt="" class="downIcon">
+                        </a>
+                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('shop.category.*') ? 'show' : '' }}"
+                            id="shopCategoryMenu">
+                            <div class="listBar">
+                                @can('shop.category.index')
+                                    <a href="{{ route('shop.category.index') }}"
+                                        class="subMenu {{ $request->routeIs('category.index') ? 'active' : '' }}">
+                                        {{ __('categories') }}
+                                    </a>
+                                @endcan
+                            </div>
+                        </div>
+                    </li>
+                @endcanany
                 @canany(['purchase.index', 'purchase.create', 'stockCount.index', 'purchase.batch'])
                     <li>
                         <a class="menu {{ $request->routeIs('purchase.*', 'stockCount.*') ? 'active' : '' }}"

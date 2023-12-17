@@ -186,5 +186,11 @@ return [
         'language.edit' => ['super admin'],
         'language.update' => ['super admin'],
         'language.delete' => ['super admin'],
+        //shop category route
+        'shop.category.index' => ['super admin'],
+        'shop.category.store' => ['super admin'],
+        'shop.category.update' => ['super admin'],
+        'shop.category.delete' => ['super admin'],
+        'shop.category.status.chanage' => ['super admin'],
     ]
 ];

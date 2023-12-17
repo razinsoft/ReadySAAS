@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title', __('subscription'))
+@section('title', __('subscriptions'))
 @section('content')
     <style>
         .switch {
@@ -65,7 +65,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <span class="list-title">{{ __('subscription') }}</span>
+                    <span class="list-title">{{ __('subscriptions') }}</span>
                     <button class="btn common-btn" data-toggle="modal" data-target="#createModal"><i
                             class="fa fa-plus"></i>&nbsp;&nbsp;
                         {{ __('add_subscription') }}</button>
@@ -81,7 +81,7 @@
                                     <th>{{ __('shop_limit') }}</th>
                                     <th>{{ __('recurring_type') }}</th>
                                     <th>{{ __('status') }}</th>
-                                    <th>{{ __('description') }}</th>
+                                    <th width="500px">{{ __('description') }}</th>
                                     <th>{{ __('action') }}</th>
                                 </tr>
                             </thead>
@@ -101,7 +101,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </td>
-                                        <td>
+                                        <td >
                                             <div class="description-content">{{ $subscription->description }}</div>
                                             <button id="see-more">See More</button>
                                         </td>
@@ -143,20 +143,20 @@
                                                                         <x-input name="title" title="{{ __('title') }}"
                                                                             type="text" :required="true"
                                                                             value="{{ $subscription->title }}"
-                                                                            placeholder="{{ __('Enter_your_subscription_title') }}" />
+                                                                            placeholder="{{ __('enter_your_subscription_title') }}" />
                                                                     </div>
                                                                     <div class="col-md-12 mb-2">
                                                                         <x-input name="price" title="{{ __('price') }}"
                                                                             type="text" :required="true"
                                                                             value="{{ $subscription->price }}"
-                                                                            placeholder="{{ __('Enter_your_subscription_price') }}" />
+                                                                            placeholder="{{ __('enter_your_subscription_price') }}" />
                                                                     </div>
                                                                     <div class="col-md-12 mb-2">
                                                                         <x-input name="shop_limit"
                                                                             title="{{ __('shop_limit') }}" type="text"
                                                                             :required="true"
                                                                             value="{{ $subscription->shop_limit }}"
-                                                                            placeholder="{{ __('Enter_your_subscription_shop_limit') }}" />
+                                                                            placeholder="{{ __('enter_your_subscription_shop_limit') }}" />
                                                                     </div>
                                                                     <div class="col-md-12 mb-2">
                                                                         <x-select name="recurring_type"
@@ -188,7 +188,7 @@
                                                                         <div class="form-group">
                                                                             <label
                                                                                 class="mb-2">{{ __('description') }}</label>
-                                                                            <textarea name="description" class="form-control" placeholder="{{ __('Enter_your_subscription_description') }}">{{ $subscription->description }}</textarea>
+                                                                            <textarea name="description" class="form-control" placeholder="{{ __('enter_your_subscription_description') }}">{{ $subscription->description }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -197,7 +197,7 @@
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">{{ __('close') }}</button>
                                                                 <button type="submit"
-                                                                    class="btn common-btn">{{ __('submit') }}</button>
+                                                                    class="btn common-btn">{{ __('update_and_Save') }}</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -230,15 +230,15 @@
                         <div class="row">
                             <div class="col-md-12 mb-2">
                                 <x-input name="title" title="{{ __('title') }}" type="text" :required="true"
-                                    placeholder="{{ __('Enter_your_subscription_title') }}" />
+                                    placeholder="{{ __('enter_your_subscription_title') }}" />
                             </div>
                             <div class="col-md-12 mb-2">
                                 <x-input name="price" title="{{ __('price') }}" type="text" :required="true"
-                                    placeholder="{{ __('Enter_your_subscription_price') }}" />
+                                    placeholder="{{ __('enter_your_subscription_price') }}" />
                             </div>
                             <div class="col-md-12 mb-2">
                                 <x-input name="shop_limit" title="{{ __('shop_limit') }}" type="text"
-                                    :required="true" placeholder="{{ __('Enter_your_subscription_shop_limit') }}" />
+                                    :required="true" placeholder="{{ __('enter_your_subscription_shop_limit') }}" />
                             </div>
                             <div class="col-md-12 mb-2">
                                 <x-select name="recurring_type" title="{{ __('recurring_type') }}"
@@ -263,7 +263,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="mb-2">{{ __('description') }}</label>
-                                    <textarea name="description" class="form-control" placeholder="{{ __('Enter_your_subscription_description') }}"></textarea>
+                                    <textarea name="description" class="form-control" placeholder="{{ __('enter_your_subscription_description') }}"></textarea>
                                 </div>
                             </div>
                         </div>
