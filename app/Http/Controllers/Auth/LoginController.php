@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Events\MailSendEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerRequest;
+use App\Http\Requests\ShopOwnerRequest;
 use App\Http\Requests\SigninRequest;
 use App\Repositories\CustomerRepository;
 use App\Repositories\EmailVerificationRepository;
+use App\Repositories\GeneralSettingRepository;
+use App\Repositories\ShopCategoryRepository;
+use App\Repositories\ShopRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +26,8 @@ class LoginController extends Controller
     }
     public function signup()
     {
-        return view('auth.registration');
+        $shopCategories = ShopCategoryRepository::getAll();
+        return view('auth.registration', compact('shopCategories'));
     }
     public function signin(SigninRequest $loginRequest)
     {
@@ -58,13 +63,14 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         return to_route('signin.index')->with('success', 'You logout successfully');
     }
-    public function signupRequest(CustomerRequest $request)
+    public function signupRequest(ShopOwnerRequest $request)
     {
-        if(!env('MAIL_USERNAME') || !env('MAIL_PASSWORD')){
+        if (!env('MAIL_USERNAME') || !env('MAIL_PASSWORD')) {
             return back()->with('error', 'Now you can not do signup because admin have not configured signup yet');
         }
         $user = UserRepository::storeByRequest($request);
-        CustomerRepository::storeByRequest($request, $user);
+        ShopRepository::storeByRequest($request);
+        GeneralSettingRepository::storeByRequest($request);
         $varificationCode = EmailVerificationRepository::storeByRequest($user);
         MailSendEvent::dispatch($user, $varificationCode, 'signup');
         return to_route('signin.index')->with('success', 'Sign Up successfully done! Please check your email inbox or spam');
@@ -77,6 +83,6 @@ class LoginController extends Controller
         }
         UserRepository::emailVarifyAt($varificationCode->user);
         $varificationCode->delete();
-        return to_route('signin.index')->with('success', 'Email successfully varified!');
+        return to_route('signin.index')->with('success', 'Email successfully varified! But wait for authorize confirmation');
     }
 }

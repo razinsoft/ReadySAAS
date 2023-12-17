@@ -4125,8 +4125,7 @@ ul.radio-button-ex li .check::before {
 }
 
 .login-section .page-content {
-    margin-top: 30px;
-    margin-bottom: 40px;
+    margin-top: 10px;
 }
 
 .login-section .card {
@@ -5780,7 +5779,7 @@ table.dataTable {
 #dataTable_filter {
     position: absolute;
     top: 12px;
-    left: 135px;
+    left: 150px;
 }
 
 [dir="rtl"] #dataTable_filter {

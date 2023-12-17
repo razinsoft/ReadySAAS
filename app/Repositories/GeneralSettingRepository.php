@@ -14,7 +14,56 @@ class GeneralSettingRepository extends Repository
         return GeneralSetting::class;
     }
 
-    public static function storeByRequest(Request $request, $settings)
+    public static function storeByRequest(Request $request)
+    {
+        $siteLogoId = null;
+        if ($request->hasFile('site_logo')) {
+            $siteLogo = (new MediaRepository())->updateOrCreateByRequest(
+                $request->site_logo,
+                self::$path,
+                'Image'
+            );
+            $siteLogoId = $siteLogo->id;
+        }
+
+        $smallLogoId = null;
+        if ($request->hasFile('small_logo')) {
+            $smallLogo = (new MediaRepository())->updateOrCreateByRequest(
+                $request->small_logo,
+                self::$path,
+                'Image'
+            );
+            $smallLogoId = $smallLogo->id;
+        }
+
+        $faviconId = null;
+        if ($request->hasFile('favicon')) {
+            $favicon = (new MediaRepository())->updateOrCreateByRequest(
+                $request->favicon,
+                self::$path,
+                'Image'
+            );
+            $faviconId = $favicon->id;
+        }
+        return self::create([
+            'site_title' => $request->shop_name,
+            'logo_id' => $siteLogoId,
+            'small_logo_id' => $smallLogoId,
+            'fav_id' => $faviconId,
+            'currency_id' => 1,
+            'currency_position' => 'Prefix',
+            'date_format' => 'd m Y',
+            'date_with_time' => 'Enable',
+            'address' => null,
+            'email' => null,
+            'phone' => null,
+            'developed_by' => $request->shop_name,
+            'direction' => 'ltr',
+            'lang' => 'en',
+        ]);
+    }
+
+    public static function updateByRequest(Request $request, $settings)
     {
         $siteLogoId = $settings->logo_id;
         if ($request->hasFile('site_logo')) {
@@ -48,10 +97,7 @@ class GeneralSettingRepository extends Repository
             );
             $faviconId = $favicon->id;
         }
-
-        $generalSettings = self::query()->updateOrCreate([
-            'id' => $settings?->id ?? 0,
-        ], [
+        return self::update($settings, [
             'site_title' => $request->site_title,
             'currency_id' => $request->currency_id,
             'currency_position' => $request->currency_position,
@@ -66,8 +112,6 @@ class GeneralSettingRepository extends Repository
             'fav_id' => $faviconId,
             'direction' => $request->direction,
         ]);
-
-        return $generalSettings;
     }
 
     public static function languageUpdate($lang)
