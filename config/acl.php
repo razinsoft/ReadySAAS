@@ -192,5 +192,12 @@ return [
         'shop.category.update' => ['super admin'],
         'shop.category.delete' => ['super admin'],
         'shop.category.status.chanage' => ['super admin'],
+        //shop route
+        'shop.index' => ['super admin', 'admin'],
+        'shop.create' => ['super admin', 'admin'],
+        'shop.store' => ['super admin', 'admin'],
+        'shop.update' => ['super admin', 'admin'],
+        'shop.delete' => ['super admin', 'admin'],
+        'shop.status.chanage' => ['super admin', 'admin'],
     ]
 ];

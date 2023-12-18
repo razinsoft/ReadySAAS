@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Enums\Status;
 use Illuminate\Http\Request;
 use App\Models\Shop;
+use App\Models\User;
 
 class ShopRepository extends Repository
 {
@@ -13,9 +14,10 @@ class ShopRepository extends Repository
         return Shop::class;
     }
 
-    public static function storeByRequest(Request $request)
+    public static function storeByRequest(Request $request, User $user)
     {
         return self::create([
+            'user_id' => $user->id,
             'name' => $request->shop_name,
             'shop_category_id' => $request->shop_category_id,
             'status' => Status::INACTIVE->value,

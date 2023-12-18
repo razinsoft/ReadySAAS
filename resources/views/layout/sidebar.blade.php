@@ -115,9 +115,9 @@
                         </div>
                     </li>
                 @endcanany
-                @canany(['shop.category.index'])
+                @canany(['shop.category.index','shop.index'])
                     <li>
-                        <a class="menu {{ $request->routeIs('shop.category.*') ? 'active' : '' }}" data-bs-toggle="collapse"
+                        <a class="menu {{ $request->routeIs('shop.category.*','shop.*') ? 'active' : '' }}" data-bs-toggle="collapse"
                             href="#shopCategoryMenu">
                             <span>
                                 <img src="/icons/product.svg" class="menu-icon" alt="icon" />
@@ -125,13 +125,25 @@
                             </span>
                             <img src="/icons/arrowDown.svg" alt="" class="downIcon">
                         </a>
-                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('shop.category.*') ? 'show' : '' }}"
+                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('shop.category.*','shop.*') ? 'show' : '' }}"
                             id="shopCategoryMenu">
                             <div class="listBar">
                                 @can('shop.category.index')
                                     <a href="{{ route('shop.category.index') }}"
                                         class="subMenu {{ $request->routeIs('category.index') ? 'active' : '' }}">
                                         {{ __('categories') }}
+                                    </a>
+                                @endcan
+                                @can('shop.index')
+                                    <a href="{{ route('shop.index') }}"
+                                        class="subMenu {{ $request->routeIs('shop.index') ? 'active' : '' }}">
+                                        {{ __('list') }}
+                                    </a>
+                                @endcan
+                                @can('shop.create')
+                                    <a href="{{ route('shop.create') }}"
+                                        class="subMenu {{ $request->routeIs('shop.create') ? 'active' : '' }}">
+                                        {{ __('create') }}
                                     </a>
                                 @endcan
                             </div>

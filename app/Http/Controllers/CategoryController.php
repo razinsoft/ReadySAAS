@@ -63,7 +63,7 @@ class CategoryController extends Controller
 
     public function categoryPrint(Request $request){
         $categories = CategoryRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->latest()->first();
+        $generalsettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
         return view('category.categoryPrint', compact('categories','generalsettings'));
     }
 }

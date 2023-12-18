@@ -26,7 +26,7 @@ class SaleController extends Controller
     {
         $request = request();
         $sales = SaleRepository::query()->orderBy('id', 'DESC')->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->latest()->first();
+        $generalsettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
         return view('sale.salePrint', compact('sales', 'generalsettings'));
     }
     public function draft()

@@ -16,7 +16,7 @@ class StockCountController extends Controller
         $warehouses = WarehouseRepository::getAll();
         $brands = BrandRepository::getAll();
         $categories = CategoryRepository::getAll();
-        $general_setting = GeneralSettingRepository::query()->latest()->first();
+        $general_setting = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
         $stockCounts = StockCountRepository::query()->orderBy('id', 'desc')->where('user_id', auth()->id())->get();
 
         return view('stockCount.index', compact('warehouses', 'brands', 'categories', 'stockCounts'));

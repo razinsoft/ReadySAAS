@@ -14,7 +14,7 @@ class SettingsController extends Controller
     public function generalSettings()
     {
         $currencies = CurrencyRepository::getAll();
-        $generalSettings = GeneralSettingRepository::query()->latest()->first();
+        $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
         $dateFormats = DateFormat::cases();
 
         $zones = array();
@@ -29,9 +29,9 @@ class SettingsController extends Controller
 
     public function store(GeneralSettingsRequest $request, GeneralSetting $generalSetting)
     {
-        if (app()->environment('local')) {
-            return back()->with('error', 'This section is not available for demo version!');
-        }
+        // if (app()->environment('local')) {
+        //     return back()->with('error', 'This section is not available for demo version!');
+        // }
         GeneralSettingRepository::updateByRequest($request, $generalSetting);
         if (env('APP_TIMEZONE') != $request->timezone) {
             $this->setEnv('APP_TIMEZONE', $request->timezone);

@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\MailSendEvent;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CustomerRequest;
 use App\Http\Requests\ShopOwnerRequest;
 use App\Http\Requests\SigninRequest;
-use App\Repositories\CustomerRepository;
 use App\Repositories\EmailVerificationRepository;
 use App\Repositories\GeneralSettingRepository;
 use App\Repositories\ShopCategoryRepository;
@@ -69,8 +67,8 @@ class LoginController extends Controller
             return back()->with('error', 'Now you can not do signup because admin have not configured signup yet');
         }
         $user = UserRepository::storeByRequest($request);
-        ShopRepository::storeByRequest($request);
-        GeneralSettingRepository::storeByRequest($request);
+        $shop = ShopRepository::storeByRequest($request, $user);
+        GeneralSettingRepository::storeByRequest($request, $shop);
         $varificationCode = EmailVerificationRepository::storeByRequest($user);
         MailSendEvent::dispatch($user, $varificationCode, 'signup');
         return to_route('signin.index')->with('success', 'Sign Up successfully done! Please check your email inbox or spam');

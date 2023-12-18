@@ -217,7 +217,7 @@ class PurchaseController extends Controller
     public function purchasePrint(){
         $request = request();
         $purchases = PurchaseRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->latest()->first();
+        $generalsettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
         return view('purchase.purchasePrint', compact('purchases','generalsettings'));
     }
 }

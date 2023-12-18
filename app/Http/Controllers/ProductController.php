@@ -274,7 +274,7 @@ class ProductController extends Controller
     public function productPrint(){
         $request = request();
         $products = ProductRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->latest()->first();
+        $generalsettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
         return view('product.productPrint', compact('products','generalsettings'));
     }
 }

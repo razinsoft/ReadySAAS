@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\GeneralSetting;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class GeneralSettingRepository extends Repository
@@ -14,12 +15,12 @@ class GeneralSettingRepository extends Repository
         return GeneralSetting::class;
     }
 
-    public static function storeByRequest(Request $request)
+    public static function storeByRequest(Request $request, Shop $shop)
     {
         $siteLogoId = null;
-        if ($request->hasFile('site_logo')) {
+        if ($request->hasFile('shop_logo')) {
             $siteLogo = (new MediaRepository())->updateOrCreateByRequest(
-                $request->site_logo,
+                $request->shop_logo,
                 self::$path,
                 'Image'
             );
@@ -27,9 +28,9 @@ class GeneralSettingRepository extends Repository
         }
 
         $smallLogoId = null;
-        if ($request->hasFile('small_logo')) {
+        if ($request->hasFile('shop_logo')) {
             $smallLogo = (new MediaRepository())->updateOrCreateByRequest(
-                $request->small_logo,
+                $request->shop_logo,
                 self::$path,
                 'Image'
             );
@@ -37,15 +38,16 @@ class GeneralSettingRepository extends Repository
         }
 
         $faviconId = null;
-        if ($request->hasFile('favicon')) {
+        if ($request->hasFile('shop_favicon')) {
             $favicon = (new MediaRepository())->updateOrCreateByRequest(
-                $request->favicon,
+                $request->shop_favicon,
                 self::$path,
                 'Image'
             );
             $faviconId = $favicon->id;
         }
         return self::create([
+            'shop_id' => $shop->id,
             'site_title' => $request->shop_name,
             'logo_id' => $siteLogoId,
             'small_logo_id' => $smallLogoId,
@@ -116,7 +118,7 @@ class GeneralSettingRepository extends Repository
 
     public static function languageUpdate($lang)
     {
-        $generalSettings = GeneralSettingRepository::query()->latest()->first();
+        $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
         $update = self::update($generalSettings, [
             'lang' => $lang
         ]);

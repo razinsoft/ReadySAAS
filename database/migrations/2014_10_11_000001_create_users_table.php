@@ -2,7 +2,6 @@
 
 use App\Models\Media;
 use App\Models\User;
-use App\Models\Warehouse;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -24,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('company_name')->nullable();
             $table->foreignId('thumbnail_id')->nullable()->constrained((new Media())->getTable());
-            $table->foreignId('warehouse_id')->nullable()->constrained((new Warehouse())->getTable());
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

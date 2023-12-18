@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('*',function($view){
-            $general_settings = GeneralSettingRepository::query()->latest()->first();
+            $general_settings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
             $currency = $general_settings?->defaultCurrency;
             $view->with('general_settings', $general_settings);
             $view->with('currency', $currency);

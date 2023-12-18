@@ -15,4 +15,14 @@ class Shop extends Model
     protected $casts = [
         'status' => Status::class,
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function shopCategory()
+    {
+        return $this->belongsTo(ShopCategory::class);
+    }
 }

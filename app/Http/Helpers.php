@@ -5,7 +5,7 @@ use Carbon\Carbon;
 
 function dateFormat($date)
 {
-    $generalSetting = GeneralSettingRepository::query()->latest()->first();
+    $generalSetting = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
     $format = $generalSetting->date_format->value ?? 'd m Y';
     $date = Carbon::parse($date)->format($format);
     if ($generalSetting->date_with_time->value == 'Enable') {
@@ -16,7 +16,7 @@ function dateFormat($date)
 
 function numberFormat($number)
 {
-    $generalSetting = GeneralSettingRepository::query()->latest()->first();
+    $generalSetting = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
     $symbol = $generalSetting->defaultCurrency->symbol ?? '$';
     if (isset($generalSetting->currency_position) && ($generalSetting->currency_position->value == "Prefix")) {
 
