@@ -24,7 +24,7 @@ class SubscriptionRepository extends Repository
         ]);
     }
 
-    public static function updateByRequest(Subscription $subscription, SubscriptionRequest $request)
+    public static function updateByRequest(SubscriptionRequest $request, Subscription $subscription)
     {
         return self::update($subscription, [
             'title' => $request->title,
