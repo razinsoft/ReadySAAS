@@ -11,7 +11,8 @@ class UnitController extends Controller
 {
     public function index()
     {
-        $units = UnitRepository::getAll();
+        $shop = auth()->user()?->shop;
+        $units = UnitRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('unit.index', compact('units'));
     }
 

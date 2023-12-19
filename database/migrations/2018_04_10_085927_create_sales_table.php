@@ -2,6 +2,7 @@
 
 use App\Models\Customer;
 use App\Models\Media;
+use App\Models\Shop;
 use App\Models\User;
 use App\Models\Warehouse;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,7 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
             $table->string('reference_no');
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignId('customer_id')->nullable()->constrained((new Customer())->getTable());
@@ -41,6 +43,7 @@ class CreateSalesTable extends Migration
             $table->double('paid_amount')->nullable();
             $table->text('sale_note')->nullable();
             $table->text('staff_note')->nullable();
+            $table->string('type');
             $table->timestamps();
         });
     }

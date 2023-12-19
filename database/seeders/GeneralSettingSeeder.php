@@ -26,5 +26,20 @@ class GeneralSettingSeeder extends Seeder
             'direction' => 'ltr',
             'lang' => 'en',
         ]);
+
+        GeneralSetting::create([
+            'shop_id' => 1,
+            'site_title' => 'ReadySOS Shop',
+            'currency_id' => 1,
+            'currency_position' => 'Prefix',
+            'date_format' => 'd-m-Y',
+            'date_with_time' => 'Enable',
+            'address' => fake()->address(),
+            'email' => fake()->email(),
+            'phone' => fake()->phoneNumber(),
+            'developed_by' => 'ReadySOS Shop',
+            'direction' => 'ltr',
+            'lang' => 'en',
+        ]);
     }
 }

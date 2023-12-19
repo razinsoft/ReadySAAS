@@ -19,6 +19,8 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
+            'shop_id' => 1,
+            'created_by' => 2,
             'title' => $this->faker->name,
             'thumbnail_id' => Media::factory()->create(),
         ];

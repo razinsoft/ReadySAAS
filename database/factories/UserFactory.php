@@ -21,7 +21,6 @@ class UserFactory extends Factory
     {
         return [
             'phone' => $this->faker->phoneNumber,
-            'company_name' => $this->faker->company(),
             'password' => Hash::make('secret'),
             'remember_token' => Str::random(10),
             'thumbnail_id' => Media::factory()->create(),

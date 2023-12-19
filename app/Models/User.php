@@ -24,10 +24,11 @@ class User extends Authenticatable
         return $this->belongsTo(Media::class, 'thumbnail_id');
     }
 
-    public function holiday()
+    public function shop()
     {
-        return $this->hasMany(Holiday::class);
+        return $this->hasOne(Shop::class);
     }
+
     public function coupons()
     {
         return $this->hasMany(Coupon::class);

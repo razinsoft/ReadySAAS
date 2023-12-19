@@ -19,6 +19,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
+            'shop_id' => 1,
+            'created_by' => 2,
             'thumbnail_id' => Media::factory()->create(),
             'name' => $this->faker->name,
             'parent_id' => 1,

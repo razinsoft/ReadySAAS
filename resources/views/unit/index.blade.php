@@ -64,6 +64,11 @@
                                                                         class="form-control mb-2"
                                                                         value="{{ $unit->name }}"
                                                                         placeholder="{{ __('enter_your_unit_name') }}">
+                                                                    @error('name')
+                                                                        <span class="text text-danger" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
 
@@ -75,14 +80,18 @@
                                                                         class="form-control mb-2"
                                                                         value="{{ $unit->code }}"
                                                                         placeholder="{{ __('enter_your_unit_code') }}">
+                                                                    @error('code')
+                                                                        <span class="text text-danger" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label
-                                                                        class="mb-2">{{ __('base_unit') }}</label>
+                                                                    <label class="mb-2">{{ __('base_unit') }}</label>
                                                                     <select class="form-control mb-2" name="base_unit_id">
-                                                                        <option>{{ __('select_a_option') }}
+                                                                        <option selected disabled>{{ __('select_a_option') }}
                                                                         </option>
                                                                         @if ($units->isNotEmpty())
                                                                             @foreach ($units as $uti)
@@ -91,10 +100,6 @@
                                                                                     value="{{ $uti->id }}">
                                                                                     {{ $uti->name }}</option>
                                                                             @endforeach
-                                                                        @else
-                                                                            <option>
-                                                                                {{ __('no_option_available') }}
-                                                                            </option>
                                                                         @endif
                                                                     </select>
                                                                 </div>
@@ -103,8 +108,7 @@
                                                         <div class="row mt-3">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label
-                                                                        class="mb-2">{{ __('operator') }}</label>
+                                                                    <label class="mb-2">{{ __('operator') }}</label>
                                                                     <input type="text" name="operator"
                                                                         placeholder="{{ __('enter_your_operator_name') }}"
                                                                         class="form-control mb-2"
@@ -147,8 +151,7 @@
                 <form action="{{ route('unit.store') }}" method="POST">
                     @csrf
                     <div class="modal-header card-header-color">
-                        <span id="createModalLabel"
-                            class="modal-title list-title text-white">{{ __('new_unit') }}</span>
+                        <span id="createModalLabel" class="modal-title list-title text-white">{{ __('new_unit') }}</span>
                         <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
                                 aria-hidden="true"><i class="fa fa-times text-white"></i></span></button>
                     </div>
@@ -156,31 +159,37 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="mb-2">{{ __('name') }} <span
-                                            class="text-danger">*</span></label>
+                                    <label class="mb-2">{{ __('name') }} <span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control mb-2"
                                         placeholder="{{ __('enter_your_unit_name') }}">
+                                    @error('name')
+                                        <span class="text text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="mb-2">{{ __('code') }} <span
-                                            class="text-danger">*</span></label>
+                                    <label class="mb-2">{{ __('code') }} <span class="text-danger">*</span></label>
                                     <input type="text" name="code" class="form-control mb-2"
                                         placeholder="{{ __('enter_your_unit_code') }}">
+                                    @error('code')
+                                        <span class="text text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="mb-2">{{ __('base_unit') }}</label>
                                     <select class="form-control mb-2" name="base_unit_id">
-                                        <option selected>{{ __('select_a_option') }}</option>
+                                        <option selected disabled>{{ __('select_a_option') }}</option>
                                         @if ($units->isNotEmpty())
                                             @foreach ($units as $unit)
                                                 <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                             @endforeach
-                                        @else
-                                            <option>{{ __('no_option_available') }}</option>
                                         @endif
                                     </select>
                                 </div>
@@ -191,17 +200,14 @@
                                 <div class="form-group operator">
                                     <label class="mb-2">{{ __('operator') }}</label>
                                     <input type="text" name="operator"
-                                        placeholder="{{ __('enter_your_operator_name') }}"
-                                        class="form-control mb-2" />
+                                        placeholder="{{ __('enter_your_operator_name') }}" class="form-control mb-2" />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group operation_value">
-
                                     <label class="mb-2">{{ __('operation_value') }}</label>
                                     <input type="number" name="operation_value"
-                                        placeholder="{{ __('enter_your_operation_value') }}"
-                                        class="form-control mb-2" />
+                                        placeholder="{{ __('enter_your_operation_value') }}" class="form-control mb-2" />
                                 </div>
                             </div>
                         </div>

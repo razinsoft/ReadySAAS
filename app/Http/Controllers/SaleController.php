@@ -10,7 +10,7 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = SaleRepository::query()->orderBy('id', 'DESC')->where('type', 'Sales')->get();
+        $sales = SaleRepository::query()->orderByDesc('id')->where('type', 'Sales')->get();
         return view('sale.index', compact('sales'));
     }
     public function posSale()
@@ -25,8 +25,9 @@ class SaleController extends Controller
     public function salePrint()
     {
         $request = request();
+        $shop = auth()->user()?->shop;
         $sales = SaleRepository::query()->orderBy('id', 'DESC')->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shop->id)->first();
         return view('sale.salePrint', compact('sales', 'generalsettings'));
     }
     public function draft()

@@ -54,7 +54,7 @@ class GeneralSettingRepository extends Repository
             'fav_id' => $faviconId,
             'currency_id' => 1,
             'currency_position' => 'Prefix',
-            'date_format' => 'd m Y',
+            'date_format' => 'd-m-Y',
             'date_with_time' => 'Enable',
             'address' => null,
             'email' => null,

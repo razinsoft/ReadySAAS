@@ -12,7 +12,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = CategoryRepository::getAll();
+        $shop = auth()->user()?->shop;
+        $categories = CategoryRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('category.index', compact('categories'));
     }
 
@@ -45,11 +46,14 @@ class CategoryController extends Controller
         ]);
         $file = $request->file('file');
         $csvData = array_map('str_getcsv', file($file));
+        $user = auth()->user();
         try {
             foreach ($csvData as $key => $row) {
                 if ($key > 0) {
                     $category = CategoryRepository::query()->where('name', $row[1])->first();
                     Category::create([
+                        'created_by' => $user->id,
+                        'shop_id' => $user->shop->id,
                         'name' => $row[0],
                         'parent_id' => $category?->id,
                     ]);
@@ -61,9 +65,11 @@ class CategoryController extends Controller
         }
     }
 
-    public function categoryPrint(Request $request){
+    public function categoryPrint(Request $request)
+    {
+        $shop = auth()->user()->shop;
         $categories = CategoryRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
-        return view('category.categoryPrint', compact('categories','generalsettings'));
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shop->id)->first();
+        return view('category.categoryPrint', compact('categories', 'generalsettings'));
     }
 }

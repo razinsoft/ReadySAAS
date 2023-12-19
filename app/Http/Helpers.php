@@ -5,10 +5,16 @@ use Carbon\Carbon;
 
 function dateFormat($date)
 {
-    $generalSetting = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
-    $format = $generalSetting->date_format->value ?? 'd m Y';
+    $shop = auth()->user()?->shop;
+    if ($shop) {
+        $generalSettings = GeneralSettingRepository::query()->where('shop_id', $shop->id)->first();
+    } else {
+        $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
+    }
+    $format = $generalSettings->date_format->value ?? 'd-m-Y';
     $date = Carbon::parse($date)->format($format);
-    if ($generalSetting->date_with_time->value == 'Enable') {
+
+    if ($generalSettings->date_with_time->value == 'Enable') {
         $date = Carbon::parse($date)->format($format . ' h:m:s');
     }
     return $date;
@@ -16,9 +22,14 @@ function dateFormat($date)
 
 function numberFormat($number)
 {
-    $generalSetting = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
-    $symbol = $generalSetting->defaultCurrency->symbol ?? '$';
-    if (isset($generalSetting->currency_position) && ($generalSetting->currency_position->value == "Prefix")) {
+    $shop = auth()->user()?->shop;
+    if ($shop) {
+        $generalSettings = GeneralSettingRepository::query()->where('shop_id', $shop->id)->first();
+    } else {
+        $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
+    }
+    $symbol = $generalSettings->defaultCurrency->symbol ?? '$';
+    if (isset($generalSettings->currency_position) && ($generalSettings->currency_position->value == "Prefix")) {
 
         return $symbol . ' ' . number_format($number, 2);
     }

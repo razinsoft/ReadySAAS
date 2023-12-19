@@ -170,4 +170,16 @@
     </section>
 @endsection
 @push('scripts')
+    <script>
+        $('.shopStatus').on("change", function() {
+            const id = $(this).attr('data-id')
+            console.log(id);
+            const url = "{{ url('shop/status-chanage/') }}";
+            if ($(this).is(":checked")) {
+                window.location.href = url + '/' + id + '/Active';
+            } else {
+                window.location.href = url + '/' + id + '/Inactive';
+            }
+        });
+    </script>
 @endpush

@@ -6,7 +6,8 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <span class="list-title">{{ __('brands') }}</span>
-                    <button class="btn common-btn" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i>&nbsp;&nbsp;
+                    <button class="btn common-btn" data-toggle="modal" data-target="#createModal"><i
+                            class="fa fa-plus"></i>&nbsp;&nbsp;
                         {{ __('add_brand') }}</button>
                 </div>
                 <div class="card-body">
@@ -92,6 +93,7 @@
             <div class="modal-content">
                 <form id="BrandUpdate" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="modal-header card-header-color">
                         <span id="BrandModalLabel" class="modal-title list-title text-white">{{ __('edit_brand') }}</span>
                         <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
@@ -121,7 +123,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('close') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ __('close') }}</button>
                         <button type="submit" class="btn common-btn">{{ __('update_and_Save') }}</button>
                     </div>
                 </form>

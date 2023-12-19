@@ -40,7 +40,7 @@ class UserRepository extends Repository
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'company_name' => $request->company_name,
+            'email_verified_at' => $request->email_verified_at,
             'password' => Hash::make($request->password),
         ]);
         return $create;

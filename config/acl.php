@@ -1,8 +1,8 @@
 <?php
 return [
     'permissions' => [
-        'root' => ['super admin', 'admin', 'store', 'customer', 'owner'],
-        'signout' => ['super admin', 'admin', 'store', 'customer', 'owner'],
+        'root' => ['super admin', 'admin', 'store', 'customer'],
+        'signout' => ['super admin', 'admin', 'store', 'customer'],
         //Subscriptions
         'subscription.index' => ['super admin'],
         'subscription.store' => ['super admin'],
@@ -13,11 +13,11 @@ return [
         //Payment Gateway
         'payment-gateway.index' => ['super admin'],
         'payment-gateway.update' => ['super admin'],
-        'payment.method' => ['owner'],
-        'payment.process' => ['owner'],
+        'payment.method' => ['admin'],
+        'payment.process' => ['admin'],
         //Subscriptions
-        'subscription-purchase.index' => ['owner'],
-        'subscription-purchase.update' => ['owner'],
+        'subscription-purchase.index' => ['admin'],
+        'subscription-purchase.update' => ['admin'],
         //Product route
         'product.index' => ['admin'],
         'product.create' => ['admin'],
@@ -175,8 +175,8 @@ return [
         'tax.update' => ['admin'],
         'tax.delete' => ['admin'],
         //Settings route
-        'settings.general' => ['super admin'],
-        'settings.general.store' => ['super admin'],
+        'settings.general' => ['super admin', 'admin'],
+        'settings.general.store' => ['super admin', 'admin'],
         'settings.mail' => ['super admin'],
         'settings.mail.store' => ['super admin'],
         // Language
@@ -193,11 +193,11 @@ return [
         'shop.category.delete' => ['super admin'],
         'shop.category.status.chanage' => ['super admin'],
         //shop route
-        'shop.index' => ['super admin', 'admin'],
-        'shop.create' => ['super admin', 'admin'],
-        'shop.store' => ['super admin', 'admin'],
-        'shop.update' => ['super admin', 'admin'],
-        'shop.delete' => ['super admin', 'admin'],
-        'shop.status.chanage' => ['super admin', 'admin'],
+        'shop.index' => ['super admin'],
+        'shop.create' => ['super admin'],
+        'shop.store' => ['super admin'],
+        'shop.update' => ['super admin'],
+        'shop.delete' => ['super admin'],
+        'shop.status.chanage' => ['super admin'],
     ]
 ];

@@ -2,6 +2,7 @@
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Shop;
 use App\Models\User;
 use App\Models\Warehouse;
 use Illuminate\Support\Facades\Schema;
@@ -18,12 +19,13 @@ class CreateStockCountsTable extends Migration
     public function up()
     {
         Schema::create('stock_counts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
+            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
+            $table->foreignId('created_by')->nullable()->constrained((new User())->getTable());
             $table->string('reference_no');
             $table->foreignId('warehouse_id')->constrained((new Warehouse())->getTable());
             $table->string('category_id')->nullable();
             $table->string('brand_id')->nullable();
-            $table->foreignIdFor(User::class);
             $table->string('type');
             $table->string('initial_file')->nullable();
             $table->string('final_file')->nullable();

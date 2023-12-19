@@ -33,8 +33,10 @@ class ProductRepository extends Repository
             $qty_list = json_encode($request->qty);
             $price_list = json_encode($request->netUnitCost);
         }
-
+        $user = auth()->user();
         return self::create([
+            'created_by' => $user->id,
+            'shop_id' => $user->shop->id,
             'type' => $request->type,
             'name' => $request->name,
             'code' => $request->code,
@@ -120,8 +122,9 @@ class ProductRepository extends Repository
 
     public static function search($search)
     {
+        $shop = auth()->user()?->shop;
         $products = self::query()
-            ->when($search, function ($query) use ($search) {
+            ->where('shop_id', $shop->id)->when($search, function ($query) use ($search) {
                 $query->where('name', 'Like', "%{$search}%")
                     ->orWhere('code', 'Like', "%{$search}%");
             })->get();

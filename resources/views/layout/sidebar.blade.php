@@ -47,7 +47,7 @@
                 @canany(['subscription-purchase.index'])
                     <li>
                         <a class="menu {{ $request->routeIs('subscription-purchase.*') ? 'active' : '' }}"
-                            data-bs-toggle="collapse" href="#productMenu">
+                            data-bs-toggle="collapse" href="#subscriptionPurchase">
                             <span>
                                 <img src="/icons/subscription.svg" class="menu-icon" alt="icon" />
                                 {{ __('subscriptions') }}
@@ -55,7 +55,7 @@
                             <img src="/icons/arrowDown.svg" alt="" class="downIcon">
                         </a>
                         <div class="collapse dropdownMenuCollapse {{ $request->routeIs('subscription-purchase.*') ? 'show' : '' }}"
-                            id="productMenu">
+                            id="subscriptionPurchase">
                             <div class="listBar">
                                 @can('subscription-purchase.index')
                                     <a href="{{ route('subscription-purchase.index') }}"

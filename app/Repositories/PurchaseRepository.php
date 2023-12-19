@@ -25,8 +25,10 @@ class PurchaseRepository extends Repository
         $amount = $request->paid_amount ?? 0;
         $payment_status = $request->grand_total == $amount ? true : false;
         $date = $request->date ? $request->date : now()->format('Y-m-d');
-
+        $user = auth()->user();
         $purchase = self::create([
+            'created_by' => $user->id,
+            'shop_id' => $user->shop->id,
             'reference_no' => 'pr-' . date("Ymd") . '-' . date("his"),
             'user_id' => auth()->id(),
             'warehouse_id' => $request->warehouse_id,

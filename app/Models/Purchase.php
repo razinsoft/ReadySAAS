@@ -11,7 +11,7 @@ class Purchase extends Model
 {
     use SoftDeletes;
     protected $guarded = ['id'];
-    
+
     protected $casts = [
         'payment_method' => PaymentMethod::class,
     ];
@@ -28,7 +28,7 @@ class Purchase extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class)->withTrashed();;
+        return $this->belongsTo(User::class, 'created_by')->withTrashed();
     }
 
     public function products()

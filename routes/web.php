@@ -101,7 +101,7 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
     Route::controller(BrandController::class)->group(function () {
         Route::get('brand', 'index')->name('brand.index');
         Route::post('brand/store', 'store')->name('brand.store');
-        Route::post('brand/update/{brand}', 'update')->name('brand.update');
+        Route::put('brand/update/{brand}', 'update')->name('brand.update');
         Route::get('brand/delete/{brand}', 'delete')->name('brand.delete');
     });
     //Supplier

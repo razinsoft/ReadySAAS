@@ -30,6 +30,7 @@ class LoginController extends Controller
     public function signin(SigninRequest $loginRequest)
     {
         $user = $this->isAuthenticate($loginRequest);
+        $shop = $user?->shop;
         $loginRequest->only('email', 'password');
 
         if (!$user) {
@@ -37,6 +38,9 @@ class LoginController extends Controller
         }
         if (!$user->email_verified_at) {
             return back()->with('error', 'Please check your email and verify your email!');
+        }
+        if ($shop && $shop->status->value == 'Inactive') {
+            return back()->with('error', 'Kindly get in touch with the administration as your shop is currently inactive!');
         }
         Auth::login($user);
         $token = $user->createToken('user token')->accessToken;

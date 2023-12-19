@@ -17,6 +17,8 @@ class CustomerGroupFactory extends Factory
     public function definition(): array
     {
         return [
+            'shop_id' => 1,
+            'created_by' => 2,
             'name' => $this->faker->name,
             'percentage' => $this->faker->randomElement([10, 15, 20])
         ];

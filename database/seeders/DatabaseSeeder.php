@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(RolePermissionSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(ShopCategorySeeder::class);
+        $this->call(ShopSeeder::class);
         $this->call(UnitSeeder::class);
         $this->call(CurrencySeeder::class);
         $this->call(GeneralSettingSeeder::class);
