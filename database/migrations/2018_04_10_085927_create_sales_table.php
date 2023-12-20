@@ -22,7 +22,7 @@ class CreateSalesTable extends Migration
             $table->id();
             $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
             $table->string('reference_no');
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignId('created_by')->nullable()->constrained((new User())->getTable());
             $table->foreignId('customer_id')->nullable()->constrained((new Customer())->getTable());
             $table->foreignId('warehouse_id')->nullable()->constrained((new Warehouse())->getTable());
             $table->integer('item');

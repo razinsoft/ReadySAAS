@@ -10,7 +10,8 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = SaleRepository::query()->orderByDesc('id')->where('type', 'Sales')->get();
+        $shop = auth()->user()?->shop;
+        $sales = SaleRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->where('type', 'Sales')->get();
         return view('sale.index', compact('sales'));
     }
     public function posSale()
@@ -32,7 +33,8 @@ class SaleController extends Controller
     }
     public function draft()
     {
-        $drafts = SaleRepository::query()->orderBy('id', 'DESC')->where('type', 'Draft')->get();
+        $shop = auth()->user()?->shop;
+        $drafts = SaleRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->where('type', 'Draft')->get();
         return view('sale.draft', compact('drafts'));
     }
     public function draftDelete(Sale $sale)

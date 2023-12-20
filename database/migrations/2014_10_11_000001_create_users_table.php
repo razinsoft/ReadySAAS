@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->foreignId('thumbnail_id')->nullable()->constrained((new Media())->getTable());
             $table->datetime('email_verified_at')->nullable();
+            $table->foreignId('shop_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

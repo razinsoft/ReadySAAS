@@ -15,7 +15,10 @@ class RolesRepository extends Repository
 
     public static function storeByRequest(RoleRequest $request)
     {
+        $user = auth()->user();
         $create = self::create([
+            'created_by' => $user->id,
+            'shop_id' => $user->shop->id,
             'name' => $request->name,
             'description' => $request->description,
             'guard_name' => 'web',

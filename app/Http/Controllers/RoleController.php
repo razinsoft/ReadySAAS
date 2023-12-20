@@ -12,8 +12,8 @@ class RoleController extends Controller
 {
     public function index()
     {
-
-        $roles = RolesRepository::query()->where('name', '!=', Roles::ADMIN->value)->get();
+        $shop = auth()->user()?->shop;
+        $roles = RolesRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('role.index', compact('roles'));
     }
 

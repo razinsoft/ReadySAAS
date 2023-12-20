@@ -36,7 +36,10 @@ class UserRepository extends Repository
     //User create
     public static function storeByRequest($request)
     {
+        $user = auth()->user();
         $create = self::create([
+            'created_by' => $user->id ?? null,
+            'shop_id' => $user->shop->id ?? null,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,

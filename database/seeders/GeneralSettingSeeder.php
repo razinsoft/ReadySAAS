@@ -17,7 +17,7 @@ class GeneralSettingSeeder extends Seeder
             'site_title' => 'Ready SOS',
             'currency_id' => 1,
             'currency_position' => 'Prefix',
-            'date_format' => 'd m Y',
+            'date_format' => 'd-m-Y',
             'date_with_time' => 'Enable',
             'address' => fake()->address(),
             'email' => fake()->email(),

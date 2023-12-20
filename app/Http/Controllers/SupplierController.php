@@ -13,7 +13,8 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        $suppliers = SupplierRepository::getAll();
+        $shop = auth()->user()?->shop;
+        $suppliers = SupplierRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('supplier.index', compact('suppliers'));
     }
 

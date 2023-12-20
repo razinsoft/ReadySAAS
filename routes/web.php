@@ -24,6 +24,7 @@ use App\Http\Controllers\ShopCategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StockCountController;
 use App\Http\Controllers\SubscriptionPurchaseController;
+use App\Http\Controllers\SuperAdmin\DashBoardController as SuperAdminDashBoardController;
 use App\Http\Controllers\SuperAdmin\PaymentGatewayController;
 use App\Http\Controllers\SuperAdmin\SubscriptionController;
 use App\Http\Controllers\SupplierController;
@@ -51,6 +52,7 @@ Route::controller(LoginController::class)->middleware('guest')->group(function (
 Route::middleware(['auth', 'check_permission'])->group(function () {
     Route::get('/signout', [LoginController::class, 'logout'])->middleware('auth')->name('signout');
     Route::get('/', [DashboardController::class, 'index'])->name('root');
+    Route::get('/dashboard', [SuperAdminDashBoardController::class, 'dashboard'])->name('dashboard');
     //subscriptions
     Route::controller(SubscriptionController::class)->group(function () {
         Route::get('subscriptions', 'index')->name('subscription.index');

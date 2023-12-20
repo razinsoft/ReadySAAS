@@ -47,7 +47,9 @@ class LoginController extends Controller
         if (isset($user->roles[0]->name) && ($user->roles[0]->name == 'store' || $user->roles[0]->name == 'customer')) {
             return to_route('sale.pos')->with('token', $token);
         }
-
+        if(isset($user->roles[0]->name) && $user->roles[0]->name == 'super admin'){
+            return to_route('dashboard')->with('token', $token);
+        }
         return to_route('root')->with('token', $token);
     }
     private function isAuthenticate($loginRequest)
@@ -73,6 +75,7 @@ class LoginController extends Controller
         $user = UserRepository::storeByRequest($request);
         $shop = ShopRepository::storeByRequest($request, $user);
         GeneralSettingRepository::storeByRequest($request, $shop);
+        $user->assignRole('admin');
         $varificationCode = EmailVerificationRepository::storeByRequest($user);
         MailSendEvent::dispatch($user, $varificationCode, 'signup');
         return to_route('signin.index')->with('success', 'Sign Up successfully done! Please check your email inbox or spam');

@@ -19,13 +19,15 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = UserRepository::query()->where('id', '>', 1)->get();
+        $shop = auth()->user()?->shop;
+        $users = UserRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('user.index', compact('users'));
     }
 
     public function create()
     {
-        $roles = RolesRepository::query()->where('id', '>', 1)->get();
+        $shop = auth()->user()?->shop;
+        $roles = RolesRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('user.create', compact('roles'));
     }
 

@@ -14,9 +14,11 @@ class ExpenseRepository extends Repository
     }
     public static function storeByRequest(ExpenseRequest $request)
     {
+        $user = auth()->user();
         $create = self::create([
+            'created_by' => $user->id,
+            'shop_id' => $user->shop->id,
             'reference_no' => 'er-' . date("Ymd") . '-' . date("his"),
-            'user_id' => auth()->id(),
             'expense_category_id' => $request->expense_category_id,
             'warehouse_id' => $request->warehouse_id,
             'amount' => $request->amount,

@@ -13,7 +13,10 @@ class AccountRepository extends Repository
     }
     public static function storeByRequest(Request $request)
     {
+        $user = auth()->user();
         $account = self::create([
+            'created_by' => $user->id,
+            'shop_id' => $user->shop->id,
             'name' => $request->name,
             'account_no' => $request->account_no,
             'note' => $request->note,

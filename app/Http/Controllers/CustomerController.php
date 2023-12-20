@@ -16,12 +16,14 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = CustomerRepository::getAll();
+        $shop = auth()->user()?->shop;
+        $customers = CustomerRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('customer.index', compact('customers'));
     }
     public function create()
     {
-        $customerGroups = CustomerGroupRepository::getAll();
+        $shop = auth()->user()?->shop;
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('customer.create', compact('customerGroups'));
     }
     public function store(CustomerRequest $request)
@@ -32,7 +34,8 @@ class CustomerController extends Controller
     }
     public function edit(Customer $customer)
     {
-        $customerGroups = CustomerGroupRepository::getAll();
+        $shop = auth()->user()?->shop;
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('customer.edit', compact('customer', 'customerGroups'));
     }
     public function update(CustomerRequest $request, Customer $customer)

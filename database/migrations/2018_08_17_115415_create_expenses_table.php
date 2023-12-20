@@ -21,7 +21,6 @@ class CreateExpensesTable extends Migration
             $table->foreignId('expense_category_id')->constrained((new ExpenseCategory())->getTable());
             $table->foreignId('warehouse_id')->constrained((new Warehouse())->getTable());
             $table->foreignId('account_id')->nullable()->constrained((new Account())->getTable());
-            $table->integer('user_id');
             $table->double('amount');
             $table->text('note')->nullable();
             $table->timestamps();

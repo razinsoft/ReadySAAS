@@ -13,7 +13,10 @@ class CouponRepository extends Repository
     }
     public static function storeByRequest(CouponRequest $request)
     {
-        $create = self::create([
+        $user = auth()->user();
+        return self::create([
+            'created_by' => $user->id,
+            'shop_id' => $user->shop->id,
             'name' => $request->name,
             'code' => $request->code,
             'type' => $request->type,
@@ -24,8 +27,6 @@ class CouponRepository extends Repository
             'expired_date' => $request->expired_date,
             'created_by' => auth()->id()
         ]);
-
-        return $create;
     }
     public static function updateByRequest(CouponRequest $request, Coupon $coupon)
     {

@@ -1,7 +1,8 @@
 <?php
 return [
     'permissions' => [
-        'root' => ['super admin', 'admin', 'store', 'customer'],
+        'root' => ['admin', 'store', 'customer'],
+        'dashboard' => ['super admin'],
         'signout' => ['super admin', 'admin', 'store', 'customer'],
         //Subscriptions
         'subscription.index' => ['super admin'],

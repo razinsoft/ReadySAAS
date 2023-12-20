@@ -11,7 +11,8 @@ class CustomerGroupController extends Controller
 {
     public function index()
     {
-        $customerGroups = CustomerGroupRepository::getAll();
+        $shop = auth()->user()?->shop;
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
         return view('customerGroup.index', compact('customerGroups'));
     }
 

@@ -17,14 +17,17 @@ class CheckPermission
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $allPermissions =  auth()->user()->roles[0]->getPermissionNames()->toArray();
+        $user = auth()->user();
+        $allPermissions =  $user->roles[0]->getPermissionNames()->toArray();
 
         $requestRoute = request()->route()->getName();
-        if(in_array($requestRoute, $allPermissions)){
-         
+        if (in_array($requestRoute, $allPermissions)) {
+
             return $next($request);
         }
-
+        if (isset($user->roles[0]->name) && $user->roles[0]->name == 'super admin') {
+            return to_route('dashboard')->with('error', 'Sorry, You have no permission');
+        }
         return to_route('root')->with('error', 'Sorry, You have no permission');
     }
 }
