@@ -18,7 +18,7 @@ class StockCountRepository extends Repository
         $user = auth()->user();
         $create = self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'reference_no' => 'scr-' . date('Y-m-d H:i:s'),
             'warehouse_id' => $request->warehouse_id,
             'category_id' => $request->category_id ? $categories : $request->category_id,

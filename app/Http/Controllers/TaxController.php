@@ -12,7 +12,12 @@ class TaxController extends Controller
     public function index()
     {
         $shop = auth()->user()?->shop;
-        $taxs = TaxRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $taxs = TaxRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('tax.index', compact('taxs'));
     }
 

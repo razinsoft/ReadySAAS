@@ -13,9 +13,14 @@ class ReportController extends Controller
     public function summary()
     {
         $shop = auth()->user()?->shop;
-        $purchases = PurchaseRepository::query()->where('shop_id', $shop->id)->whereMonth('created_at', date('m'))->get();
-        $sales = SaleRepository::query()->where('shop_id', $shop->id)->whereMonth('created_at', date('m'))->get();
-        $transactions = TransactionRepository::query()->where('shop_id', $shop->id)->whereMonth('created_at', date('m'))->where('transection_type', 'Credit')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $purchases = PurchaseRepository::query()->where('shop_id', $shopId)->whereMonth('created_at', date('m'))->get();
+        $sales = SaleRepository::query()->where('shop_id', $shopId)->whereMonth('created_at', date('m'))->get();
+        $transactions = TransactionRepository::query()->where('shop_id', $shopId)->whereMonth('created_at', date('m'))->where('transection_type', 'Credit')->get();
 
         //purchase
         $totalPurchasesAmount = $purchases->sum('grand_total');

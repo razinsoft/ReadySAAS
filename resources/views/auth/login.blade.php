@@ -48,7 +48,7 @@
                     <div class=" d-flex justify-content-center gap-2 flex-wrap">
                         <button type="submit" class="btn btn-primary" id="super_admin">Super Admin</button>
                         <button type="submit" class="btn btn-primary" id="admin">Admin and Shop Owner</button>
-                        <button type="submit" class="btn btn-primary" id="store">Go to pos</button>
+                        <button type="submit" class="btn btn-primary" id="store">Store Manager</button>
                     </div>
                 </div>
                 <div class="col-md-12">

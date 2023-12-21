@@ -7,7 +7,12 @@ function dateFormat($date)
 {
     $shop = auth()->user()?->shop;
     if ($shop) {
-        $generalSettings = GeneralSettingRepository::query()->where('shop_id', $shop->id)->first();
+        $shopId = $shop->id;
+    } else {
+        $shopId = auth()->user()?->shop_id;
+    }
+    if ($shopId) {
+        $generalSettings = GeneralSettingRepository::query()->where('shop_id', $shopId)->first();
     } else {
         $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
     }
@@ -24,7 +29,12 @@ function numberFormat($number)
 {
     $shop = auth()->user()?->shop;
     if ($shop) {
-        $generalSettings = GeneralSettingRepository::query()->where('shop_id', $shop->id)->first();
+        $shopId = $shop->id;
+    } else {
+        $shopId = auth()->user()?->shop_id;
+    }
+    if ($shopId) {
+        $generalSettings = GeneralSettingRepository::query()->where('shop_id', $shopId)->first();
     } else {
         $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
     }

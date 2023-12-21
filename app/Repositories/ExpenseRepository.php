@@ -17,7 +17,7 @@ class ExpenseRepository extends Repository
         $user = auth()->user();
         $create = self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'reference_no' => 'er-' . date("Ymd") . '-' . date("his"),
             'expense_category_id' => $request->expense_category_id,
             'warehouse_id' => $request->warehouse_id,

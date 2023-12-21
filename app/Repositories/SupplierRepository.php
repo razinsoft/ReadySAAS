@@ -25,7 +25,7 @@ class SupplierRepository extends Repository
         $user = auth()->user();
         return self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'name' => $request->name,
             'thumbnail_id' => $thumbnail_id,
             'company_name' => $request->company_name,

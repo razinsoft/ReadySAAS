@@ -200,5 +200,13 @@ return [
         'shop.update' => ['super admin'],
         'shop.delete' => ['super admin'],
         'shop.status.chanage' => ['super admin'],
+        //store route
+        'store.index' => ['admin'],
+        'store.create' => ['admin'],
+        'store.edit' => ['admin'],
+        'store.store' => ['admin'],
+        'store.update' => ['admin'],
+        'store.delete' => ['admin'],
+        'store.status.chanage' => ['admin'],
     ]
 ];

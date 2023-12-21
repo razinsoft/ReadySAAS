@@ -12,7 +12,12 @@ class UnitController extends Controller
     public function index()
     {
         $shop = auth()->user()?->shop;
-        $units = UnitRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $units = UnitRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('unit.index', compact('units'));
     }
 

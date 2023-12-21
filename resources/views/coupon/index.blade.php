@@ -74,7 +74,7 @@
                                                 data-minimum_amount="{{ $coupon->min_amount }}"
                                                 data-maximum_amount="{{ $coupon->max_amount }}"
                                                 data-quantity="{{ $coupon->qty }}"
-                                                data-expired_date="{{ $coupon->expired_date }}"><i
+                                                data-expired_date="{{ $coupon->expired_at }}"><i
                                                     class="fa fa-edit"></i></a>
 
                                             <a id="delete" href="{{ route('coupons.destroy', $coupon->id) }}"
@@ -94,8 +94,7 @@
         <div role="document" class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header card-header-color">
-                    <span id="createModalLabel"
-                        class="modal-title list-title text-white">{{ __('new_coupon') }}</span>
+                    <span id="createModalLabel" class="modal-title list-title text-white">{{ __('new_coupon') }}</span>
                     <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
                             aria-hidden="true"><i class="fa fa-times text-white"></i></span></button>
                 </div>
@@ -104,8 +103,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('name') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('name') }} <span class="text-danger">*</span></label>
                                 <input type="text" name="name" step="any" class="form-control"
                                     placeholder="{{ __('enter_your_coupon_name') }}">
                                 @error('name')
@@ -113,8 +111,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('code') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('code') }} <span class="text-danger">*</span></label>
                                 <input id="createCouponcode" type="text" name="code" class="form-control"
                                     placeholder="{{ __('enter_your_coupon_code') }}">
                                 @error('code')
@@ -122,9 +119,9 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('type') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('type') }} <span class="text-danger">*</span></label>
                                 <select class="form-control" name="type" id="couponType">
+                                    <option selected disabled>{{ __('select_a_option') }}</option>
                                     @foreach ($couponTypes as $couponType)
                                         <option value="{{ $couponType->value }}">{{ $couponType->value }}</option>
                                     @endforeach
@@ -144,8 +141,7 @@
                                     placeholder="{{ __('enter_your_maximum_purchase_amount') }}">
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('amount') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('amount') }} <span class="text-danger">*</span></label>
                                 <input type="number" name="amount" class="form-control"
                                     placeholder="{{ __('enter_your_discount_amount') }}">
                                 @error('amount')
@@ -153,8 +149,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('quantity') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('quantity') }} <span class="text-danger">*</span></label>
                                 <input type="number" name="quantity" step="any" class="form-control"
                                     placeholder="{{ __('enter_your_coupon_apply_quantity') }}">
                                 @error('quantity')
@@ -162,8 +157,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('expired_date') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('expired_date') }} <span class="text-danger">*</span></label>
                                 <input type="date" name="expired_date" class="form-control">
                                 @error('expired_date')
                                     <span class="text-danger">{{ $message }}</span>
@@ -172,8 +166,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit"
-                            class="btn btn-dipBlue bgBlue saveBtn">{{ __('submit') }}</button>
+                        <button type="submit" class="btn btn-dipBlue bgBlue saveBtn">{{ __('submit') }}</button>
                     </div>
                 </form>
             </div>
@@ -184,8 +177,7 @@
         <div role="document" class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header card-header-color">
-                    <span id="editModalBox"
-                        class="modal-title list-title text-white">{{ __('edit_coupon') }}</span>
+                    <span id="editModalBox" class="modal-title list-title text-white">{{ __('edit_coupon') }}</span>
                     <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
                             aria-hidden="true"><i class="fa fa-times text-white"></i></span></button>
                 </div>
@@ -194,8 +186,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('name') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('name') }} <span class="text-danger">*</span></label>
                                 <input type="text" name="name" step="any" class="form-control"
                                     placeholder="{{ __('enter_your_coupon_name') }}">
                                 @error('name')
@@ -203,16 +194,14 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('Code') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('Code') }} <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <input id="editCouponcode" type="text" name="code" class="form-control"
                                         placeholder="{{ __('enter_your_coupon_code') }}">
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('type') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('type') }} <span class="text-danger">*</span></label>
                                 <select class="form-control" name="type">
                                     @foreach ($couponTypes as $couponType)
                                         <option value="{{ $couponType->value }}">{{ $couponType->value }}</option>
@@ -232,16 +221,14 @@
                                     placeholder="{{ __('enter_your_maximum_purchase_amount') }}">
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('amount') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('amount') }} <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <input type="number" name="amount" step="any" required class="form-control"
                                         placeholder="{{ __('enter_your_discount_amount') }}">
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mb-3">
-                                <label class="mb-2">{{ __('quantity') }} <span
-                                        class="text-danger">*</span></label>
+                                <label class="mb-2">{{ __('quantity') }} <span class="text-danger">*</span></label>
                                 <input type="number" name="quantity" step="any" required class="form-control"
                                     placeholder="{{ __('enter_your_coupon_apply_quantity') }}">
                             </div>
@@ -254,7 +241,8 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                             data-dismiss="modal">{{ __('close') }}</button>
-                        <button type="submit" class="btn btn-dipBlue bgBlue saveBtn">{{ __('update_and_Save') }}</button>
+                        <button type="submit"
+                            class="btn btn-dipBlue bgBlue saveBtn">{{ __('update_and_Save') }}</button>
                     </div>
                 </form>
             </div>
@@ -300,6 +288,7 @@
             const maximum_amount = $(this).attr('data-maximum_amount');
             const quantity = $(this).attr('data-quantity');
             const expired_date = $(this).attr('data-expired_date');
+            console.log(expired_date);
             $('#editForm').attr('action', action)
             $("#editModal input[name='name']").val(name);
             $("#editModal input[name='code']").val(code);

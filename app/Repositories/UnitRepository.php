@@ -16,7 +16,7 @@ class UnitRepository extends Repository
         $user = auth()->user();
         $create = self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'code' => $request->code,
             'name' => $request->name,
             'base_unit_id' => $request->base_unit_id,

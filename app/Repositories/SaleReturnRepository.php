@@ -18,7 +18,7 @@ class SaleReturnRepository extends Repository
         $user = auth()->user();
         return self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'reference_no' => $referenceNo,
             'total_discount' => $sale->total_discount - $request->total_discount,
             'total_tax' => $sale->total_tax - $request->total_tax,

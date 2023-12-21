@@ -28,7 +28,7 @@ class PurchaseRepository extends Repository
         $user = auth()->user();
         $purchase = self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'reference_no' => 'pr-' . date("Ymd") . '-' . date("his"),
             'user_id' => auth()->id(),
             'warehouse_id' => $request->warehouse_id,

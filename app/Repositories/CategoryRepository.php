@@ -29,7 +29,7 @@ class CategoryRepository extends Repository
         $user = auth()->user();
         return self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'name' => $request->name,
             'parent_id' => $request->parent_id,
             'thumbnail_id' => $thumbnailId,

@@ -9,7 +9,6 @@ use App\Repositories\AccountRepository;
 use App\Repositories\ExpenseCategoryRepository;
 use App\Repositories\ExpenseRepository;
 use App\Repositories\WarehouseRepository;
-use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {
@@ -17,6 +16,11 @@ class ExpenseController extends Controller
     {
         $request = request();
         $shop = auth()->user()?->shop;
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
         $hasDate = false;
         $startDate = date('m/d/Y');
         $endDate = date('m/d/Y', strtotime('+8 days'));
@@ -29,13 +33,13 @@ class ExpenseController extends Controller
             $endDate = date("m/d/Y", $endSeconds);
             $hasDate = true;
         }
-        $expenses = ExpenseRepository::query()->where('shop_id', $shop->id)->when($hasDate, function ($query) use ($startDate, $endDate) {
+        $expenses = ExpenseRepository::query()->where('shop_id', $shopId)->when($hasDate, function ($query) use ($startDate, $endDate) {
             $query->whereBetween('created_at', [$startDate, $endDate]);
         })->get();
 
-        $warehouses =  WarehouseRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
-        $exCategories = ExpenseCategoryRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
-        $accounts = AccountRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        $warehouses =  WarehouseRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $exCategories = ExpenseCategoryRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $accounts = AccountRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('expense.index', compact('accounts', 'expenses', 'warehouses', 'exCategories', 'startDate', 'endDate'));
     }
 

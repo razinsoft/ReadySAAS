@@ -17,13 +17,23 @@ class CustomerController extends Controller
     public function index()
     {
         $shop = auth()->user()?->shop;
-        $customers = CustomerRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $customers = CustomerRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('customer.index', compact('customers'));
     }
     public function create()
     {
         $shop = auth()->user()?->shop;
-        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('customer.create', compact('customerGroups'));
     }
     public function store(CustomerRequest $request)
@@ -35,7 +45,12 @@ class CustomerController extends Controller
     public function edit(Customer $customer)
     {
         $shop = auth()->user()?->shop;
-        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('customer.edit', compact('customer', 'customerGroups'));
     }
     public function update(CustomerRequest $request, Customer $customer)
@@ -59,7 +74,7 @@ class CustomerController extends Controller
         $request->validate([
             'file' => 'required|file'
         ]);
-
+        $authUser = auth()->user();
         $file = $request->file('file');
         $csvData = array_map('str_getcsv', file($file));
         try {
@@ -74,6 +89,8 @@ class CustomerController extends Controller
                         'password' => Hash::make($row[10]),
                     ]);
                     Customer::create([
+                        'created_by' => $authUser->id,
+                        'shop_id' => $authUser->shop->id,
                         'customer_group_id' => $customerGroup?->id,
                         'user_id' => $user?->id,
                         'name' => $row[1],

@@ -14,7 +14,12 @@ class SupplierController extends Controller
     public function index()
     {
         $shop = auth()->user()?->shop;
-        $suppliers = SupplierRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $suppliers = SupplierRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('supplier.index', compact('suppliers'));
     }
 
@@ -59,10 +64,13 @@ class SupplierController extends Controller
 
         $file = $request->file('file');
         $csvData = array_map('str_getcsv', file($file));
+        $user = auth()->user();
         try {
             foreach ($csvData as $key => $row) {
                 if ($key > 0) {
                     Supplier::create([
+                        'created_by' => $user->id,
+                        'shop_id' => $user->shop->id ?? $user->shop_id,
                         'name' => $row[0],
                         'company_name' => $row[1],
                         'vat_number' => $row[2],

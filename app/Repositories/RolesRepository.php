@@ -18,7 +18,7 @@ class RolesRepository extends Repository
         $user = auth()->user();
         $create = self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'name' => $request->name,
             'description' => $request->description,
             'guard_name' => 'web',

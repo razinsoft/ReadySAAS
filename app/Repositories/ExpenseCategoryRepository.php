@@ -16,7 +16,7 @@ class ExpenseCategoryRepository extends Repository
         $user = auth()->user();
         $create = self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'name' => $request->name,
             'code' => $request->code,
         ]);

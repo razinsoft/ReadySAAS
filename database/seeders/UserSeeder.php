@@ -40,6 +40,7 @@ class UserSeeder extends Seeder
         $staffUser = User::factory()->create([
             'name' => 'Store',
             'email' => 'store@example.com',
+            'shop_id' => 1,
         ]);
 
         $staffUser->assignRole('store');

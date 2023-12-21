@@ -13,7 +13,12 @@ class CategoryController extends Controller
     public function index()
     {
         $shop = auth()->user()?->shop;
-        $categories = CategoryRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $categories = CategoryRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('category.index', compact('categories'));
     }
 
@@ -53,7 +58,7 @@ class CategoryController extends Controller
                     $category = CategoryRepository::query()->where('name', $row[1])->first();
                     Category::create([
                         'created_by' => $user->id,
-                        'shop_id' => $user->shop->id,
+                        'shop_id' => $user->shop->id ?? $user->shop_id,
                         'name' => $row[0],
                         'parent_id' => $category?->id,
                     ]);
@@ -68,8 +73,13 @@ class CategoryController extends Controller
     public function categoryPrint(Request $request)
     {
         $shop = auth()->user()->shop;
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
         $categories = CategoryRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shop->id)->first();
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shopId)->first();
         return view('category.categoryPrint', compact('categories', 'generalsettings'));
     }
 }

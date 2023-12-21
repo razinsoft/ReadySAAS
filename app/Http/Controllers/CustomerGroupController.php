@@ -12,7 +12,12 @@ class CustomerGroupController extends Controller
     public function index()
     {
         $shop = auth()->user()?->shop;
-        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('customerGroup.index', compact('customerGroups'));
     }
 

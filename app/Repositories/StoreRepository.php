@@ -12,18 +12,38 @@ class StoreRepository extends Repository
         return Store::class;
     }
 
-    public static function storeByRequest(Request $request)
+    public static function storeByRequest(Request $request, $shopManager)
     {
+        $user = auth()->user();
         return self::create([
-            'created_by' => '',
+            'created_by' => $user->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
+            'user_id' => $shopManager->id,
+            'name' => $request->store_name,
+            'description' => $request->description,
+            'email' => $request->store_email,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'country' => $request->country,
+            'status' => $request->status,
         ]);
     }
 
     public static function updateByRequest(Request $request, Store $store)
     {
-
         $update = self::update($store, [
-            'name' => $request->name,
+            'name' => $request->store_name,
+            'description' => $request->description,
+            'email' => $request->store_email,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'country' => $request->country,
         ]);
 
         return $update;

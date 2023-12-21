@@ -16,7 +16,7 @@ class CouponRepository extends Repository
         $user = auth()->user();
         return self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'name' => $request->name,
             'code' => $request->code,
             'type' => $request->type,
@@ -24,7 +24,7 @@ class CouponRepository extends Repository
             'max_amount' => $request->type == 'Percentage' ? 0 : $request->maximum_amount,
             'amount' => $request->amount,
             'qty' => $request->quantity,
-            'expired_date' => $request->expired_date,
+            'expired_at' => $request->expired_date,
             'created_by' => auth()->id()
         ]);
     }
@@ -38,7 +38,7 @@ class CouponRepository extends Repository
             'max_amount' => $request->type == 'Percentage' ? 0 : $request->maximum_amount,
             'amount' => $request->amount,
             'qty' => $request->quantity,
-            'expired_date' => $request->expired_date,
+            'expired_at' => $request->expired_date,
         ]);
 
         return $update;

@@ -17,7 +17,7 @@ class CurrencyRepository extends Repository
         $user = auth()->user();
         return self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'name' => $request->name,
             'symbol' => $request->symbol,
             'code' => $request->code

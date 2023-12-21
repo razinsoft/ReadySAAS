@@ -83,7 +83,7 @@ class SaleRepository extends Repository
 
         $sale = self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'reference_no' => $referenceNo,
             'customer_id' => $request->customer_id,
             'item' => collect($request->product_ids)->count(),

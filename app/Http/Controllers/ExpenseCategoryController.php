@@ -14,8 +14,13 @@ class ExpenseCategoryController extends Controller
     public function index()
     {
         $shop = auth()->user()?->shop;
-        $accounts = AccountRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
-        $expenseCategories = ExpenseCategoryRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $accounts = AccountRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $expenseCategories = ExpenseCategoryRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('expenseCategory.index', compact('expenseCategories', 'accounts'));
     }
     public function generateCode()

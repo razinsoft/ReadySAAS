@@ -12,7 +12,12 @@ class WarehouseController extends Controller
     public function index()
     {
         $shop = auth()->user()?->shop;
-        $warehouses = WarehouseRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $warehouses = WarehouseRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
         return view('warehouse.index', compact('warehouses'));
     }
 

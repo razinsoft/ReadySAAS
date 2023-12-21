@@ -115,12 +115,41 @@
                         </div>
                     </li>
                 @endcanany
+                @canany(['store.index'])
+                    <li>
+                        <a class="menu {{ $request->routeIs('store.*') ? 'active' : '' }}" data-bs-toggle="collapse"
+                            href="#storeMenu">
+                            <span>
+                                <img src="/icons/shop.svg" class="menu-icon" alt="icon" />
+                                {{ __('store') }}
+                            </span>
+                            <img src="/icons/arrowDown.svg" alt="" class="downIcon">
+                        </a>
+                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('store.*') ? 'show' : '' }}"
+                            id="storeMenu">
+                            <div class="listBar">
+                                @can('store.index')
+                                    <a href="{{ route('store.index') }}"
+                                        class="subMenu {{ $request->routeIs('store.index') ? 'active' : '' }}">
+                                        {{ __('list') }}
+                                    </a>
+                                @endcan
+                                @can('store.create')
+                                    <a href="{{ route('store.create') }}"
+                                        class="subMenu {{ $request->routeIs('store.create') ? 'active' : '' }}">
+                                        {{ __('create') }}
+                                    </a>
+                                @endcan
+                            </div>
+                        </div>
+                    </li>
+                @endcanany
                 @canany(['shop.category.index','shop.index'])
                     <li>
                         <a class="menu {{ $request->routeIs('shop.category.*','shop.*') ? 'active' : '' }}" data-bs-toggle="collapse"
                             href="#shopCategoryMenu">
                             <span>
-                                <img src="/icons/product.svg" class="menu-icon" alt="icon" />
+                                <img src="/icons/shop.svg" class="menu-icon" alt="icon" />
                                 {{ __('shop') }}
                             </span>
                             <img src="/icons/arrowDown.svg" alt="" class="downIcon">

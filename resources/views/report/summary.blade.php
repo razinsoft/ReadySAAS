@@ -48,7 +48,7 @@
                     <div class="colored-box d-flex flex-column h-100">
                         <div class="d-flex justify-content-between report-box-top w-100">
                             <div class="report-section-card-text">{{ __('sales') }}</div>
-                            <img src="{{ asset('icons/sales.png') }}" alt="" class="report-section-card-image">
+                            <img src="{{ asset('icons/sales.svg') }}" alt="" class="report-section-card-image">
                         </div>
                         <div class="mt-3 w-100">
                             <div class="d-flex justify-content-between">

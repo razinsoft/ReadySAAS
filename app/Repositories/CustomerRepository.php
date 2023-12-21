@@ -54,7 +54,12 @@ class CustomerRepository extends Repository
     public static function search($search)
     {
         $shop = auth()->user()?->shop;
-        $products = self::query()->where('shop_id', $shop->id)
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
+        $products = self::query()->where('shop_id', $shopId)
             ->when($search, function ($query) use ($search) {
                 $query->where('name', 'Like', "%{$search}%");
                 $query->orWhere('email', 'Like', "%{$search}%");

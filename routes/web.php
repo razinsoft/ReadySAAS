@@ -23,6 +23,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ShopCategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StockCountController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SubscriptionPurchaseController;
 use App\Http\Controllers\SuperAdmin\DashBoardController as SuperAdminDashBoardController;
 use App\Http\Controllers\SuperAdmin\PaymentGatewayController;
@@ -290,7 +291,7 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
         Route::get('shop-category/delete/{shopCategory}', 'delete')->name('shop.category.delete');
         Route::get('shop-category/status-chanage/{shopCategory}/{status}', 'statusChanage')->name('shop.category.status.chanage');
     });
-    //Shop Category
+    //Shop
     Route::controller(ShopController::class)->group(function () {
         Route::get('shops', 'index')->name('shop.index');
         Route::get('shop/create', 'create')->name('shop.create');
@@ -298,6 +299,16 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
         Route::put('shop/update/{shop}', 'update')->name('shop.update');
         Route::get('shop/delete/{shop}', 'delete')->name('shop.delete');
         Route::get('shop/status-chanage/{shop}/{status}', 'statusChanage')->name('shop.status.chanage');
+    });
+
+    //Shop
+    Route::controller(StoreController::class)->group(function () {
+        Route::get('stores', 'index')->name('store.index');
+        Route::get('store/create', 'create')->name('store.create');
+        Route::post('store/store', 'store')->name('store.store');
+        Route::get('store/edit/{store}', 'edit')->name('store.edit');
+        Route::put('store/update/{store}', 'update')->name('store.update');
+        Route::get('store/delete/{store}', 'delete')->name('store.delete');
     });
 });
 

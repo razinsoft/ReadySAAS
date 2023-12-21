@@ -27,7 +27,7 @@ class MoneyTransferRepository extends Repository
         $user = auth()->user();
         $create = self::create([
             'created_by' => $user->id,
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->shop->id ?? $user->shop_id,
             'reference_no' => 'mtr-' . date("Ymd") . '-' . date("his"),
             'from_account_id' => $request->from_account_id,
             'to_account_id' => $request->to_account_id,

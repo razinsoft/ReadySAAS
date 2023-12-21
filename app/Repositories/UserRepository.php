@@ -34,12 +34,10 @@ class UserRepository extends Repository
     }
 
     //User create
-    public static function storeByRequest($request)
+    public static function storeByRequest($request, $shop = null)
     {
-        $user = auth()->user();
         $create = self::create([
-            'created_by' => $user->id ?? null,
-            'shop_id' => $user->shop->id ?? null,
+            'shop_id' => $shop->id ?? null,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -68,7 +66,7 @@ class UserRepository extends Repository
         return $userUpdate;
     }
     //User Profile update
-    public static function updateByRequest(UserRequest $request, User $user)
+    public static function updateByRequest($request, User $user)
     {
         $thumbnailId = $user->thumbnail_id;
         if ($request->hasFile('image')) {
@@ -84,7 +82,6 @@ class UserRepository extends Repository
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'company_name' => $request->company_name,
             'thumbnail_id' => $thumbnailId,
         ]);
     }

@@ -28,6 +28,11 @@ class ProductController extends Controller
     {
         $status = request()->status;
         $shop = auth()->user()?->shop;
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
         $products = ProductRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->when($status, function ($query) use ($status) {
             $query->where('type', $status);
         })->get();
@@ -38,6 +43,11 @@ class ProductController extends Controller
     public function create()
     {
         $shop = auth()->user()?->shop;
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
         $categories = CategoryRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
         $brands = BrandRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
         $units = UnitRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
@@ -74,6 +84,11 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $shop = auth()->user()?->shop;
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
         $productList = json_decode($product->product_list);
         $qtyList = json_decode($product->qty_list);
         $priceList = json_decode($product->price_list);
@@ -250,8 +265,10 @@ class ProductController extends Controller
                     $category = CategoryRepository::query()->where('name', $row[4])->first();
                     $unit = UnitRepository::query()->where('name', $row[5])->first();
                     $thumbnail = Media::factory()->create();
-
+                    $user = auth()->user();
                     Product::create([
+                        'created_by' => $user->id,
+                        'shop_id' => $user->shop->id ?? $user->shop_id,
                         'name' => $row[0],
                         'code' => $row[1],
                         'type' => ucfirst($row[2]),
@@ -277,8 +294,13 @@ class ProductController extends Controller
     public function productPrint(){
         $request = request();
         $shop = auth()->user()?->shop;
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
         $products = ProductRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shop->id)->first();
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shopId)->first();
         return view('product.productPrint', compact('products','generalsettings'));
     }
 }
