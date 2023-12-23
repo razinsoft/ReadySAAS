@@ -32,6 +32,12 @@ class StoreController extends Controller
     public function store(StoreRequest $request)
     {
         $shop = auth()->user()?->shop;
+        $subscription = auth()->user()?->shop?->currentSubscriptions()?->subscription;
+        $stores = StoreRepository::query()->where('shop_id', $shop->id)->get();
+        if ($stores->count() == $subscription->shop_limit) {
+            return back()->withError('You have extend your limit');
+        }
+        $shop = auth()->user()?->shop;
         $request['email_verified_at'] = now();
         $shopManager = UserRepository::storeByRequest($request, $shop);
         StoreRepository::storeByRequest($request, $shopManager);

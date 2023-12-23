@@ -129,7 +129,7 @@
                                                         <div class="modal-body">
                                                             <div class="row">
                                                                 <div class="col-md-12 mb-2">
-                                                                    <x-input name="title" title="{{ __('name') }}"
+                                                                    <x-input name="shop_name" title="{{ __('name') }}"
                                                                         type="text" :required="true"
                                                                         value="{{ $shop->name }}"
                                                                         placeholder="{{ __('enter_your_shop_name') }}" />

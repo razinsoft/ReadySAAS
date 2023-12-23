@@ -61,6 +61,12 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
+        $shop = auth()->user()?->shop;
+        $subscription = auth()->user()?->shop?->currentSubscriptions()?->subscription;
+        $stores = ProductRepository::query()->where('shop_id', $shop->id)->get();
+        if ($stores->count() == $subscription->product_limit) {
+            return back()->withError('You have extend your limit');
+        }
         $product = ProductRepository::storeByRequest($request);
 
         if ($request->variant_name) { //If not empty variant
@@ -291,7 +297,8 @@ class ProductController extends Controller
         }
     }
 
-    public function productPrint(){
+    public function productPrint()
+    {
         $request = request();
         $shop = auth()->user()?->shop;
         if ($shop) {
@@ -301,6 +308,6 @@ class ProductController extends Controller
         }
         $products = ProductRepository::query()->limit($request->length)->get();
         $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shopId)->first();
-        return view('product.productPrint', compact('products','generalsettings'));
+        return view('product.productPrint', compact('products', 'generalsettings'));
     }
 }

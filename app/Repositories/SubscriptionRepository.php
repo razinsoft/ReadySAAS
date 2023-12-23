@@ -19,6 +19,7 @@ class SubscriptionRepository extends Repository
             'description' => $request->description,
             'price' => $request->price,
             'shop_limit' => $request->shop_limit,
+            'product_limit' => $request->product_limit,
             'recurring_type' => $request->recurring_type,
             'status' => $request->status,
         ]);
@@ -31,6 +32,7 @@ class SubscriptionRepository extends Repository
             'description' => $request->description,
             'price' => $request->price,
             'shop_limit' => $request->shop_limit,
+            'product_limit' => $request->product_limit,
             'recurring_type' => $request->recurring_type,
             'status' => $request->status,
         ]);

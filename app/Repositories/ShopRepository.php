@@ -24,12 +24,11 @@ class ShopRepository extends Repository
         ]);
     }
 
-    public static function updateByRequest(Shop $shop, Request $request)
+    public static function updateByRequest(Request $request, Shop $shop)
     {
         return self::update($shop, [
             'name' => $request->shop_name,
             'shop_category_id' => $request->shop_category_id,
-            'status' => $request->status,
         ]);
     }
 

@@ -6000,7 +6000,6 @@ table.dataTable {
 }
 
 .subscription-container {
-    width: 460px;
     padding: 40px;
     background: #ffffff;
     text-align: center;
@@ -6074,4 +6073,17 @@ table.dataTable {
     background-color: transparent;
     color: #29aae1;
     text-decoration: underline;
+}
+
+.subscription-box {
+    color: #43475d;
+    background-color: rgb(243 244 246);
+    padding: 18px;
+    border-radius: 5px;
+    margin: 0px 15px;
+}
+
+.subscription-box-title {
+    font-size: 18px;
+
 }

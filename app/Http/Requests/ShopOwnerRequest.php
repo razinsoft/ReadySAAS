@@ -21,10 +21,15 @@ class ShopOwnerRequest extends FormRequest
      */
     public function rules(): array
     {
+        $method = request()->isMethod('put');
+        $isRequired = 'required';
+        if ($method) {
+            $isRequired = 'nullable';
+        }
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
+            'name' =>  $isRequired . '|string|max:255',
+            'email' => $isRequired . '|email|unique:users,email',
+            'password' => $isRequired . '|min:6',
             'shop_name' => 'required|string|max:255',
             'shop_category_id' => 'required|integer',
             'shop_logo' => 'nullable|file|mimes:png,jpg,jpeg',

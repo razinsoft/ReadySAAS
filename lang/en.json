@@ -494,5 +494,7 @@
     "enter_your_store_manager_email": "Enter your store manager email",
     "enter_your_store_manager_password": "Enter your store manager password",
     "enter_your_store_description": "Enter your store description",
-    "": ""
+    "subscription_purchase": "Subscription Purchase",
+    "product_limit": "Product Limit",
+    "enter_your_subscription_product_limit": "Enter your subscription product limit"
 }

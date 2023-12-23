@@ -21,7 +21,6 @@
         .business {
             font-size: 20px;
             font-weight: 500;
-            margin-left: 15px
         }
 
         .plan {
@@ -74,6 +73,10 @@
             height: 70px;
             font-size: 20px
         }
+
+        #card-element {
+            height: 40px;
+        }
     </style>
     <section>
         <div class="subscription-container-fluid">
@@ -87,54 +90,32 @@
                         </div>
                         <div class="pricing p-3 rounded mt-4 d-flex justify-content-between">
                             <div class="images d-flex flex-row align-items-center">
-                                <div class="d-flex flex-column ml-4"> <span class="business">Small Business</span> <span
+                                <div class="d-flex flex-column ml-4"> <span
+                                        class="business">{{ $subscription->title ?? '--' }}</span> <span
                                         class="plan">CHANGE PLAN</span> </div>
                             </div> <!--pricing table-->
-                            <div class="d-flex flex-row align-items-center"> <sup class="dollar font-weight-bold">$</sup>
-                                <span class="amount ml-1 mr-1">8,350</span>
-                                <span class="year font-weight-bold">/ year</span>
+                            <div class="d-flex flex-row align-items-center"> <sup
+                                    class="dollar font-weight-bold">{{ $general_settings?->defaultCurrency->symbol }}</sup>
+                                <span class="amount ml-1 mr-1">{{ $subscription->price ?? '--' }}</span>
+                                <span class="year font-weight-bold">/ {{ $subscription->recurring_type ?? '--' }}</span>
                             </div> <!-- /pricing table-->
                         </div> <span class="detail mt-5">Payment method</span>
                         <div class="credit rounded mt-4 d-flex justify-content-between align-items-center">
                             <div class="d-flex flex-row align-items-center w-100"> <img src="/icons/stripe.svg"
                                     class="rounded" width="70">
-                                <div class="d-flex flex-column w-100"><span class="business">Stripe</span></div>
+                                <div class="d-flex flex-column w-100"><span class="business"
+                                        style="margin: 18px">Stripe</span></div>
                             </div>
                         </div>
 
-                        <form role="form" action="{{ route('payment.process') }}" method="post"
-                            class="require-validation" data-cc-on-file="false"
-                            data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
+                        <form role="form" action="{{ route('payment.process', $subscriptionRequest->id) }}" method="post"
+                            id="payment-form">
                             @csrf
-                            <div class='form-row row'>
-                                <div class='col-xs-12 col-md-6 form-group required'>
-                                    <label class='control-label'>Name on Card</label>
-                                    <input class='form-control' size='4' type='text'>
-                                </div>
-                                <div class='col-xs-12 col-md-6 form-group required'>
-                                    <label class='control-label'>Card Number</label>
-                                    <input autocomplete='off' class='form-control card-number' size='20'
-                                        type='text'>
-                                </div>
-                            </div>
-                            <div class='form-row row'>
-                                <div class='col-xs-12 col-md-4 form-group cvc required'>
-                                    <label class='control-label'>CVC</label>
-                                    <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311'
-                                        size='4' type='text'>
-                                </div>
-                                <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                    <label class='control-label'>Expiration Month</label>
-                                    <input class='form-control card-expiry-month' placeholder='MM' size='2'
-                                        type='text'>
-                                </div>
-                                <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                    <label class='control-label'>Expiration Year</label>
-                                    <input class='form-control card-expiry-year' placeholder='YYYY' size='4'
-                                        type='text'>
-                                </div>
-                            </div>
-                            <div class="mt-3"><button class="btn btn-primary btn-block payment-button w-100">Proceed to
+                            <input type="hidden" name="stripeToken" id="stripe-token-id">
+                            
+                            <div id="card-element" class="form-control my-3"></div>
+                            <span class="text-danger" id="stripe-error"></span>
+                            <div class="mt-3"><button type="button" class="btn common-btn btn-block payment-button w-100" id="pay-btn" onclick="createToken()">Proceed to
                                     payment
                                     <i class="fa fa-long-arrow-right"></i></button> </div>
                         </form>
@@ -145,9 +126,29 @@
     </section>
 @endsection
 @push('scripts')
-<script src="https://js.stripe.com/v3/"></script>
-    <script>
-        var stripe = Stripe('{{ env('STRIPE_SECRET') }}');
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript">
+        var stripe = Stripe('{{ env('STRIPE_KEY') }}')
         var elements = stripe.elements();
+        
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        function createToken() {
+            document.getElementById("pay-btn").disabled = true;
+            stripe.createToken(cardElement).then(function(result) {
+
+                if (typeof result.error != 'undefined') {
+                    document.getElementById("pay-btn").disabled = false;
+                    $('#stripe-error').text(result.error.message)
+                }
+
+                /* creating token success */
+                if (typeof result.token != 'undefined') {
+                    document.getElementById("stripe-token-id").value = result.token.id;
+                    document.getElementById('payment-form').submit();
+                }
+            });
+        }
     </script>
 @endpush

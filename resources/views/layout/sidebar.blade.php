@@ -144,17 +144,17 @@
                         </div>
                     </li>
                 @endcanany
-                @canany(['shop.category.index','shop.index'])
+                @canany(['shop.category.index', 'shop.index'])
                     <li>
-                        <a class="menu {{ $request->routeIs('shop.category.*','shop.*') ? 'active' : '' }}" data-bs-toggle="collapse"
-                            href="#shopCategoryMenu">
+                        <a class="menu {{ $request->routeIs('shop.category.*', 'shop.*') ? 'active' : '' }}"
+                            data-bs-toggle="collapse" href="#shopCategoryMenu">
                             <span>
                                 <img src="/icons/shop.svg" class="menu-icon" alt="icon" />
                                 {{ __('shop') }}
                             </span>
                             <img src="/icons/arrowDown.svg" alt="" class="downIcon">
                         </a>
-                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('shop.category.*','shop.*') ? 'show' : '' }}"
+                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('shop.category.*', 'shop.*') ? 'show' : '' }}"
                             id="shopCategoryMenu">
                             <div class="listBar">
                                 @can('shop.category.index')
@@ -455,6 +455,21 @@
                 @endcan
             </ul>
         </div>
+        @canany(['subscription-purchase.index'])
+            @php
+                $subscription = auth()
+                    ->user()
+                    ?->shop?->currentSubscriptions();
+            @endphp
+            @if ($subscription)
+                <div class="subscription-box">
+                    <div class="subscription-box-title"><img src="/icons/crown.svg" class="menu-icon" alt="icon" />
+                        Your
+                        current subscription name is {{ $subscription->title }} and this
+                        subscription will expires in {{ dateFormat($subscription->expired_at) }}</div>
+                </div>
+            @endif
+        @endcanany
         <div class="sideBarfooter">
             <button type="button" class="fullbtn hite-icon" onclick="toggleFullScreen(document.body)"><i
                     class="fa-solid fa-expand"></i></button>

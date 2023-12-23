@@ -79,6 +79,7 @@
                                     <th>{{ __('title') }}</th>
                                     <th>{{ __('price') }}</th>
                                     <th>{{ __('shop_limit') }}</th>
+                                    <th>{{ __('product_limit') }}</th>
                                     <th>{{ __('recurring_type') }}</th>
                                     <th>{{ __('status') }}</th>
                                     <th width="500px">{{ __('description') }}</th>
@@ -92,6 +93,7 @@
                                         <td>{{ $subscription->title }}</td>
                                         <td>{{ numberFormat($subscription->price) }}</td>
                                         <td>{{ $subscription->shop_limit }}</td>
+                                        <td>{{ $subscription->product_limit }}</td>
                                         <td>{{ $subscription->recurring_type }}</td>
                                         <td>
                                             <label class="switch">
@@ -101,7 +103,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </td>
-                                        <td >
+                                        <td>
                                             <div class="description-content">{{ $subscription->description }}</div>
                                             <button id="see-more">See More</button>
                                         </td>
@@ -153,10 +155,17 @@
                                                                     </div>
                                                                     <div class="col-md-12 mb-2">
                                                                         <x-input name="shop_limit"
-                                                                            title="{{ __('shop_limit') }}" type="text"
+                                                                            title="{{ __('shop_limit') }}" type="number"
                                                                             :required="true"
                                                                             value="{{ $subscription->shop_limit }}"
                                                                             placeholder="{{ __('enter_your_subscription_shop_limit') }}" />
+                                                                    </div>
+                                                                    <div class="col-md-12 mb-2">
+                                                                        <x-input name="product_limit"
+                                                                            title="{{ __('product_limit') }}"
+                                                                            type="number" :required="true"
+                                                                            value="{{ $subscription->product_limit }}"
+                                                                            placeholder="{{ __('enter_your_subscription_product_limit') }}" />
                                                                     </div>
                                                                     <div class="col-md-12 mb-2">
                                                                         <x-select name="recurring_type"
@@ -239,6 +248,10 @@
                             <div class="col-md-12 mb-2">
                                 <x-input name="shop_limit" title="{{ __('shop_limit') }}" type="text"
                                     :required="true" placeholder="{{ __('enter_your_subscription_shop_limit') }}" />
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <x-input name="product_limit" title="{{ __('product_limit') }}" type="number"
+                                    :required="true" placeholder="{{ __('enter_your_subscription_product_limit') }}" />
                             </div>
                             <div class="col-md-12 mb-2">
                                 <x-select name="recurring_type" title="{{ __('recurring_type') }}"

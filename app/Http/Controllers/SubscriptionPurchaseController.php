@@ -17,8 +17,7 @@ class SubscriptionPurchaseController extends Controller
 
     public function update(Subscription $subscription)
     {
-        // $subscriptionRequest = SubscriptionRequestRepository::storeByRequest($subscription);
-        // dd($subscription);
-        return to_route('payment.method');
+        $subscriptionRequest = SubscriptionRequestRepository::storeByRequest($subscription);
+        return view('subscriptionPurchase.payment', compact('subscription', 'subscriptionRequest'));
     }
 }

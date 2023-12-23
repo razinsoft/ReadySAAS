@@ -25,6 +25,12 @@ class ShopController extends Controller
         return view('shop.create', compact('shopCategories'));
     }
 
+    public function update(ShopOwnerRequest $request, Shop $shop)
+    {
+        ShopRepository::updateByRequest($request, $shop);
+        return back()->with('success', 'Shop successfully updated');
+    }
+
     public function store(ShopOwnerRequest $request)
     {
         $request['email_verified_at'] = now();
@@ -38,6 +44,6 @@ class ShopController extends Controller
     public function statusChanage(Shop $shop, $status)
     {
         ShopRepository::statusChanageByRequest($shop, $status);
-        return back()->with('success', 'Subscription successfully chanaged');
+        return back()->with('success', 'Shop status successfully chanaged');
     }
 }

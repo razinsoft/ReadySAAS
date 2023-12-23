@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Wallet::class);
     }
+
+    public function mailShop()
+    {
+        return $this->belongsTo(Shop::class,'shop_id');
+    }
 }

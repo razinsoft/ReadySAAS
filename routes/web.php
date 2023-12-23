@@ -50,7 +50,7 @@ Route::controller(LoginController::class)->middleware('guest')->group(function (
     Route::post('/signin', 'signin')->name('signin.request');
     Route::get('/signup/varification/{token}', 'varification')->name('signup.varification');
 });
-Route::middleware(['auth', 'check_permission'])->group(function () {
+Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->group(function () {
     Route::get('/signout', [LoginController::class, 'logout'])->middleware('auth')->name('signout');
     Route::get('/', [DashboardController::class, 'index'])->name('root');
     Route::get('/dashboard', [SuperAdminDashBoardController::class, 'dashboard'])->name('dashboard');
@@ -72,8 +72,7 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
     Route::controller(PaymentGatewayController::class)->group(function () {
         Route::get('payment-gateways', 'index')->name('payment-gateway.index');
         Route::put('payment-gateway/update', 'update')->name('payment-gateway.update');
-        Route::get('payment', 'payment')->name('payment.method');
-        Route::get('payment/process', 'process')->name('payment.process');
+        Route::post('payment/process/{subscriptionRequest}', 'process')->name('payment.process');
     });
     //Role Permissions
     Route::controller(RoleController::class)->group(function () {

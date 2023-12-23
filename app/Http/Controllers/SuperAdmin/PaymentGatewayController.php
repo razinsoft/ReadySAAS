@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
+use App\Enums\IsHas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StripeConfigureRequest;
+use App\Models\Subscription;
+use App\Models\SubscriptionRequest;
+use App\Repositories\GeneralSettingRepository;
+use App\Repositories\ShopSubscriptionRepository;
+use App\Repositories\SubscriptionRequestRepository;
+use Exception;
 use Illuminate\Http\Request;
 use Stripe;
 
@@ -31,17 +38,39 @@ class PaymentGatewayController extends Controller
         return view('subscriptionPurchase.payment');
     }
 
-    public function process(Request $request)
+    public function process(Request $request, SubscriptionRequest $subscriptionRequest)
     {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        Stripe\Charge::create([
-            "amount" => 100 * 100,
-            "currency" => "INR",
-            "source" => $request->stripeToken,
-            "description" => "This payment is testing purpose",
-        ]);
+        $shop = auth()->user()?->shop;
+        if ($shop) {
+            $shopId = $shop->id;
+        } else {
+            $shopId = auth()->user()?->shop_id;
+        }
 
-        return back();
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shopId)->first();
+        try {
+            Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe\Charge::create([
+                "amount" => $subscriptionRequest->subscription->price * 100,
+                "currency" => $generalsettings?->defaultCurrency?->code ?? 'USD',
+                "source" => $request->stripeToken,
+                "description" => $subscriptionRequest->subscription->description,
+            ]);
+
+            $shopSubscription = ShopSubscriptionRepository::query()->where(['is_current' => IsHas::YES->value, 'shop_id' => $shopId])->first();
+
+            if ($shopSubscription) {
+                $shopSubscription->update([
+                    'is_current' => IsHas::NO->value,
+                ]);
+            }
+            SubscriptionRequestRepository::updateByRequest($subscriptionRequest);
+            ShopSubscriptionRepository::storeByRequest($subscriptionRequest);
+            return to_route('root')->with('success', 'Stripe payment successfully done');
+        } catch (Exception $ex) {
+            SubscriptionRequestRepository::requestFailed($subscriptionRequest);
+            return to_route('subscription-purchase.index')->withError('Something is wrong please try again');;
+        }
     }
 
     public static function setEnv($key, $value)
