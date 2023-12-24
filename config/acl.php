@@ -9,8 +9,7 @@ return [
         'subscription.store' => ['super admin'],
         'subscription.status.chanage' => ['super admin'],
         'subscription.update' => ['super admin'],
-        'subscription.requests' => ['super admin'],
-        'subscription.status.update' => ['super admin'],
+        'subscription.report' => ['super admin', 'admin'],
         //Payment Gateway
         'payment-gateway.index' => ['super admin'],
         'payment-gateway.update' => ['super admin'],

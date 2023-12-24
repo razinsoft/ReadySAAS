@@ -21,18 +21,18 @@
                         </span>
                     </a>
                 </li>
-                @canany(['subscription.index'])
+                @canany(['subscription.index', 'subscription-purchase.index'])
                     <li>
-                        <a class="menu {{ $request->routeIs('subscription.*') ? 'active' : '' }}" data-bs-toggle="collapse"
-                            href="#productMenu">
+                        <a class="menu {{ $request->routeIs('subscription.*', 'subscription-purchase.*') ? 'active' : '' }}"
+                            data-bs-toggle="collapse" href="#subscriptionMenu">
                             <span>
                                 <img src="/icons/subscription.svg" class="menu-icon" alt="icon" />
                                 {{ __('subscriptions') }}
                             </span>
                             <img src="/icons/arrowDown.svg" alt="" class="downIcon">
                         </a>
-                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('subscription.*') ? 'show' : '' }}"
-                            id="productMenu">
+                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('subscription.*', 'subscription-purchase.*') ? 'show' : '' }}"
+                            id="subscriptionMenu">
                             <div class="listBar">
                                 @can('subscription.index')
                                     <a href="{{ route('subscription.index') }}"
@@ -40,27 +40,16 @@
                                         {{ __('list') }}
                                     </a>
                                 @endcan
-                            </div>
-                        </div>
-                    </li>
-                @endcanany
-                @canany(['subscription-purchase.index'])
-                    <li>
-                        <a class="menu {{ $request->routeIs('subscription-purchase.*') ? 'active' : '' }}"
-                            data-bs-toggle="collapse" href="#subscriptionPurchase">
-                            <span>
-                                <img src="/icons/subscription.svg" class="menu-icon" alt="icon" />
-                                {{ __('subscriptions') }}
-                            </span>
-                            <img src="/icons/arrowDown.svg" alt="" class="downIcon">
-                        </a>
-                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('subscription-purchase.*') ? 'show' : '' }}"
-                            id="subscriptionPurchase">
-                            <div class="listBar">
                                 @can('subscription-purchase.index')
                                     <a href="{{ route('subscription-purchase.index') }}"
                                         class="subMenu {{ $request->routeIs('subscription-purchase.index') ? 'active' : '' }}">
-                                        {{ __('list') }}
+                                        {{ __('purchase') }}
+                                    </a>
+                                @endcan
+                                @can('subscription.report')
+                                    <a href="{{ route('subscription.report') }}"
+                                        class="subMenu {{ $request->routeIs('subscription.report') ? 'active' : '' }}">
+                                        {{ __('reports') }}
                                     </a>
                                 @endcan
                             </div>

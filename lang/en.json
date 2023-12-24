@@ -496,5 +496,8 @@
     "enter_your_store_description": "Enter your store description",
     "subscription_purchase": "Subscription Purchase",
     "product_limit": "Product Limit",
+    "is_current": "Is Current",
+    "subscription_title": "Subscription Title",
+    "subscription_reports": "Subscription Reports",
     "enter_your_subscription_product_limit": "Enter your subscription product limit"
 }

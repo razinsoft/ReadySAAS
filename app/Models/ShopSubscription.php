@@ -25,4 +25,9 @@ class ShopSubscription extends Model
     {
         return $this->belongsTo(Subscription::class);
     }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
 }

@@ -57,11 +57,10 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
     //subscriptions
     Route::controller(SubscriptionController::class)->group(function () {
         Route::get('subscriptions', 'index')->name('subscription.index');
+        Route::get('subscription/report', 'report')->name('subscription.report');
         Route::get('subscription/status-chanage/{subscription}/{status}', 'statusChanage')->name('subscription.status.chanage');
         Route::post('subscription/store', 'store')->name('subscription.store');
         Route::put('subscription/update/{subscription}', 'update')->name('subscription.update');
-        Route::get('subscription/requests', 'requests')->name('subscription.requests');
-        Route::put('subscription/status-update', 'statusUpdate')->name('subscription.status.update');
     });
     // Unit
     Route::controller(SubscriptionPurchaseController::class)->group(function () {
@@ -300,7 +299,7 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
         Route::get('shop/status-chanage/{shop}/{status}', 'statusChanage')->name('shop.status.chanage');
     });
 
-    //Shop
+    // Store
     Route::controller(StoreController::class)->group(function () {
         Route::get('stores', 'index')->name('store.index');
         Route::get('store/create', 'create')->name('store.create');

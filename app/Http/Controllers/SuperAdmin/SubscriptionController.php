@@ -7,6 +7,7 @@ use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubscriptionRequest;
 use App\Models\Subscription;
+use App\Repositories\ShopSubscriptionRepository;
 use App\Repositories\SubscriptionRepository;
 use Illuminate\Http\Request;
 
@@ -38,11 +39,13 @@ class SubscriptionController extends Controller
         return back()->with('success', 'Subscription successfully chanaged');
     }
 
-    public function requests()
+    public function report()
     {
-    }
-
-    public function statusUpdate()
-    {
+        $shopSubscriptions = ShopSubscriptionRepository::getAll();
+        $shop = auth()->user()?->shop;
+        if ($shop) {
+            $shopSubscriptions = ShopSubscriptionRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        }
+        return view('subscription.report', compact('shopSubscriptions'));
     }
 }
