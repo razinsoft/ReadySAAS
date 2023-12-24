@@ -11,7 +11,7 @@ class SubscriptionPurchaseController extends Controller
 {
     public function index()
     {
-        $subscriptions = SubscriptionRepository::query()->where('id', '>', 1)->where('status', 'Active')->get();
+        $subscriptions = SubscriptionRepository::query()->where('status', 'Active')->get();
         return view('subscriptionPurchase.index', compact('subscriptions'));
     }
 
