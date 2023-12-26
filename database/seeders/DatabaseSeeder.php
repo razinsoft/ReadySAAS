@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(UnitSeeder::class);
         $this->call(CurrencySeeder::class);
-        $this->call(GeneralSettingSeeder::class,);
+        $this->call(GeneralSettingSeeder::class);
+        $this->call(SubscriptionSeeder::class);
         
 
         if (app()->environment('local')) {

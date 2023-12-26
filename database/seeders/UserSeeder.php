@@ -13,9 +13,19 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->createSuperAdmin();
         $this->createAdmin();
         $this->createOwner();
         $this->createStore();
+    }
+    private function createSuperAdmin()
+    {
+        $userAdmin = User::factory()->create([
+            'name' => 'Super Admin',
+            'email' => 'superadmin@example.com',
+        ]);
+
+        $userAdmin->assignRole('super admin');
     }
     private function createAdmin()
     {

@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('warehouse_id')->nullable()->constrained((new Warehouse())->getTable());
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

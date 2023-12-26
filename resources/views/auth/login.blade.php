@@ -15,8 +15,7 @@
 
         <div class="form-outline form-white mb-3 mb-md-4">
             <label class="mb-2">{{ __('enter_your_email') }}</label>
-            <input type="email" name="email" id="email" class="form-control mb-1"
-                placeholder="{{ __('email') }}">
+            <input type="email" name="email" id="email" class="form-control mb-1" placeholder="{{ __('email') }}">
             @error('email')
                 <span class="text text-danger" role="alert">
                     <strong>{{ $message }}</strong>
@@ -47,6 +46,7 @@
             <div class="row mt-4">
                 <div class="col-md-12">
                     <div class=" d-flex justify-content-center gap-2 flex-wrap">
+                        <button type="submit" class="btn btn-primary" id="super_admin">Super Admin</button>
                         <button type="submit" class="btn btn-primary" id="admin">Admin</button>
                         <button type="submit" class="btn btn-primary" id="owner">Owner</button>
                         <button type="submit" class="btn btn-primary" id="store">Go to pos</button>
@@ -62,6 +62,10 @@
 @endsection
 @push('scripts')
     <script>
+        $('#super_admin').on('click', function() {
+            $('#email').val('superadmin@example.com');
+            $('#password').val('secret');
+        });
         $('#admin').on('click', function() {
             $('#email').val('admin@example.com');
             $('#password').val('secret');
