@@ -5,7 +5,6 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Enums\IsHas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StripeConfigureRequest;
-use App\Models\Subscription;
 use App\Models\SubscriptionRequest;
 use App\Repositories\GeneralSettingRepository;
 use App\Repositories\ShopSubscriptionRepository;
@@ -40,14 +39,7 @@ class PaymentGatewayController extends Controller
 
     public function process(Request $request, SubscriptionRequest $subscriptionRequest)
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-
-        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shopId)->first();
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
         try {
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             Stripe\Charge::create([
@@ -57,7 +49,7 @@ class PaymentGatewayController extends Controller
                 "description" => $subscriptionRequest->subscription->description,
             ]);
 
-            $shopSubscription = ShopSubscriptionRepository::query()->where(['is_current' => IsHas::YES->value, 'shop_id' => $shopId])->first();
+            $shopSubscription = ShopSubscriptionRepository::query()->where(['is_current' => IsHas::YES->value, 'shop_id' => mainShop()->id])->first();
 
             if ($shopSubscription) {
                 $shopSubscription->update([

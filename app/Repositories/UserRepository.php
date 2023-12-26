@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class UserRepository extends Repository
 {
     public static $path = "/users";
+    
     public static function model()
     {
         return User::class;
@@ -37,7 +38,6 @@ class UserRepository extends Repository
     public static function storeByRequest($request, $shop = null)
     {
         $create = self::create([
-            'shop_id' => $shop->id ?? null,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -53,14 +53,13 @@ class UserRepository extends Repository
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'company_name' => $request->company_name
         ]);
 
         $user->assignRole($request->role_name);
 
         if ($request->password) {
             self::update($user, [
-                'password' => bcrypt($request->password),
+                'password' => hash::make($request->password),
             ]);
         }
         return $userUpdate;

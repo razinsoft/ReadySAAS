@@ -14,10 +14,9 @@ class CurrencyRepository extends Repository
 
     public static function storeByRequest(CurrencyRequest $request)
     {
-        $user = auth()->user();
         return self::create([
-            'created_by' => $user->id,
-            'shop_id' => $user->shop->id ?? $user->shop_id,
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'name' => $request->name,
             'symbol' => $request->symbol,
             'code' => $request->code

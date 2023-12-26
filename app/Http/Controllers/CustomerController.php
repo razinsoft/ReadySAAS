@@ -16,24 +16,12 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $customers = CustomerRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $customers = CustomerRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('customer.index', compact('customers'));
     }
     public function create()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('customer.create', compact('customerGroups'));
     }
     public function store(CustomerRequest $request)
@@ -44,13 +32,7 @@ class CustomerController extends Controller
     }
     public function edit(Customer $customer)
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('customer.edit', compact('customer', 'customerGroups'));
     }
     public function update(CustomerRequest $request, Customer $customer)

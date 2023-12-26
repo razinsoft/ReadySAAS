@@ -35,6 +35,10 @@ class Shop extends Model
     public function currentSubscriptions()
     {
         return $this->subscriptions()->latest()->where('is_current' , IsHas::YES->value)->first();
+    }
 
+    public function staffs()
+    {
+        return $this->hasMany(ShopUser::class);
     }
 }

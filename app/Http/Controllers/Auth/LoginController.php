@@ -73,8 +73,10 @@ class LoginController extends Controller
             return back()->with('error', 'Now you can not do signup because admin have not configured signup yet');
         }
         $user = UserRepository::storeByRequest($request);
+        
         $shop = ShopRepository::storeByRequest($request, $user);
         GeneralSettingRepository::storeByRequest($request, $shop);
+        $user->shopUser()->attach($shop->id);
         $user->assignRole('admin');
         $varificationCode = EmailVerificationRepository::storeByRequest($user);
         MailSendEvent::dispatch($user, $varificationCode, 'signup');

@@ -28,15 +28,9 @@ class PurchaseController extends Controller
         $warehouseId = $request->warehouse_id;
         $startDate = $request->start_date;
         $endDate = $request->end_date;
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
         $hasDate = $startDate && $endDate ? true : false;
 
-        $purchases = PurchaseRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)
+        $purchases = PurchaseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)
             ->when($warehouseId, function ($query) use ($warehouseId) {
                 $query->where('warehouse_id', $warehouseId);
             })
@@ -45,23 +39,17 @@ class PurchaseController extends Controller
             })->get();
 
         $paymentMethods = PaymentMethod::cases();
-        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
-        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
+        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
         return view('purchase.index', compact('accounts', 'warehouses', 'purchases', 'paymentMethods'));
     }
 
     public function create()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $suppliers = SupplierRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
-        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
-        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
-        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
+        $suppliers = SupplierRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
         $paymentMethods = PaymentMethod::cases();
 
         return view('purchase.create', compact('accounts', 'suppliers', 'warehouses', 'taxs', 'paymentMethods'));
@@ -113,16 +101,10 @@ class PurchaseController extends Controller
 
     public function edit(Purchase $purchase)
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $suppliers = SupplierRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
-        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
-        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
-        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', $shop->id)->get();
+        $suppliers = SupplierRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
         $payment_method = $purchase->payments()->latest()->first()?->paying_method->value;
         $paymentMethods = PaymentMethod::cases();
         return view('purchase.edit', compact('warehouses', 'suppliers', 'taxs', 'purchase', 'accounts', 'payment_method', 'paymentMethods'));
@@ -233,14 +215,8 @@ class PurchaseController extends Controller
 
     public function purchasePrint(){
         $request = request();
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
         $purchases = PurchaseRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $shopId)->first();
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
         return view('purchase.purchasePrint', compact('purchases','generalsettings'));
     }
 }

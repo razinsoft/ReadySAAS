@@ -22,10 +22,9 @@ class BrandRepository extends Repository
             $thumbnail = MediaRepository::storeByRequest($request->image, self::$path);
             $thumbnailId = $thumbnail->id;
         }
-        $user = auth()->user();
         $create = self::create([
-            'created_by' => $user->id,
-            'shop_id' => $user->shop->id ?? $user->shop_id,
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'title' => $request->title,
             'thumbnail_id' => $thumbnailId
         ]);

@@ -35,8 +35,10 @@ class ShopController extends Controller
     {
         $request['email_verified_at'] = now();
         $user = UserRepository::storeByRequest($request);
+        
         $user->assignRole('admin');
         $shop = ShopRepository::storeByRequest($request, $user);
+        $user->shopUser()->attach($shop->id);
         GeneralSettingRepository::storeByRequest($request, $shop);
         return to_route('shop.index')->with('success', 'Shop and Shop owner successfully created');
     }

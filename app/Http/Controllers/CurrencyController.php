@@ -10,13 +10,7 @@ class CurrencyController extends Controller
 {
     public function index()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $currencies = CurrencyRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $currencies = CurrencyRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('currency.index', compact('currencies'));
     }
 

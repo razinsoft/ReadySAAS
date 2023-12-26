@@ -13,13 +13,7 @@ class StoreController extends Controller
 {
     public function index()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $stores = StoreRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $stores = StoreRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('store.index', compact('stores'));
     }
 
@@ -31,15 +25,15 @@ class StoreController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $shop = auth()->user()?->shop;
         $subscription = auth()->user()?->shop?->currentSubscriptions()?->subscription;
-        $stores = StoreRepository::query()->where('shop_id', $shop->id)->get();
+        $stores = StoreRepository::query()->where('shop_id', mainShop()->id)->get();
         if ($stores->count() == $subscription->shop_limit) {
             return back()->withError('You have extend your limit');
         }
-        $shop = auth()->user()?->shop;
+
         $request['email_verified_at'] = now();
-        $shopManager = UserRepository::storeByRequest($request, $shop);
+        $shopManager = UserRepository::storeByRequest($request, mainShop());
+        $shopManager->shopUser()->attach(mainShop()->id);
         StoreRepository::storeByRequest($request, $shopManager);
         $shopManager->assignRole('store');
         return back()->with('success', 'Store inserted successfully');

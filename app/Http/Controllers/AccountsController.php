@@ -10,13 +10,7 @@ class AccountsController extends Controller
 {
     public function index()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $accounts = AccountRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $accounts = AccountRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('account.index', compact('accounts'));
     }
 
@@ -54,13 +48,7 @@ class AccountsController extends Controller
 
     public function balanceSheet()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $accounts = AccountRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $accounts = AccountRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('account.balance_sheet', compact('accounts'));
     }
 

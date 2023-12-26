@@ -32,7 +32,6 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@example.com',
         ]);
-
         $userAdmin->assignRole('admin');
     }
     private function createStore()
@@ -40,9 +39,7 @@ class UserSeeder extends Seeder
         $staffUser = User::factory()->create([
             'name' => 'Store',
             'email' => 'store@example.com',
-            'shop_id' => 1,
         ]);
-
         $staffUser->assignRole('store');
     }
 }
