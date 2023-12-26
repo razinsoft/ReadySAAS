@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountsController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\SignInController;
+use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CouponController;
@@ -43,15 +44,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Auth
-Route::controller(LoginController::class)->middleware('guest')->group(function () {
+Route::controller(SignInController::class)->middleware('guest')->group(function () {
     Route::get('/signin', 'index')->name('signin.index');
+    Route::post('/signin', 'signin')->name('signin.request');
+});
+Route::controller(SignUpController::class)->middleware('guest')->group(function () {
     Route::get('/signup', 'signup')->name('signup.index');
     Route::post('/signup/request', 'signupRequest')->name('signup.request');
-    Route::post('/signin', 'signin')->name('signin.request');
     Route::get('/signup/varification/{token}', 'varification')->name('signup.varification');
 });
 Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->group(function () {
-    Route::get('/signout', [LoginController::class, 'logout'])->middleware('auth')->name('signout');
+    Route::get('/signout', [SigninController::class, 'logout'])->middleware('auth')->name('signout');
     Route::get('/', [DashboardController::class, 'index'])->name('root');
     Route::get('/dashboard', [SuperAdminDashBoardController::class, 'dashboard'])->name('dashboard');
     //subscriptions
