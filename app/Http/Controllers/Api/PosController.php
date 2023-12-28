@@ -26,20 +26,14 @@ class PosController extends Controller
 {
     public function pos()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $customers = CustomerRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
-        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
-        $warehouses = WarehouseRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
-        $taxes = TaxRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
-        $products = ProductRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->whereNotNull('is_featured')->get();
-        $brands = BrandRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
-        $categories = CategoryRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
-        $currency = GeneralSetting::where('shop_id', $shopId)->first()?->defaultCurrency?->symbol ?? '$';
+        $customers = CustomerRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $warehouses = WarehouseRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $taxes = TaxRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $products = ProductRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->whereNotNull('is_featured')->get();
+        $brands = BrandRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $categories = CategoryRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $currency = GeneralSetting::where('shop_id', mainShop()->id)->first()?->defaultCurrency?->symbol ?? '$';
 
         return $this->json('Pos data', [
             'customers' => CustomerResource::collection($customers),

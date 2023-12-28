@@ -12,14 +12,8 @@ class MoneyTransferController extends Controller
 {
     public function index()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $moneyTransfer = MoneyTransferRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
-        $accounts = AccountRepository::query()->where('shop_id', $shop->id)->get();
+        $moneyTransfer = MoneyTransferRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $accounts = AccountRepository::query()->where('shop_id', mainShop()->id)->get();
         return view('moneyTransfer.index', compact('moneyTransfer', 'accounts'));
     }
 

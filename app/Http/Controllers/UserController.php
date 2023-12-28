@@ -19,25 +19,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $users = UserRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
-        return view('user.index', compact('users'));
+        $staffs = mainShop()->staffs;
+        return view('user.index', compact('staffs'));
     }
 
     public function create()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $roles = RolesRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $roles = RolesRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('user.create', compact('roles'));
     }
 
@@ -49,11 +37,12 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        // dd($request->all());
         if (Role::findByName(lcfirst($request->role_name))->permissions->isEmpty()) {
             return back()->with('error', 'Please assign role permission!');
         }
+        $request['email_verified_at'] = now();
         $user = UserRepository::storeByRequest($request);
+        $user->shopUser()->attach(mainShop()->id);
         WalletRepository::create([
             'user_id' => $user->id,
         ]);

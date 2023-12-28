@@ -42,9 +42,8 @@ class SubscriptionController extends Controller
     public function report()
     {
         $shopSubscriptions = ShopSubscriptionRepository::getAll();
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopSubscriptions = ShopSubscriptionRepository::query()->where('shop_id', $shop->id)->orderByDesc('id')->get();
+        if (mainShop()) {
+            $shopSubscriptions = ShopSubscriptionRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         }
         return view('subscription.report', compact('shopSubscriptions'));
     }

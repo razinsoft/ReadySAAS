@@ -18,12 +18,6 @@ class ShopSubscriptionRepository extends Repository
 
     public static function storeByRequest(ModelsSubscriptionRequest $subscriptionRequest)
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
         $subscription = $subscriptionRequest->subscription;
         $date = now();
         if ($subscription->recurring_type->value == 'Onetime') {
@@ -36,7 +30,7 @@ class ShopSubscriptionRepository extends Repository
             $expiredAt = Carbon::parse($date)->addYears(1);
         }
         return self::create([
-            'shop_id' => $shopId,
+            'shop_id' => mainShop()->id,
             'subscription_id' => $subscriptionRequest->subscription_id,
             'is_current' => IsHas::YES->value,
             'payment_status' => PaymentStatus::PAID->value,

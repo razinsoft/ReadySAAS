@@ -26,10 +26,10 @@ class CategoryRepository extends Repository
             );
             $thumbnailId = $thumbnail->id;
         }
-        $user = auth()->user();
+        
         return self::create([
-            'created_by' => $user->id,
-            'shop_id' => $user->shop->id ?? $user->shop_id,
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'name' => $request->name,
             'parent_id' => $request->parent_id,
             'thumbnail_id' => $thumbnailId,

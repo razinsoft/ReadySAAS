@@ -15,60 +15,51 @@
                             <form action="{{ route('user.store') }}" method="POST">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group mb-3">
-                                            <label class="mb-2">{{ __('name') }} <span
-                                                    class="text-danger">*</span>
+                                            <label class="mb-2">{{ __('name') }} <span class="text-danger">*</span>
                                             </label>
                                             <input type="text" name="name" class="form-control"
                                                 placeholder="{{ __('enter_your_user_name') }}">
-                                            @if ($errors->has('name'))
-                                                <span class="text-danger">{{ $errors->first('name') }}</span>
-                                            @endif
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <label class="mb-2">{{ __('password') }} <span
-                                                    class="text-danger">*</span>
+                                            <label class="mb-2">{{ __('password') }} <span class="text-danger">*</span>
                                             </label>
                                             <div class="input-group mb-3">
                                                 <input type="text" id="getPass" class="form-control"
-                                                    placeholder="{{ __('enter_your_user_password') }}"
-                                                    name="password">
+                                                    placeholder="{{ __('enter_your_user_password') }}" name="password">
+                                                @error('password')
+                                                    <span class="text-danger">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
                                                 <div class="input-group-append">
                                                     <button class="btn common-btn" type="button"
                                                         id="generatePass">{{ __('qenerate') }}</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        @if ($errors->has('password'))
-                                            <span class="text-danger">
-                                                {{ $errors->first('password') }}
-                                            </span>
-                                        @endif
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <label class="mb-2">{{ __('email_address') }}<span
                                                     class="text-danger">*</span></label>
                                             <input type="email" name="email"
                                                 placeholder="{{ __('enter_your_user_email_address') }}"
                                                 class="form-control">
-                                            @if ($errors->has('email'))
+                                            @error('email')
                                                 <span class="text-danger">
-                                                    {{ $errors->first('email') }}
+                                                    {{ $message }}
                                                 </span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group mb-3">
-                                            <button type="submit"
-                                                class="btn common-btn">{{ __('submit') }}</button>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label class="mb-2">{{ __('company_name') }}</label>
-                                            <input type="text" name="company_name" class="form-control"
-                                                placeholder="{{ __('enter_your_user_company_name') }}">
-                                        </div>
                                         <div class="form-group mb-3">
                                             <label class="mb-2">{{ __('role') }} <span
                                                     class="text-danger">*</span></label>
@@ -80,18 +71,28 @@
                                                     </option>
                                                 @endforeach
                                             </select>
+                                            @error('role_name')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <label class="mb-2">{{ __('phone_number') }} <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" name="phone" class="form-control"
                                                 placeholder="{{ __('enter_your_user_phone_number') }}">
-                                            @if ($errors->has('phone'))
+                                            @error('phone')
                                                 <span class="text-danger">
-                                                    {{ $errors->first('phone') }}
+                                                    {{ $message }}
                                                 </span>
-                                            @endif
+                                            @enderror
                                         </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <button type="submit" class="btn common-btn">{{ __('submit') }}</button>
                                     </div>
                                 </div>
                             </form>

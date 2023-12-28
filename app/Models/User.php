@@ -46,6 +46,15 @@ class User extends Authenticatable
 
     public function mailShop()
     {
-        return $this->belongsTo(Shop::class,'shop_id');
+        return $this->belongsTo(Shop::class, 'shop_id');
+    }
+    public function userShop()
+    {
+        return $this->hasOne(ShopUser::class);
+    }
+
+    public function shopUser()
+    {
+        return $this->belongsToMany(User::class, 'shop_users', 'user_id', 'shop_id');
     }
 }

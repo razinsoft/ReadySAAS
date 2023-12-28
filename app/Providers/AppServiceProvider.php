@@ -22,16 +22,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('*', function ($view) {
-            $shop = auth()->user()?->shop;
-            if ($shop) {
-                $shopId = $shop->id;
-            } else {
-                $shopId = auth()->user()?->shop_id;
-            }
-            if ($shopId) {
-                $generalSettings = GeneralSettingRepository::query()->where('shop_id', $shopId)->first();
-            } else {
-                $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
+            $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
+            if (mainShop()) {
+                $generalSettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
             }
             $currency = $generalSettings?->defaultCurrency;
             $view->with('general_settings', $generalSettings);

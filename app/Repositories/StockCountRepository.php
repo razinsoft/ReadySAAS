@@ -15,10 +15,10 @@ class StockCountRepository extends Repository
     {
         $categories = json_encode($request->category_id);
         $brands = json_encode($request->brand_id);
-        $user = auth()->user();
+
         $create = self::create([
-            'created_by' => $user->id,
-            'shop_id' => $user->shop->id ?? $user->shop_id,
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'reference_no' => 'scr-' . date('Y-m-d H:i:s'),
             'warehouse_id' => $request->warehouse_id,
             'category_id' => $request->category_id ? $categories : $request->category_id,

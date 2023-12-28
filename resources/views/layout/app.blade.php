@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!--Responsive--Css-Link -->
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-    <link rel="stylesheet" href="{{asset('assets/css/daterangepicker.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/daterangepicker.css') }}">
 </head>
 
 <body>
@@ -84,13 +84,16 @@
 
                 <!-- Header-Rignt-Section -->
                 <div class="app-header-right">
-                    <div class="badgeButtonBox">
-                        <div class="notifactionIcon  me-4">
-                            <a href="{{ route('sale.pos') }}" class="btn common-btn mr-3 d-block">
-                                <i class="fa-solid fa-cart-plus"></i> {{ __('pos') }}
-                            </a>
+                    @if (isset(auth()->user()->roles[0]->name) && auth()->user()->roles[0]->name != 'super admin')
+                        <div class="badgeButtonBox">
+                            <div class="notifactionIcon  me-4">
+                                <a href="{{ route('sale.pos') }}" class="btn common-btn mr-3 d-block">
+                                    <i class="fa-solid fa-cart-plus"></i> {{ __('pos') }}
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    @endif
+
                     <div class="user-profile-box dropdown mx-3">
                         <div class="nav-profile-box dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="profile-image">
@@ -106,7 +109,7 @@
                         @endphp
                         <div class="dropdown-menu profile-item">
                             @foreach ($languages as $lang)
-                                <a href="{{ route('change.local', 'ln='.$lang->name) }}" class="dropdown-item">
+                                <a href="{{ route('change.local', 'ln=' . $lang->name) }}" class="dropdown-item">
                                     <i class="fa fa-language mr-3"></i> {{ $lang->title }}
                                 </a>
                             @endforeach
@@ -197,8 +200,8 @@
     <script type="text/javascript" src="{{ asset('assets/scripts/datatable4.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('assets/scripts/apexcharts.min.js') }}"></script>
-    <script src="{{asset('assets/scripts/moment.min.js')}}"></script>
-    <script src="{{asset('assets/scripts/daterangepicker.js')}}"></script>
+    <script src="{{ asset('assets/scripts/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/scripts/daterangepicker.js') }}"></script>
     @stack('scripts')
 
     @if (session('success'))

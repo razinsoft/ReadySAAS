@@ -11,13 +11,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $shop = auth()->user()?->shop;
-        if ($shop) {
-            $shopId = $shop->id;
-        } else {
-            $shopId = auth()->user()?->shop_id;
-        }
-        $roles = RolesRepository::query()->where('shop_id', $shopId)->orderByDesc('id')->get();
+        $roles = RolesRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('role.index', compact('roles'));
     }
 

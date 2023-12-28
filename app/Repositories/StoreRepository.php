@@ -14,10 +14,9 @@ class StoreRepository extends Repository
 
     public static function storeByRequest(Request $request, $shopManager)
     {
-        $user = auth()->user();
         return self::create([
-            'created_by' => $user->id,
-            'shop_id' => $user->shop->id ?? $user->shop_id,
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'user_id' => $shopManager->id,
             'name' => $request->store_name,
             'description' => $request->description,

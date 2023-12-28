@@ -15,10 +15,9 @@ class SaleReturnRepository extends Repository
     public static function storeByRequest(SaleReturnRequest $request, Sale $sale)
     {
         $referenceNo = 'rrp-' . date("Ymd") . '-' . date("his");
-        $user = auth()->user();
         return self::create([
-            'created_by' => $user->id,
-            'shop_id' => $user->shop->id ?? $user->shop_id,
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'reference_no' => $referenceNo,
             'total_discount' => $sale->total_discount - $request->total_discount,
             'total_tax' => $sale->total_tax - $request->total_tax,
