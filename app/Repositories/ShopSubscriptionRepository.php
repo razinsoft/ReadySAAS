@@ -30,7 +30,7 @@ class ShopSubscriptionRepository extends Repository
             $expiredAt = Carbon::parse($date)->addYears(1);
         }
         return self::create([
-            'shop_id' => mainShop()->id,
+            'shop_id' => auth()->user()->shop->id,
             'subscription_id' => $subscriptionRequest->subscription_id,
             'is_current' => IsHas::YES->value,
             'payment_status' => PaymentStatus::PAID->value,
