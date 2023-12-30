@@ -126,7 +126,7 @@ class ProductRepository extends Repository
             ->where('shop_id', mainShop()->id)->when($search, function ($query) use ($search) {
                 $query->where('name', 'Like', "%{$search}%")
                     ->orWhere('code', 'Like', "%{$search}%");
-            })->get();
+            });
 
         return $products;
     }
