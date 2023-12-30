@@ -164,7 +164,7 @@ class ProductController extends Controller
     //products search
     public function productSearch(Request $request)
     {
-        $products = ProductRepository::search($request->search);
+        $products = ProductRepository::search($request->search)->get();
         return $this->json('message', [
             'products' => $products
         ]);
