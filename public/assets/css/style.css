@@ -6,6 +6,7 @@
     --paragraph-color: #707070;
     --dark-theme-color: #252c32;
     --theme-color: #29aae1;
+    --theme-secondary-color: #eaf7fc;
     --theme-hover-bg: #eaf7fc;
     --theme-hover-text: #626578;
 }
@@ -711,14 +712,14 @@ table.dataTable tfoot td {
 }
 
 .vertical-nav-menu li .menu.active {
-    background: #eaf7fc;
+    background: var(--theme-secondary-color) !important;
     color: var(--theme-color) !important;
 }
 
 .vertical-nav-menu li .menu:hover,
 .vertical-nav-menu li .menu[aria-expanded="true"] {
     color: #43475d;
-    background: var(--theme-hover-bg);
+    background: var(--theme-secondary-color);
 }
 
 .vertical-nav-menu li .menu .menu-icon {
@@ -733,6 +734,12 @@ table.dataTable tfoot td {
 .vertical-nav-menu li .menu[aria-expanded="true"] .menu-icon,
 .vertical-nav-menu li .menu:hover .menu-icon {
     filter: invert(1);
+}
+
+.menu-icon{
+    /* filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%); */
+    stroke: red;
+
 }
 
 .dropdownMenuCollapse {
@@ -773,12 +780,12 @@ table.dataTable tfoot td {
 
 .dropdownMenuCollapse .subMenu:hover {
     color: var(--theme-hover-text);
-    background: var(--theme-hover-bg);
+    background: var(--theme-secondary-color);
 }
 
 .dropdownMenuCollapse .subMenu.active {
     color: var(--theme-color);
-    background: var(--theme-hover-bg);
+    background: var(--theme-secondary-color);
 }
 
 .dropdownMenuCollapse .subMenu::before {
@@ -2195,13 +2202,13 @@ li.sub-menu.active::before {
 }
 
 .branding-logo {
-    height: 60px;
+    height: 70px;
     text-align: center;
 }
 
 .branding-logo img {
-    width: 175px;
-    height: 50px;
+    width: 250px;
+    height: 80px;
 }
 
 .branding-logo-forMobile {
@@ -5589,7 +5596,7 @@ table.dataTable {
 }
 
 .table-bg-color {
-    background: var(--table-header-bg, #29aae1);
+    background: var(--theme-color, #29aae1);
     color: #fff;
 }
 
@@ -5603,7 +5610,7 @@ table.dataTable {
 }
 
 .card-header-color {
-    background: var(--table-header-bg, #29aae1);
+    background: var(--theme-color, #29aae1);
     color: #fff;
 }
 
@@ -5641,7 +5648,7 @@ table.dataTable {
 }
 
 .table-bg-color {
-    background: var(--table-header-bg, #29aae1);
+    background: var(--theme-color, #29aae1);
     color: #fff;
 }
 

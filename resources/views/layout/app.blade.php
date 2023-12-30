@@ -41,6 +41,71 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/daterangepicker.css') }}">
 </head>
+<style>
+    :root {
+        --theme-color: {{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }};
+        --theme-secondary-color: {{ mainShop()?->shopCategory?->secondary_color }};
+    }
+    img.menu-icon {
+        color: #EF4444; filter: hue-rotate(0deg) !important;
+    }
+</style>
+<script>
+//     function colorizeFilter(hexColor) {
+//   // Remove the hash symbol if it exists
+//   hexColor = hexColor.replace(/^#/, '');
+
+//   // Convert hex to RGB
+//   const bigint = parseInt(hexColor, 16);
+//   const r = (bigint >> 16) & 255;
+//   const g = (bigint >> 8) & 255;
+//   const b = bigint & 255;
+
+//   // Calculate hue from RGB
+//   const hue = rgbToHue(r, g, b);
+
+//   // Generate the filter code
+//   const filterCode = `filter: hue-rotate(${hue}deg);`;
+
+//   // Apply the color to the filter
+//   const coloredFilterCode = hexColor ? `color: #${hexColor}; ${filterCode}` : filterCode;
+
+//   return coloredFilterCode;
+// }
+
+// // Convert RGB to Hue
+// function rgbToHue(red, green, blue) {
+//   const max = Math.max(red, green, blue);
+//   const min = Math.min(red, green, blue);
+
+//   let hue;
+
+//   if (max === min) {
+//     hue = 0;
+//   } else {
+//     const d = max - min;
+//     switch (max) {
+//       case red:
+//         hue = (green - blue) / d + (green < blue ? 6 : 0);
+//         break;
+//       case green:
+//         hue = (blue - red) / d + 2;
+//         break;
+//       case blue:
+//         hue = (red - green) / d + 4;
+//         break;
+//     }
+//     hue *= 60;
+//   }
+
+//   return Math.round(hue);
+// }
+
+// // Example usage:
+// const colorFilter = colorizeFilter("{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"); // Change color to a shade of green
+// console.log(colorFilter);
+
+</script>
 
 <body>
 

@@ -23,6 +23,7 @@ class ShopCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
+            'primary_color' => 'required|string',
             'description' => 'nullable|string',
             'status' => 'required|in:Active,Inactive',
         ];
