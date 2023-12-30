@@ -21,41 +21,7 @@
                         </span>
                     </a>
                 </li>
-                @canany(['subscription.index', 'subscription-purchase.index'])
-                    <li>
-                        <a class="menu {{ $request->routeIs('subscription.*', 'subscription-purchase.*') ? 'active' : '' }}"
-                            data-bs-toggle="collapse" href="#subscriptionMenu">
-                            <span>
-                                <img src="/icons/subscription.svg" class="menu-icon" alt="icon" />
-                                {{ __('subscriptions') }}
-                            </span>
-                            <img src="/icons/arrowDown.svg" alt="" class="downIcon">
-                        </a>
-                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('subscription.*', 'subscription-purchase.*') ? 'show' : '' }}"
-                            id="subscriptionMenu">
-                            <div class="listBar">
-                                @can('subscription.index')
-                                    <a href="{{ route('subscription.index') }}"
-                                        class="subMenu {{ $request->routeIs('subscription.index') ? 'active' : '' }}">
-                                        {{ __('list') }}
-                                    </a>
-                                @endcan
-                                @can('subscription-purchase.index')
-                                    <a href="{{ route('subscription-purchase.index') }}"
-                                        class="subMenu {{ $request->routeIs('subscription-purchase.index') ? 'active' : '' }}">
-                                        {{ __('purchase') }}
-                                    </a>
-                                @endcan
-                                @can('subscription.report')
-                                    <a href="{{ route('subscription.report') }}"
-                                        class="subMenu {{ $request->routeIs('subscription.report') ? 'active' : '' }}">
-                                        {{ __('reports') }}
-                                    </a>
-                                @endcan
-                            </div>
-                        </div>
-                    </li>
-                @endcanany
+
                 @canany(['category.index', 'product.index', 'barcode.print', 'brand.index', 'unit.index',
                     'warehouse.index'])
                     <li>
@@ -378,6 +344,41 @@
                                     <a href="{{ route('report.summary') }}"
                                         class="subMenu {{ $request->routeIs('report.summary') ? 'active' : '' }}">
                                         {{ __('summary') }}
+                                    </a>
+                                @endcan
+                            </div>
+                        </div>
+                    </li>
+                @endcanany
+                @canany(['subscription.index', 'subscription-purchase.index'])
+                    <li>
+                        <a class="menu {{ $request->routeIs('subscription.*', 'subscription-purchase.*') ? 'active' : '' }}"
+                            data-bs-toggle="collapse" href="#subscriptionMenu">
+                            <span>
+                                <img src="/icons/subscription.svg" class="menu-icon" alt="icon" />
+                                {{ __('subscriptions') }}
+                            </span>
+                            <img src="/icons/arrowDown.svg" alt="" class="downIcon">
+                        </a>
+                        <div class="collapse dropdownMenuCollapse {{ $request->routeIs('subscription.*', 'subscription-purchase.*') ? 'show' : '' }}"
+                            id="subscriptionMenu">
+                            <div class="listBar">
+                                @can('subscription.index')
+                                    <a href="{{ route('subscription.index') }}"
+                                        class="subMenu {{ $request->routeIs('subscription.index') ? 'active' : '' }}">
+                                        {{ __('list') }}
+                                    </a>
+                                @endcan
+                                @can('subscription-purchase.index')
+                                    <a href="{{ route('subscription-purchase.index') }}"
+                                        class="subMenu {{ $request->routeIs('subscription-purchase.index') ? 'active' : '' }}">
+                                        {{ __('purchase') }}
+                                    </a>
+                                @endcan
+                                @can('subscription.report')
+                                    <a href="{{ route('subscription.report') }}"
+                                        class="subMenu {{ $request->routeIs('subscription.report') ? 'active' : '' }}">
+                                        {{ __('reports') }}
                                     </a>
                                 @endcan
                             </div>

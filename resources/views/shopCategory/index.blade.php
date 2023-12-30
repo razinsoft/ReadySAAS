@@ -134,6 +134,9 @@
                                     placeholder="{{ __('enter_your_shop_category_name') }}" />
                             </div>
                             <div class="col-md-12 mb-3">
+                                <x-input type="color" name="primary_color" title="{{ __('primary_color') }}" />
+                            </div>
+                            <div class="col-md-12 mb-3">
                                 <label class="mb-2">{{ __('description') }}</label>
                                 <textarea name="description" class="form-control" rows="3"
                                     placeholder="{{ __('enter_your_shop_category_description') }}"></textarea>
@@ -187,6 +190,9 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <x-input type="color" name="primary_color" title="{{ __('primary_color') }}" />
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label class="mb-2">{{ __('description') }}</label>
