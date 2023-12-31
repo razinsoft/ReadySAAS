@@ -15,6 +15,11 @@ class UserSeeder extends Seeder
     {
         $this->createSuperAdmin();
         $this->createAdmin();
+        $this->groceryShopOwner();
+        $this->pharmacyOwner();
+        $this->electronicsShopOwner();
+        $this->restaurantOwner();
+        $this->clothingOwner();
         $this->createStore();
     }
     private function createSuperAdmin()
@@ -31,6 +36,46 @@ class UserSeeder extends Seeder
         $userAdmin = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
+        ]);
+        $userAdmin->assignRole('admin');
+    }
+    private function groceryShopOwner()
+    {
+        $userAdmin = User::factory()->create([
+            'name' => 'Grocery Shop Owner',
+            'email' => 'groceryshop@example.com',
+        ]);
+        $userAdmin->assignRole('admin');
+    }
+    private function pharmacyOwner()
+    {
+        $userAdmin = User::factory()->create([
+            'name' => 'Pharmacy Owner',
+            'email' => 'pharmacy@example.com',
+        ]);
+        $userAdmin->assignRole('admin');
+    }
+    private function electronicsShopOwner()
+    {
+        $userAdmin = User::factory()->create([
+            'name' => 'Electronics Shop Owner',
+            'email' => 'electronics@example.com',
+        ]);
+        $userAdmin->assignRole('admin');
+    }
+    private function restaurantOwner()
+    {
+        $userAdmin = User::factory()->create([
+            'name' => 'Restaurant Owner',
+            'email' => 'restaurant@example.com',
+        ]);
+        $userAdmin->assignRole('admin');
+    }
+    private function clothingOwner()
+    {
+        $userAdmin = User::factory()->create([
+            'name' => 'Clothing Shop Owner',
+            'email' => 'clothing@example.com',
         ]);
         $userAdmin->assignRole('admin');
     }

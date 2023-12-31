@@ -13,15 +13,26 @@
         </div>
         <div class="app-sidebar-inner">
             <ul class="vertical-nav-menu">
-                <li>
-                    <a class="menu {{ $request->routeIs('root') ? 'active' : '' }}" href="{{ route('root') }}">
-                        <span>
-                            <img src="/icons/menu.svg" class="menu-icon" alt="icon" />
-                            {{ __('dashboard') }}
-                        </span>
-                    </a>
-                </li>
-
+                @can('root')
+                    <li>
+                        <a class="menu {{ $request->routeIs('root') ? 'active' : '' }}" href="{{ route('root') }}">
+                            <span>
+                                <img src="/icons/menu.svg" class="menu-icon" alt="icon" />
+                                {{ __('dashboard') }}
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('dashboard')
+                    <li>
+                        <a class="menu {{ $request->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                            <span>
+                                <img src="/icons/menu.svg" class="menu-icon" alt="icon" />
+                                {{ __('dashboard') }}
+                            </span>
+                        </a>
+                    </li>
+                @endcan
                 @canany(['category.index', 'product.index', 'barcode.print', 'brand.index', 'unit.index',
                     'warehouse.index'])
                     <li>
@@ -114,7 +125,7 @@
                             <div class="listBar">
                                 @can('shop.category.index')
                                     <a href="{{ route('shop.category.index') }}"
-                                        class="subMenu {{ $request->routeIs('category.index') ? 'active' : '' }}">
+                                        class="subMenu {{ $request->routeIs('shop.category.index') ? 'active' : '' }}">
                                         {{ __('categories') }}
                                     </a>
                                 @endcan

@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="submitBtn">
-                        <button type="submit" class="btn btn-primary">{{ __('update_and_Save') }}</button>
+                        <button type="submit" class="btn common-btn">{{ __('update_and_Save') }}</button>
                     </div>
                 </form>
             </div>

@@ -116,7 +116,7 @@
                             Order</a>
                     </td>
                     <td>
-                        <button onclick="window.print();" class="btn btn-primary">
+                        <button onclick="window.print();" class="btn common-btn">
                             <i class="fa fa-print"></i> Print Now
                         </button>
                     </td>

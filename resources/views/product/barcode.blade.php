@@ -50,7 +50,7 @@
                                                 <label class="mb-2">{{ __('add_product') }}<span
                                                         class="text-danger">*</span></label>
                                                 <div class="search-box input-group">
-                                                    <button type="button" class="btn btn-secondary btn-lg"><i
+                                                    <button type="button" class="btn common-btn btn-lg"><i
                                                             class="fa fa-barcode"></i></button>
                                                     <input type="text" name="product_ids" id="searchProduct"
                                                         placeholder="{{ __('please_type_product_code_and_select') }}"
@@ -121,7 +121,7 @@
                             </div>
                             <div class="form-group mt-3">
                                 <button type="submit"
-                                    class="btn btn-primary w-100">{{ __('print') }}</button>
+                                    class="btn common-btn w-100">{{ __('print') }}</button>
                             </div>
                         </div>
                     </div>

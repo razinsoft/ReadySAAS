@@ -6,7 +6,7 @@
                 <div class="card border-0 rounded shadow-sm">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="m-0">{{ __('languages') }}</h3>
-                        <a class="btn btn-primary" href="{{ route('language.create') }}">{{ __('Create_new_Language') }}</a>
+                        <a class="btn common-btn" href="{{ route('language.create') }}">{{ __('Create_new_Language') }}</a>
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="{{ route('language.edit', $language->id) }}" class="btn btn-primary btn-sm">
+                            <a href="{{ route('language.edit', $language->id) }}" class="btn btn-info btn-sm">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </a>
                             @if ($language->name != 'en')

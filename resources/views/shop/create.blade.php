@@ -17,7 +17,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <label class="mb-2">{{ __('name') }} <span class="text-danger">*</span>
+                                            <label class="mb-2">{{ __('business_owner_name') }} <span class="text-danger">*</span>
                                             </label>
                                             <input type="text" name="name" class="form-control"
                                                 placeholder="{{ __('enter_your_shop_owner_name') }}">

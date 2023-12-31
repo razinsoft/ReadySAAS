@@ -15,4 +15,9 @@ class ShopCategory extends Model
     protected $casts = [
         'status' => Status::class,
     ];
+
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
 }

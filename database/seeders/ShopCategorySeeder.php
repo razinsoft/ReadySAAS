@@ -16,6 +16,11 @@ class ShopCategorySeeder extends Seeder
     {
         $shopCategories = [
             [
+                'name' => 'All in One',
+                'primary_color' => '#29aae1',
+                'secondary_color' => '#eaf7fc',
+            ],
+            [
                 'name' => 'Super Shop or Grocery Shop',
                 'primary_color' => '#EF4444',
                 'secondary_color' => '#ef444421',
