@@ -6,6 +6,7 @@
     --paragraph-color: #707070;
     --dark-theme-color: #252c32;
     --theme-color: #29aae1;
+    --theme-secondary-color: #eaf7fc;
     --theme-hover-bg: #eaf7fc;
     --theme-hover-text: #626578;
 }
@@ -711,29 +712,34 @@ table.dataTable tfoot td {
 }
 
 .vertical-nav-menu li .menu.active {
-    background: #eaf7fc;
+    background: var(--theme-secondary-color) !important;
     color: var(--theme-color) !important;
 }
-
+.form-check-input:checked {
+    background-color: var(--theme-color);
+    border-color: var(--theme-color);
+}
 .vertical-nav-menu li .menu:hover,
 .vertical-nav-menu li .menu[aria-expanded="true"] {
-    color: #43475d;
-    background: var(--theme-hover-bg);
+    color: var(--theme-color);
+    background: var(--theme-secondary-color);
 }
-
+.vertical-nav-menu li .menu:hover {
+    color: var(--theme-color);
+}
 .vertical-nav-menu li .menu .menu-icon {
     width: 24px;
     height: 24px;
 }
-
+/* 
 .vertical-nav-menu li .menu.active .menu-icon {
     filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg) !important;
-}
+} */
 
-.vertical-nav-menu li .menu[aria-expanded="true"] .menu-icon,
+/* .vertical-nav-menu li .menu[aria-expanded="true"] .menu-icon,
 .vertical-nav-menu li .menu:hover .menu-icon {
     filter: invert(1);
-}
+} */
 
 .dropdownMenuCollapse {
     display: flex;
@@ -772,13 +778,13 @@ table.dataTable tfoot td {
 }
 
 .dropdownMenuCollapse .subMenu:hover {
-    color: var(--theme-hover-text);
-    background: var(--theme-hover-bg);
+    color: var(--theme-color);
+    background: var(--theme-secondary-color);
 }
 
 .dropdownMenuCollapse .subMenu.active {
     color: var(--theme-color);
-    background: var(--theme-hover-bg);
+    background: var(--theme-secondary-color);
 }
 
 .dropdownMenuCollapse .subMenu::before {
@@ -2195,13 +2201,13 @@ li.sub-menu.active::before {
 }
 
 .branding-logo {
-    height: 60px;
+    height: 70px;
     text-align: center;
 }
 
 .branding-logo img {
-    width: 175px;
-    height: 50px;
+    width: 250px;
+    height: 80px;
 }
 
 .branding-logo-forMobile {
@@ -5513,7 +5519,7 @@ ul.timeline-3 > li {
     line-height: 120%;
     letter-spacing: 0.08px;
     border-radius: 5px;
-    background: #29aae1;
+    background: var(--theme-color);
     width: 100%;
     padding: 8px 24px 8px 16px;
 }
@@ -5529,6 +5535,7 @@ ul.timeline-3 > li {
 }
 
 .common-btn {
+    background-color: var();
     --bs-btn-color: #fff;
     --bs-btn-bg: #29aae1;
     --bs-btn-border-color: #29aae1;
@@ -5581,6 +5588,12 @@ ul.timeline-3 > li {
     --bs-btn-disabled-border-color: #0d6efd;
     margin-left: 5px;
 }
+
+.common-btn {
+    background-color: var(--theme-color) !important;
+    border: var(--theme-color) !important;
+}
+
 table.dataTable {
     background-color: #fff;
     border-collapse: collapse !important;
@@ -5589,7 +5602,7 @@ table.dataTable {
 }
 
 .table-bg-color {
-    background: var(--table-header-bg, #29aae1);
+    background: var(--theme-color, #29aae1);
     color: #fff;
 }
 
@@ -5603,7 +5616,7 @@ table.dataTable {
 }
 
 .card-header-color {
-    background: var(--table-header-bg, #29aae1);
+    background: var(--theme-color, #29aae1);
     color: #fff;
 }
 
@@ -5641,7 +5654,7 @@ table.dataTable {
 }
 
 .table-bg-color {
-    background: var(--table-header-bg, #29aae1);
+    background: var(--theme-color, #29aae1);
     color: #fff;
 }
 
@@ -6011,11 +6024,11 @@ table.dataTable {
 
 .subscription-container .title {
     font-size: 2rem;
-    color: #29aae1;
+    color: var(--theme-color);
 }
 
 .subscription-container .price {
-    color: #29aae1 !important;
+    color: var(--theme-color) !important;
     font-weight: 700;
     font-size: 2.2rem;
     margin: 15px 0;
@@ -6043,7 +6056,7 @@ table.dataTable {
 .subscribe-button {
     display: inline-block;
     padding: 15px 0;
-    background-color: #29aae1;
+    background-color: var(--theme-color);
     color: #fff;
     text-decoration: none;
     border-radius: 30px;
@@ -6053,10 +6066,6 @@ table.dataTable {
     font-weight: 500;
     transition: 0.2s ease;
     border: 1px solid;
-}
-
-.subscribe-button:hover {
-    background: #4089f3;
 }
 
 .description-content {
@@ -6071,7 +6080,7 @@ table.dataTable {
     cursor: pointer;
     border: none;
     background-color: transparent;
-    color: #29aae1;
+    color: var(--theme-color);
     text-decoration: underline;
 }
 
@@ -6085,5 +6094,4 @@ table.dataTable {
 
 .subscription-box-title {
     font-size: 18px;
-
 }

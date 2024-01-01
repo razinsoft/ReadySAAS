@@ -38,7 +38,7 @@
                                                 data-name="{{ $warehouse->name }}" data-phone="{{ $warehouse->phone }}"
                                                 data-email="{{ $warehouse->email }}"
                                                 data-address="{{ $warehouse->address }}" href="#"
-                                                class="btn btn-sm btn-info edit-btn"><i class="fa fa-edit"></i></a>
+                                                class="btn btn-sm common-btn edit-btn"><i class="fa fa-edit"></i></a>
 
                                             <a id="delete" href="{{ route('warehouse.delete', $warehouse->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

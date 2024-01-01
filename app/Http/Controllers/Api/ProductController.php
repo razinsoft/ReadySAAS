@@ -20,12 +20,8 @@ class ProductController extends Controller
 
         $productSearch = ProductRepository::search($search);
         $totalProduct = $productSearch->count();
-        $hasTakeSkip = false;
-        if ($page && $take) {
-            $hasTakeSkip = true;
-        }
 
-        $products = $productSearch->when($hasTakeSkip, function ($query) use ($skip, $take) {
+        $products = $productSearch->when($page && $take, function ($query) use ($skip, $take) {
             $query->skip($skip)->take($take);
         })->get();
 

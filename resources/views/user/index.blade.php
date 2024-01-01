@@ -35,7 +35,7 @@
                                         <td>{{ $staff->user->phone ?? 'N/A' }}</td>
                                         <td>{{ ucfirst($staff->user->roles[0]->name ?? 'N/A') }}</td>
                                         <td class="">
-                                            <a href="{{ route('user.edit', $staff->user->id) }}" class="btn btn-sm btn-info"><i
+                                            <a href="{{ route('user.edit', $staff->user->id) }}" class="btn btn-sm common-btn"><i
                                                     class="fa fa-edit"></i></a>
 
                                             <a id="delete" href="{{ route('user.delete', $staff->user->id) }}"

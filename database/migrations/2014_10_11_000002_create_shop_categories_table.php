@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('created_by')->nullable()->constrained((new User())->getTable());
             $table->string('name');
+            $table->string('primary_color');
+            $table->string('secondary_color');
             $table->longText('description')->nullable();
             $table->string('status');
             $table->timestamps();

@@ -19,6 +19,7 @@ class ShopCategoryRepository extends Repository
         return self::create([
             'created_by' => auth()->id(),
             'name' => $request->name,
+            'primary_color' => $request->primary_color,
             'description' => $request->description,
             'status' => $request->status,
         ]);
@@ -28,6 +29,7 @@ class ShopCategoryRepository extends Repository
     {
         return self::update($shopCategory, [
             'name' => $request->name,
+            'primary_color' => $request->primary_color,
             'description' => $request->description,
             'status' => $request->status,
         ]);

@@ -61,7 +61,7 @@
         </div>
         <div class="hidden-print mt-3 mb-2 text-center">
             <a href="{{ route('purchase.index') }}" class="btn btn-danger">{{ __('back') }}</a>
-            <button type="button" class="btn btn-primary"
+            <button type="button" class="btn common-btn"
                 onclick="window.print();">{{ __('print') }}</button>
         </div>
         <table class="table table-bordered text-center">

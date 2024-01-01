@@ -46,9 +46,12 @@
             <div class="row mt-4">
                 <div class="col-md-12">
                     <div class=" d-flex justify-content-center gap-2 flex-wrap">
-                        <button type="submit" class="btn btn-primary" id="super_admin">Super Admin</button>
-                        <button type="submit" class="btn btn-primary" id="admin">Admin and Shop Owner</button>
-                        <button type="submit" class="btn btn-primary" id="store">Store Manager</button>
+                        <button type="submit" class="btn btn-primary" id="admin">All In One</button>
+                        <button type="submit" class="btn btn-primary" id="groceryShop">Super Shop/Grocery</button>
+                        <button type="submit" class="btn btn-primary" id="pharmacyShop">Pharmacy</button>
+                        <button type="submit" class="btn btn-primary" id="mobileShop">Electronics/Hardware or Mobile Shop</button>
+                        <button type="submit" class="btn btn-primary" id="restaurant">Restaurant</button>
+                        <button type="submit" class="btn btn-primary" id="super_admin">Super Admin or SAAS</button>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -69,8 +72,20 @@
             $('#email').val('admin@example.com');
             $('#password').val('secret');
         });
-        $('#store').on('click', function() {
-            $('#email').val('store@example.com');
+        $('#groceryShop').on('click', function() {
+            $('#email').val('groceryshop@example.com');
+            $('#password').val('secret');
+        });
+        $('#pharmacyShop').on('click', function() {
+            $('#email').val('pharmacy@example.com');
+            $('#password').val('secret');
+        });
+        $('#mobileShop').on('click', function() {
+            $('#email').val('electronics@example.com');
+            $('#password').val('secret');
+        });
+        $('#restaurant').on('click', function() {
+            $('#email').val('restaurant@example.com');
             $('#password').val('secret');
         });
     </script>

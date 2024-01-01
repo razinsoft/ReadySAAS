@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between card-header-color">
                             <span class="list-title text-white">{{ __('new_store') }}</span>
-                            <a href="{{ route('store.index') }}" class="btn btn-info2"><i class="fa fa-chevron-left "></i>
+                            <a href="{{ route('store.index') }}" class="btn common-btn"><i class="fa fa-chevron-left "></i>
                                 {{ __('back') }}</a>
                         </div>
                         <div class="card-body">

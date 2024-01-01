@@ -46,7 +46,7 @@
                                         <div class="col-md-12 mt-3">
                                             <label class="mb-2">{{ __('select_a_product') }}</label>
                                             <div class="search-box input-group">
-                                                <span class="btn btn-secondary"><i class="fa fa-barcode"></i></span>
+                                                <span class="btn common-btn"><i class="fa fa-barcode"></i></span>
                                                 <input type="text" name="product_code_name" id="searchProduct"
                                                     placeholder="{{ __('please_type_product_code_and_select') }}"
                                                     class="form-control rounded-end" />

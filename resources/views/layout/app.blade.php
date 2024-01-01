@@ -41,6 +41,13 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/daterangepicker.css') }}">
 </head>
+<style>
+    :root {
+        --theme-color: {{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }};
+        --theme-secondary-color: {{ mainShop()?->shopCategory?->secondary_color ?? '#eaf7fc' }};
+        --bs-btn-bg: {{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }};
+    }
+</style>
 
 <body>
 
@@ -59,7 +66,7 @@
             <div class="app-header-menu">
                 <span>
                     <button type="button"
-                        class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        class="btn-icon btn-icon-only btn common-btn btn-sm mobile-toggle-header-nav">
                         <span class="btn-icon-wrapper">
                             <i class="fa fa-ellipsis-v fa-w-6"></i>
                         </span>
@@ -236,6 +243,108 @@
                 "search": "",
                 "searchPlaceholder": "Search..."
             }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var svgImages = document.querySelectorAll('.menu.active .menu-icon');
+            svgImages.forEach(function(svgImage) {
+                var svgPath = svgImage.getAttribute('src');
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var svgContent = xhr.responseText;
+                        svgContent = svgContent.replace(/stroke="#9395A2"/g,
+                            'stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"'
+                        );
+                        svgImage.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+                            svgContent);
+                    }
+                };
+                xhr.open('GET', svgPath, true);
+                xhr.send();
+            });
+
+
+            var menus = document.querySelectorAll('.menu');
+
+            menus.forEach(function(menu) {
+                menu.addEventListener('mouseover', function() {
+                    var svgImages = menu.querySelectorAll('.menu .menu-icon');
+                    svgImages.forEach(function(svgImage) {
+                        var svgPath = svgImage.getAttribute('src');
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                var svgContent = xhr.responseText;
+                                svgContent = svgContent.replace(/stroke="#9395A2"/g,
+                                    'stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"'
+                                );
+                                svgImage.src = 'data:image/svg+xml;charset=utf-8,' +
+                                    encodeURIComponent(svgContent);
+                            }
+                        };
+                        xhr.open('GET', svgPath, true);
+                        xhr.send();
+                    });
+                });
+
+                menu.addEventListener('mouseout', function() {
+                    var svgImages = menu.querySelectorAll('.menu .menu-icon');
+                    svgImages.forEach(function(svgImage) {
+                        var svgPath = svgImage.getAttribute('src');
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                var svgContent = xhr.responseText;
+                                svgContent = svgContent.replace(
+                                    /stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"/g,
+                                    'stroke="#9395A2"');
+                                svgImage.src = 'data:image/svg+xml;charset=utf-8,' +
+                                    encodeURIComponent(svgContent);
+                            }
+                        };
+                        xhr.open('GET', svgPath, true);
+                        xhr.send();
+                    });
+
+                    var svgImages = document.querySelectorAll('.menu.active .menu-icon');
+                    svgImages.forEach(function(svgImage) {
+                        var svgPath = svgImage.getAttribute('src');
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                var svgContent = xhr.responseText;
+                                svgContent = svgContent.replace(/stroke="#9395A2"/g,
+                                    'stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"'
+                                );
+                                svgImage.src = 'data:image/svg+xml;charset=utf-8,' +
+                                    encodeURIComponent(svgContent);
+                            }
+                        };
+                        xhr.open('GET', svgPath, true);
+                        xhr.send();
+                    });
+
+                    var svgImages = document.querySelectorAll('.menu[aria-expanded="true"] .menu-icon');
+                    svgImages.forEach(function(svgImage) {
+                        var svgPath = svgImage.getAttribute('src');
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                var svgContent = xhr.responseText;
+                                svgContent = svgContent.replace(/stroke="#9395A2"/g,
+                                    'stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"'
+                                );
+                                svgImage.src = 'data:image/svg+xml;charset=utf-8,' +
+                                    encodeURIComponent(svgContent);
+                            }
+                        };
+                        xhr.open('GET', svgPath, true);
+                        xhr.send();
+                    });
+                });
+            });
         });
     </script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>

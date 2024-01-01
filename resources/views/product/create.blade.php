@@ -55,7 +55,7 @@
                                             <div class="col-md-12">
                                                 <label class="mb-2">{{ __('add_product') }}</label>
                                                 <div class="search-box input-group mb-3">
-                                                    <button class="btn btn-secondary"><i class="fa fa-barcode"></i></button>
+                                                    <button class="btn common-btn"><i class="fa fa-barcode"></i></button>
                                                     <input type="text" name="product_code_name" id="searchProduct"
                                                         placeholder="{{ __('please_type_product_code_and_select') }}"
                                                         class="form-control" />

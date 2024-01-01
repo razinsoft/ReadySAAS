@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between card-header-color">
                             <span class="list-title text-white">{{ __('new_shop') }}</span>
-                            <a href="{{ route('shop.index') }}" class="btn btn-info2"><i class="fa fa-chevron-left "></i>
+                            <a href="{{ route('shop.index') }}" class="btn common-btn"><i class="fa fa-chevron-left "></i>
                                 {{ __('back') }}</a>
                         </div>
                         <div class="card-body">
@@ -17,7 +17,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <label class="mb-2">{{ __('name') }} <span class="text-danger">*</span>
+                                            <label class="mb-2">{{ __('business_owner_name') }} <span class="text-danger">*</span>
                                             </label>
                                             <input type="text" name="name" class="form-control"
                                                 placeholder="{{ __('enter_your_shop_owner_name') }}">

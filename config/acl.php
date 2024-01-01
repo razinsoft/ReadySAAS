@@ -120,8 +120,8 @@ return [
         'user.edit' => ['admin'],
         'user.update' => ['admin'],
         'user.delete' => ['admin'],
-        'profile.index' => ['admin'],
-        'profile.update' => ['admin'],
+        'profile.index' => ['super admin','admin'],
+        'profile.update' => ['super admin','admin'],
         'user.password' => ['admin'],
         'genPassword' => ['admin'],
         //Sale route
