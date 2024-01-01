@@ -14,9 +14,20 @@ class ProductController extends Controller
     {
         $request = request();
         $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
 
-        $products = ProductRepository::search($search);
+        $productSearch = ProductRepository::search($search);
+        $totalProduct = $productSearch->count();
+
+        $products = $productSearch->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
+
         return $this->json('Search Products', [
+            'total' => $totalProduct,
             'products' => ProductResource::collection($products),
         ]);
     }

@@ -57,7 +57,7 @@ class PurchaseController extends Controller
 
     public function productSearch(Request $request)
     {
-        $products = ProductRepository::search($request->search);
+        $products = ProductRepository::search($request->search)->get();
         return $this->json('message', [
             'products' => $products
         ]);

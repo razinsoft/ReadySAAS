@@ -30,9 +30,9 @@
                                             {{ $role->description ?? __('no_description_available_yet') }}</td>
                                         <td class="">
                                             <a data-toggle="modal" data-target="#editeModal_{{ $role->id }}"
-                                                href="#" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
+                                                href="#" class="btn btn-sm common-btn"><i class="fa fa-edit"></i></a>
                                             <a id="permission" href="{{ route('role.permission', $role->id) }}"
-                                                class="btn btn-sm btn-primary" title="Permission"><i
+                                                class="btn btn-sm common-btn" title="Permission"><i
                                                     class="fa fa-key"></i></a>
                                         </td>
                                     </tr>

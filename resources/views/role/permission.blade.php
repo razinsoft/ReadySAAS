@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between card-header-color">
                             <span class="list-title text-white">{{ __('permissions') }}</span>
-                            <a href="{{ route('role.index') }}" class="btn btn-info2"><i class="fa fa-chevron-left "></i>
+                            <a href="{{ route('role.index') }}" class="btn common-btn2"><i class="fa fa-chevron-left "></i>
                                 {{ __('back') }}</a>
                         </div>
                         <form action="{{ route('role.setPermission') }}" method="POST">

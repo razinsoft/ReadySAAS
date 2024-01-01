@@ -59,6 +59,13 @@
     .slider.round:before {
         border-radius: 50%;
     }
+
+    .primary_color {
+        position: relative;
+        display: inline-block;
+        width: 35px !important;
+        height: 35px;
+    }
 </style>
 @section('content')
     <section>
@@ -77,6 +84,7 @@
                             <tr>
                                 <th>{{ __('sl') }}</th>
                                 <th>{{ __('name') }}</th>
+                                <th>{{ __('primary_color') }}</th>
                                 <th>{{ __('description') }}</th>
                                 <th>{{ __('status') }}</th>
                                 <th class="not-exported">{{ __('action') }}</th>
@@ -87,6 +95,10 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $shopCategory->name }}</td>
+                                    <td>
+                                        <span class="primary_color"
+                                            style="background: {{ $shopCategory->primary_color }}"></span>
+                                    </td>
                                     <td>{{ $shopCategory->description ?? 'N/A' }}</td>
                                     <td>
                                         <label class="switch">
@@ -101,7 +113,8 @@
                                             data-name="{{ $shopCategory->name }}"
                                             data-description="{{ $shopCategory->description }}"
                                             data-status="{{ $shopCategory->status->value }}"
-                                            class="shopCategoryEditBtn btn btn-sm btn-info text-white"><i
+                                            data-color="{{ $shopCategory->primary_color }}"
+                                            class="shopCategoryEditBtn btn btn-sm common-btn text-white"><i
                                                 class="fa fa-edit"></i></a>
                                         <a id="delete" href="{{ route('shop.category.delete', $shopCategory->id) }}"
                                             class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
@@ -132,6 +145,9 @@
                             <div class="col-md-12 mb-3">
                                 <x-input name="name" title="{{ __('name') }}"
                                     placeholder="{{ __('enter_your_shop_category_name') }}" />
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <x-input type="color" name="primary_color" title="{{ __('primary_color') }}" />
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label class="mb-2">{{ __('description') }}</label>
@@ -189,6 +205,17 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
+                                <div class="form-group">
+                                    <label class="mb-2">{{ __('primary_color') }}<span
+                                            class="text-danger">*</span></label>
+                                    <input type="color" class="form-control" id="shopCategoryEditprimaryColor"
+                                        name="primary_color">
+                                    @error('primary_color')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
                                 <label class="mb-2">{{ __('description') }}</label>
                                 <textarea name="description" class="form-control" id="shopCategoryEditDescription" rows="3"
                                     placeholder="{{ __('enter_your_shop_category_description') }}"></textarea>
@@ -227,9 +254,11 @@
             const name = $(this).attr('data-name');
             const description = $(this).attr('data-description');
             const status = $(this).attr('data-status');
+            const primaryColor = $(this).attr('data-color');
 
             $('#shopCategoryEditForm').attr('action', action)
             $('#shopCategoryEditName').val(name)
+            $('#shopCategoryEditprimaryColor').val(primaryColor)
             $('#shopCategoryEditDescription').val(description)
             $('#shopCategoryEditStatus').val(status).trigger('change')
         });

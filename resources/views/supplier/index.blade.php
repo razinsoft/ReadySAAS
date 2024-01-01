@@ -45,7 +45,7 @@
                                         <td>{{ $supplier->phone_number }}</td>
                                         <td>
                                             <a href="{{ route('supplier.edit', $supplier->id) }}"
-                                                class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
+                                                class="btn btn-sm common-btn"><i class="fa fa-edit"></i></a>
 
                                             <a id="delete" href="{{ route('supplier.destroy', $supplier->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

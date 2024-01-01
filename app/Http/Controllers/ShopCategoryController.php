@@ -30,6 +30,10 @@ class ShopCategoryController extends Controller
     }
     public function delete(ShopCategory $shopCategory)
     {
+        if ($shopCategory->shops) {
+            return back()->with('error', 'You can\'t delete this category because this category already used for shop created');
+        }
+
         $shopCategory->delete();
         return back()->with('success', 'Shop category deleted successfully');
     }

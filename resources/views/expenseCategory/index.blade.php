@@ -30,7 +30,7 @@
                                         <td>
                                             <button type="button" data-toggle="modal"
                                                 data-target="#editModal_{{ $expenseCategory->id }}"
-                                                class="edit-btn btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
+                                                class="edit-btn btn btn-sm common-btn"><i class="fa fa-edit"></i></button>
                                             <a id="delete"
                                                 href="{{ route('expenseCategory.destroy', $expenseCategory->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

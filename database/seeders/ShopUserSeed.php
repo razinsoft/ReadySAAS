@@ -13,9 +13,13 @@ class ShopUserSeed extends Seeder
      */
     public function run(): void
     {
-        $admin = User::find(2);
-        $staff = User::find(3);
-        $admin->shopUser()->attach(1);
+        $userIds = [2, 3, 4, 5, 6, 7];
+        $shopIds = [1, 2, 3, 4, 5, 6];
+        foreach ($userIds as $key => $id) {
+            $user = User::find($id);
+            $user->shopUser()->attach($shopIds[$key]);
+        }
+        $staff = User::find(8);
         $staff->shopUser()->attach(1);
     }
 }

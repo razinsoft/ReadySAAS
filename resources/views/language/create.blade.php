@@ -11,16 +11,19 @@
                         </div>
                         <div class="card-body">
                             <div>
-                                <x-input type="text" name="title" placeholder="{{  __('Enter') . ' ' . __('Title') }}" title="Title" value="" />
+                                <x-input type="text" name="title" placeholder="{{ __('Enter') . ' ' . __('Title') }}"
+                                    title="Title" value="" />
                             </div>
                             <div class="mt-3">
-                                <label class="mb-0">{{ __('Short Name') }} <small>(only allow English characters)</small></label>
-                                <input name="name" oninput="this.value=this.value.replace(/[^a-z]/gi,'')" class="form-control" placeholder="Exm: bn" autocomplete="off" required />
+                                <label class="mb-0">{{ __('short_name') }} <small>(only allow English
+                                        characters)</small></label>
+                                <input name="name" oninput="this.value=this.value.replace(/[^a-z]/gi,'')"
+                                    class="form-control" placeholder="Exm: bn" autocomplete="off" required />
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between flex-wrap gap-2 ">
                             <a href="{{ route('language.index') }}" class="btn btn-danger">{{ __('Back') }}</a>
-                            <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                            <button type="submit" class="btn common-btn">{{ __('submit') }}</button>
                         </div>
                     </div>
                 </form>
