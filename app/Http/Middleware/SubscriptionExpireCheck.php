@@ -22,7 +22,7 @@ class SubscriptionExpireCheck
         $user = auth()->user();
         $put = request()->isMethod('put');
         $post = request()->isMethod('Post');
-        $subscription = mainShop()->currentSubscriptions();
+        $subscription = mainShop()?->currentSubscriptions();
         $requestRoute = request()->route()->getName();
         if ($user->roles[0]->name != 'super admin' && (!isset($subscription->expired_at) || (Carbon::parse($subscription->expired_at) <= now())) && ($put || $post) && !in_array($requestRoute,$this->whiteList)) {
             return to_route('root')->with('error', 'Sorry, Your subscription has been expired');

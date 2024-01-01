@@ -28,9 +28,9 @@
                                             <input type="text" name="name" value="{{ $user->name }}"
                                                 class="form-control"
                                                 placeholder="{{ __('enter_your_full_name') }}" />
-                                            @if ($errors->has('name'))
-                                                <span class="text-danger">{{ $errors->first('name') }}</span>
-                                            @endif
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group mt-2">
                                             <label class="mb-2">{{ __('email_address') }}<span
@@ -38,9 +38,9 @@
                                             <input type="email" name="email" value="{{ $user->email }}"
                                                 class="form-control"
                                                 placeholder="{{ __('enter_your_email_address') }}" />
-                                            @if ($errors->has('email'))
-                                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                                            @endif
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group mt-2">
                                             <label class="mb-2">{{ __('phone_number') }}<span
@@ -48,15 +48,9 @@
                                             <input type="text" name="phone" value="{{ $user->phone }}"
                                                 class="form-control"
                                                 placeholder="{{ __('enter_your_phone_number') }}" />
-                                            @if ($errors->has('phone'))
-                                                <span class="text-danger">{{ $errors->first('phone') }}</span>
-                                            @endif
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <label class="mb-2">{{ __('company_name') }}</label>
-                                            <input type="text" name="company_name" value="{{ $user->company_name }}"
-                                                class="form-control"
-                                                placeholder="{{ __('enter_your_company_name') }}" />
+                                            @error('phone')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group mt-2">
                                             <label class="mb-2">{{ __('profile_image') }}</label>
