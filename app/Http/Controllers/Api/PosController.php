@@ -26,14 +26,14 @@ class PosController extends Controller
 {
     public function pos()
     {
-        $customers = CustomerRepository::getAll();
-        $customerGroups = CustomerGroupRepository::getAll();
-        $warehouses = WarehouseRepository::getAll();
-        $taxes = TaxRepository::getAll();
-        $products = ProductRepository::query()->whereNotNull('is_featured')->get();
-        $brands = BrandRepository::getAll();
-        $categories = CategoryRepository::getAll();
-        $currency = GeneralSetting::latest('id')->first()?->defaultCurrency?->symbol ?? '$';
+        $customers = CustomerRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $warehouses = WarehouseRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $taxes = TaxRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $products = ProductRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->whereNotNull('is_featured')->get();
+        $brands = BrandRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $categories = CategoryRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $currency = GeneralSetting::where('shop_id', mainShop()->id)->first()?->defaultCurrency?->symbol ?? '$';
 
         return $this->json('Pos data', [
             'customers' => CustomerResource::collection($customers),

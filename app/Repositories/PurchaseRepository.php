@@ -27,6 +27,8 @@ class PurchaseRepository extends Repository
         $date = $request->date ? $request->date : now()->format('Y-m-d');
 
         $purchase = self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'reference_no' => 'pr-' . date("Ymd") . '-' . date("his"),
             'user_id' => auth()->id(),
             'warehouse_id' => $request->warehouse_id,

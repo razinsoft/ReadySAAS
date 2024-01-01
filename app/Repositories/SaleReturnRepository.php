@@ -16,8 +16,9 @@ class SaleReturnRepository extends Repository
     {
         $referenceNo = 'rrp-' . date("Ymd") . '-' . date("his");
         return self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'reference_no' => $referenceNo,
-            'user_id' => auth()->id(),
             'total_discount' => $sale->total_discount - $request->total_discount,
             'total_tax' => $sale->total_tax - $request->total_tax,
             'total_qty' => $sale->total_qty - $request->total_qty,

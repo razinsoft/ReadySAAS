@@ -22,7 +22,9 @@ class SupplierRepository extends Repository
             $thumbnail_id =  $thumbnail->id;
         }
 
-        $create = self::create([
+        return self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'name' => $request->name,
             'thumbnail_id' => $thumbnail_id,
             'company_name' => $request->company_name,
@@ -35,8 +37,6 @@ class SupplierRepository extends Repository
             'postal_code' => $request->postal_code,
             'country' => $request->country,
         ]);
-
-        return $create;
     }
 
     public static function updateByRequest(SupplierRequest $request, Supplier $supplier)

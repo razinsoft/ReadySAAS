@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('sale_returns', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
             $table->string('reference_no');
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignId('created_by')->nullable()->constrained((new User())->getTable());
             $table->integer('item');
             $table->double('total_qty');
             $table->double('total_discount');

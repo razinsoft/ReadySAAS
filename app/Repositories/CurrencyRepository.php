@@ -14,13 +14,13 @@ class CurrencyRepository extends Repository
 
     public static function storeByRequest(CurrencyRequest $request)
     {
-        $create = self::create([
+        return self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'name' => $request->name,
             'symbol' => $request->symbol,
             'code' => $request->code
         ]);
-
-        return $create;
     }
 
     public static function updateByRequest(CurrencyRequest $request, Currency $currency)
@@ -30,7 +30,7 @@ class CurrencyRepository extends Repository
             'symbol' => $request->symbol,
             'code' => $request->code
         ]);
-        
+
         return $update;
     }
 }

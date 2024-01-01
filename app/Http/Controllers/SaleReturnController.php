@@ -14,7 +14,7 @@ class SaleReturnController extends Controller
 {
     public function index()
     {
-        $saleReturns = SaleReturnRepository::query()->orderBy('id', 'DESC')->get();
+        $saleReturns = SaleReturnRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('saleReturn.index', compact('saleReturns'));
     }
     public function search(SearchInvoiceNoRequest $request)

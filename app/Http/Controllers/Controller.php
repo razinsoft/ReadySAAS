@@ -17,7 +17,7 @@ class Controller extends BaseController
         if ($message) {
             $content['message'] = $message;
         }
-        if (! empty($data)) {
+        if (!empty($data)) {
             $content['data'] = $data;
         }
         return response()->json($content, $statusCode, $headers, $options);

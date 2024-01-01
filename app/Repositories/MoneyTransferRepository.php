@@ -26,6 +26,8 @@ class MoneyTransferRepository extends Repository
         TransactionRepository::creditByRequest('Bank', $request->amount, $toAccount->id, 'moneytransfer');
 
         $create = self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'reference_no' => 'mtr-' . date("Ymd") . '-' . date("his"),
             'from_account_id' => $request->from_account_id,
             'to_account_id' => $request->to_account_id,

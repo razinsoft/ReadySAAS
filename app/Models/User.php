@@ -24,10 +24,11 @@ class User extends Authenticatable
         return $this->belongsTo(Media::class, 'thumbnail_id');
     }
 
-    public function holiday()
+    public function shop()
     {
-        return $this->hasMany(Holiday::class);
+        return $this->hasOne(Shop::class);
     }
+
     public function coupons()
     {
         return $this->hasMany(Coupon::class);
@@ -41,5 +42,19 @@ class User extends Authenticatable
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
+    }
+
+    public function mailShop()
+    {
+        return $this->belongsTo(Shop::class, 'shop_id');
+    }
+    public function userShop()
+    {
+        return $this->hasOne(ShopUser::class);
+    }
+
+    public function shopUser()
+    {
+        return $this->belongsToMany(User::class, 'shop_users', 'user_id', 'shop_id');
     }
 }

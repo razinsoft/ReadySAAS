@@ -30,7 +30,6 @@ class UserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->user?->id,
             'phone' => 'required|numeric',
-            'company_name' => 'nullable|string|max:255',
             'password' => $password,
         ];
     }

@@ -12,8 +12,8 @@ class MoneyTransferController extends Controller
 {
     public function index()
     {
-        $moneyTransfer = MoneyTransferRepository::getAll();
-        $accounts = AccountRepository::getAll();
+        $moneyTransfer = MoneyTransferRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $accounts = AccountRepository::query()->where('shop_id', mainShop()->id)->get();
         return view('moneyTransfer.index', compact('moneyTransfer', 'accounts'));
     }
 

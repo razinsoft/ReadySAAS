@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = CategoryRepository::getAll();
+        $categories = CategoryRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('category.index', compact('categories'));
     }
 
@@ -50,6 +50,8 @@ class CategoryController extends Controller
                 if ($key > 0) {
                     $category = CategoryRepository::query()->where('name', $row[1])->first();
                     Category::create([
+                        'created_by' => auth()->id(),
+                        'shop_id' => mainShop()->id,
                         'name' => $row[0],
                         'parent_id' => $category?->id,
                     ]);
@@ -61,9 +63,10 @@ class CategoryController extends Controller
         }
     }
 
-    public function categoryPrint(Request $request){
+    public function categoryPrint(Request $request)
+    {
         $categories = CategoryRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->latest()->first();
-        return view('category.categoryPrint', compact('categories','generalsettings'));
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
+        return view('category.categoryPrint', compact('categories', 'generalsettings'));
     }
 }

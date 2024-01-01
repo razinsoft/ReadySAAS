@@ -39,7 +39,7 @@
             @enderror
         </div>
         <button class="btn loginButton" type="submit">{{ __('sign_in') }}</button>
-        <span class="text-center w-100 d-block pt-2">{{ __('register_yourself_as_a_customer') }} <a
+        <span class="text-center w-100 d-block pt-2">{{ __('register_yourself_as_a_shop_owner') }} <a
                 href="{{ route('signup.index') }}">{{ __('signup') }}</a></span>
 
         @if (config('app.env') == 'local')
@@ -47,9 +47,8 @@
                 <div class="col-md-12">
                     <div class=" d-flex justify-content-center gap-2 flex-wrap">
                         <button type="submit" class="btn btn-primary" id="super_admin">Super Admin</button>
-                        <button type="submit" class="btn btn-primary" id="admin">Admin</button>
-                        <button type="submit" class="btn btn-primary" id="owner">Owner</button>
-                        <button type="submit" class="btn btn-primary" id="store">Go to pos</button>
+                        <button type="submit" class="btn btn-primary" id="admin">Admin and Shop Owner</button>
+                        <button type="submit" class="btn btn-primary" id="store">Store Manager</button>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -68,10 +67,6 @@
         });
         $('#admin').on('click', function() {
             $('#email').val('admin@example.com');
-            $('#password').val('secret');
-        });
-        $('#owner').on('click', function() {
-            $('#email').val('owner@example.com');
             $('#password').val('secret');
         });
         $('#store').on('click', function() {

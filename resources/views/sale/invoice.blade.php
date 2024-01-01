@@ -124,17 +124,14 @@
             </table>
             <br>
         </div>
-        @php
-            $generalsetting = App\Models\GeneralSetting::latest()->first();
-        @endphp
         <div id="receipt-data">
             <div class="centered">
-                <img src="{{ $generalsetting->logo->file ?? asset('logo/logo.svg') }}" height="42"
+                <img src="{{ $generalsettings->logo->file ?? asset('logo/logo.svg') }}" height="42"
                     style="margin-top: -10px; margin-bottom: 0px;filter: brightness(100%);">
                 <p style="margin-top: 0; font-size: 10px; line-height: 20px;">
-                    {{ $generalsetting?->address }}<br>
-                    <i class="fas fa-phone-alt" style="font-size:10px"></i> {{ $generalsetting?->phone }} <br>
-                    <i class="fas fa-globe" style="font-size:10px"></i> {{ $generalsetting?->email }}
+                    {{ $generalsettings?->address }}<br>
+                    <i class="fas fa-phone-alt" style="font-size:10px"></i> {{ $generalsettings?->phone }} <br>
+                    <i class="fas fa-globe" style="font-size:10px"></i> {{ $generalsettings?->email }}
                 </p>
             </div>
 
@@ -181,7 +178,7 @@
                     </tr>
 
                     <tr>
-                        <td class="centered" colspan="3">Thank you for choosing {{ $generalsetting?->site_title }}
+                        <td class="centered" colspan="3">Thank you for choosing {{ $generalsettings?->site_title }}
                         </td>
                     </tr>
                 </tbody>

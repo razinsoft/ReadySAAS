@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountsController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\SignInController;
+use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CouponController;
@@ -20,7 +21,13 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleReturnController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ShopCategoryController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StockCountController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\SubscriptionPurchaseController;
+use App\Http\Controllers\SuperAdmin\DashBoardController as SuperAdminDashBoardController;
+use App\Http\Controllers\SuperAdmin\PaymentGatewayController;
 use App\Http\Controllers\SuperAdmin\SubscriptionController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TaxController;
@@ -37,22 +44,37 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Auth
-Route::controller(LoginController::class)->middleware('guest')->group(function () {
+Route::controller(SignInController::class)->middleware('guest')->group(function () {
     Route::get('/signin', 'index')->name('signin.index');
+    Route::post('/signin', 'signin')->name('signin.request');
+});
+Route::controller(SignUpController::class)->middleware('guest')->group(function () {
     Route::get('/signup', 'signup')->name('signup.index');
     Route::post('/signup/request', 'signupRequest')->name('signup.request');
-    Route::post('/signin', 'signin')->name('signin.request');
     Route::get('/signup/varification/{token}', 'varification')->name('signup.varification');
 });
-Route::middleware(['auth', 'check_permission'])->group(function () {
-    Route::get('/signout', [LoginController::class, 'logout'])->middleware('auth')->name('signout');
+Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->group(function () {
+    Route::get('/signout', [SigninController::class, 'logout'])->middleware('auth')->name('signout');
     Route::get('/', [DashboardController::class, 'index'])->name('root');
+    Route::get('/dashboard', [SuperAdminDashBoardController::class, 'dashboard'])->name('dashboard');
     //subscriptions
     Route::controller(SubscriptionController::class)->group(function () {
         Route::get('subscriptions', 'index')->name('subscription.index');
+        Route::get('subscription/report', 'report')->name('subscription.report');
         Route::get('subscription/status-chanage/{subscription}/{status}', 'statusChanage')->name('subscription.status.chanage');
         Route::post('subscription/store', 'store')->name('subscription.store');
         Route::put('subscription/update/{subscription}', 'update')->name('subscription.update');
+    });
+    // Unit
+    Route::controller(SubscriptionPurchaseController::class)->group(function () {
+        Route::get('subscription-purchase', 'index')->name('subscription-purchase.index');
+        Route::get('subscription-purchase/update/{subscription}', 'update')->name('subscription-purchase.update');
+    });
+    // Payment Gateway
+    Route::controller(PaymentGatewayController::class)->group(function () {
+        Route::get('payment-gateways', 'index')->name('payment-gateway.index');
+        Route::put('payment-gateway/update', 'update')->name('payment-gateway.update');
+        Route::post('payment/process/{subscriptionRequest}', 'process')->name('payment.process');
     });
     //Role Permissions
     Route::controller(RoleController::class)->group(function () {
@@ -83,7 +105,7 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
     Route::controller(BrandController::class)->group(function () {
         Route::get('brand', 'index')->name('brand.index');
         Route::post('brand/store', 'store')->name('brand.store');
-        Route::post('brand/update/{brand}', 'update')->name('brand.update');
+        Route::put('brand/update/{brand}', 'update')->name('brand.update');
         Route::get('brand/delete/{brand}', 'delete')->name('brand.delete');
     });
     //Supplier
@@ -261,6 +283,33 @@ Route::middleware(['auth', 'check_permission'])->group(function () {
         Route::get('language/{language}/edit', 'edit')->name('language.edit');
         Route::put('language/{language}/update', 'update')->name('language.update');
         Route::get('language/{language}/delete', 'delete')->name('language.delete');
+    });
+    //Shop Category
+    Route::controller(ShopCategoryController::class)->group(function () {
+        Route::get('shop-categories', 'index')->name('shop.category.index');
+        Route::post('shop-category/store', 'store')->name('shop.category.store');
+        Route::put('shop-category/update/{shopCategory}', 'update')->name('shop.category.update');
+        Route::get('shop-category/delete/{shopCategory}', 'delete')->name('shop.category.delete');
+        Route::get('shop-category/status-chanage/{shopCategory}/{status}', 'statusChanage')->name('shop.category.status.chanage');
+    });
+    //Shop
+    Route::controller(ShopController::class)->group(function () {
+        Route::get('shops', 'index')->name('shop.index');
+        Route::get('shop/create', 'create')->name('shop.create');
+        Route::post('shop/store', 'store')->name('shop.store');
+        Route::put('shop/update/{shop}', 'update')->name('shop.update');
+        Route::get('shop/delete/{shop}', 'delete')->name('shop.delete');
+        Route::get('shop/status-chanage/{shop}/{status}', 'statusChanage')->name('shop.status.chanage');
+    });
+
+    // Store
+    Route::controller(StoreController::class)->group(function () {
+        Route::get('stores', 'index')->name('store.index');
+        Route::get('store/create', 'create')->name('store.create');
+        Route::post('store/store', 'store')->name('store.store');
+        Route::get('store/edit/{store}', 'edit')->name('store.edit');
+        Route::put('store/update/{store}', 'update')->name('store.update');
+        Route::get('store/delete/{store}', 'delete')->name('store.delete');
     });
 });
 

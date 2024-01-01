@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->datetime('email_verified_at')->nullable();
+        Schema::create('payment_gateways', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->longText('value');
+            $table->string('status');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('email_verified_at');
-        });
+        Schema::dropIfExists('payment_gateways');
     }
 };

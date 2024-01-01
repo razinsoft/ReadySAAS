@@ -23,10 +23,12 @@ class BrandRepository extends Repository
             $thumbnailId = $thumbnail->id;
         }
         $create = self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'title' => $request->title,
             'thumbnail_id' => $thumbnailId
         ]);
-        
+
         return $create;
     }
 

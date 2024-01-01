@@ -15,12 +15,14 @@ class WarehouseRepository extends Repository
     public static function storeByRequest(WarehouseRequest $request)
     {
         $create = self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
             'address' => $request->address
         ]);
-        
+
         return $create;
     }
 

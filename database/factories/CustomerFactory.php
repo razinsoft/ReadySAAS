@@ -22,7 +22,8 @@ class CustomerFactory extends Factory
         $user = $this->faker->randomElement(UserRepository::getAll());
         $customerGroup = $this->faker->randomElement(CustomerGroupRepository::getAll());
         return [
-            'user_id' => $user->id,
+            'shop_id' => 1,
+            'created_by' => 2,
             'customer_group_id' => $customerGroup->id,
             'name' => $this->faker->name,
             'company_name' => $this->faker->company,

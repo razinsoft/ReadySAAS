@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class UserRepository extends Repository
 {
     public static $path = "/users";
+    
     public static function model()
     {
         return User::class;
@@ -34,13 +35,13 @@ class UserRepository extends Repository
     }
 
     //User create
-    public static function storeByRequest($request)
+    public static function storeByRequest($request, $shop = null)
     {
         $create = self::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'company_name' => $request->company_name,
+            'email_verified_at' => $request->email_verified_at,
             'password' => Hash::make($request->password),
         ]);
         return $create;
@@ -52,20 +53,19 @@ class UserRepository extends Repository
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'company_name' => $request->company_name
         ]);
 
         $user->assignRole($request->role_name);
 
         if ($request->password) {
             self::update($user, [
-                'password' => bcrypt($request->password),
+                'password' => hash::make($request->password),
             ]);
         }
         return $userUpdate;
     }
     //User Profile update
-    public static function updateByRequest(UserRequest $request, User $user)
+    public static function updateByRequest($request, User $user)
     {
         $thumbnailId = $user->thumbnail_id;
         if ($request->hasFile('image')) {
@@ -81,7 +81,6 @@ class UserRepository extends Repository
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'company_name' => $request->company_name,
             'thumbnail_id' => $thumbnailId,
         ]);
     }

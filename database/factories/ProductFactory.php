@@ -30,6 +30,8 @@ class ProductFactory extends Factory
         $code = mt_rand(1000000, 9999999);
 
         return [
+            'shop_id' => 1,
+            'created_by' => 2,
             'name' => $this->faker->name,
             'code' =>  $code,
             'type' => 'Standard',

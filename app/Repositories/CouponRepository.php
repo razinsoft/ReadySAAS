@@ -13,7 +13,9 @@ class CouponRepository extends Repository
     }
     public static function storeByRequest(CouponRequest $request)
     {
-        $create = self::create([
+        return self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'name' => $request->name,
             'code' => $request->code,
             'type' => $request->type,
@@ -21,11 +23,9 @@ class CouponRepository extends Repository
             'max_amount' => $request->type == 'Percentage' ? 0 : $request->maximum_amount,
             'amount' => $request->amount,
             'qty' => $request->quantity,
-            'expired_date' => $request->expired_date,
+            'expired_at' => $request->expired_date,
             'created_by' => auth()->id()
         ]);
-
-        return $create;
     }
     public static function updateByRequest(CouponRequest $request, Coupon $coupon)
     {
@@ -37,7 +37,7 @@ class CouponRepository extends Repository
             'max_amount' => $request->type == 'Percentage' ? 0 : $request->maximum_amount,
             'amount' => $request->amount,
             'qty' => $request->quantity,
-            'expired_date' => $request->expired_date,
+            'expired_at' => $request->expired_date,
         ]);
 
         return $update;

@@ -13,8 +13,9 @@ class UnitRepository extends Repository
     }
     public static function storeByRequest(UnitRequest $request)
     {
-
         $create = self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'code' => $request->code,
             'name' => $request->name,
             'base_unit_id' => $request->base_unit_id,

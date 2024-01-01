@@ -19,13 +19,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = UserRepository::query()->where('id', '>', 1)->get();
-        return view('user.index', compact('users'));
+        $staffs = mainShop()->staffs;
+        return view('user.index', compact('staffs'));
     }
 
     public function create()
     {
-        $roles = RolesRepository::query()->where('id', '>', 1)->get();
+        $roles = RolesRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('user.create', compact('roles'));
     }
 
@@ -40,7 +40,9 @@ class UserController extends Controller
         if (Role::findByName(lcfirst($request->role_name))->permissions->isEmpty()) {
             return back()->with('error', 'Please assign role permission!');
         }
+        $request['email_verified_at'] = now();
         $user = UserRepository::storeByRequest($request);
+        $user->shopUser()->attach(mainShop()->id);
         WalletRepository::create([
             'user_id' => $user->id,
         ]);

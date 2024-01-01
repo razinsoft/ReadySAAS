@@ -11,7 +11,7 @@ class TaxController extends Controller
 {
     public function index()
     {
-        $taxs = TaxRepository::getAll();
+        $taxs = TaxRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('tax.index', compact('taxs'));
     }
 

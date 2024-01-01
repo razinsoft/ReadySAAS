@@ -19,6 +19,8 @@ class SupplierFactory extends Factory
     public function definition(): array
     {
         return [
+            'shop_id' => 1,
+            'created_by' => 2,
             'name' => $this->faker->name,
             'thumbnail_id' => Media::factory()->create(),
             'company_name' => $this->faker->company(),

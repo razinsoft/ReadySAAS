@@ -13,12 +13,12 @@ class CustomerGroupRepository extends Repository
     }
     public static function storeByRequest(Request $request)
     {
-        $create = self::create([
+        return self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'name' => $request->name,
             'percentage' => $request->percentage,
         ]);
-
-        return $create;
     }
 
     public static function updateByRequest(Request $request, CustomerGroup $customergroup)

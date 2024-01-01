@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Media;
+use App\Models\Shop;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,6 +17,7 @@ class CreateGeneralSettingsTable extends Migration
     {
         Schema::create('general_settings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
             $table->string('site_title');
             $table->foreignId('logo_id')->nullable()->constrained((new Media())->getTable());
             $table->foreignId('small_logo_id')->nullable()->constrained((new Media())->getTable());

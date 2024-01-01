@@ -12,11 +12,11 @@ class CouponController extends Controller
 {
     public function index()
     {
-        $coupons = CouponRepository::query()->orderByDesc('id')->get();
+        $coupons = CouponRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         $couponTypes = CouponType::cases();
-        return view('coupon.index', compact('coupons','couponTypes'));
+        return view('coupon.index', compact('coupons', 'couponTypes'));
     }
-    
+
     public function store(CouponRequest $request)
     {
         CouponRepository::storeByRequest($request);

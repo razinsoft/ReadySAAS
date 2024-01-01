@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Roles;
 use App\Http\Requests\RoleRequest;
 use Illuminate\Http\Request;
 use App\Repositories\RolesRepository;
@@ -12,8 +11,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-
-        $roles = RolesRepository::query()->where('name', '!=', Roles::ADMIN->value)->get();
+        $roles = RolesRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('role.index', compact('roles'));
     }
 

@@ -13,8 +13,8 @@ class ExpenseCategoryController extends Controller
 {
     public function index()
     {
-        $accounts = AccountRepository::getAll();
-        $expenseCategories = ExpenseCategoryRepository::getAll();
+        $accounts = AccountRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $expenseCategories = ExpenseCategoryRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
         return view('expenseCategory.index', compact('expenseCategories', 'accounts'));
     }
     public function generateCode()

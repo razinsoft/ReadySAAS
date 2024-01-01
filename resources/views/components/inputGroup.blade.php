@@ -6,11 +6,6 @@
     <div class="input-group">
         <input type="{{ $type }}" id="{{ $name }}" class="form-control" value="{{ old($name) ?? $value }}"
             name="{{ $name }}" placeholder="{{ $placeholder }}">
-
-        <div class="input-group-append">
-            <button id="genbutton" type="button" class="btn btn-sm common-btn py-2" title="{{ __('Generate') }}"><i
-                    class="fa fa-refresh"></i></button>
-        </div>
     </div>
     @error($name)
         <span class="text-danger">{{ $message }}</span>

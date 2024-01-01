@@ -14,6 +14,8 @@ class WarehouseSeeder extends Seeder
     public function run(): void
     {
         Warehouse::create([
+            'shop_id' => 1,
+            'created_by' => 2,
             'name' => 'warehouse 1',
             'phone' => '25477888',
             'email' => 'warehouse1@gmail.com',

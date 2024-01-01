@@ -13,7 +13,10 @@ class CustomerRepository extends Repository
     }
     public static function storeByRequest(CustomerRequest $request, $user)
     {
-        $create = self::create([
+        $authUser = auth()->user();
+        return self::create([
+            'created_by' => $authUser->id,
+            'shop_id' => $authUser->shop->id,
             'customer_group_id' => $request->customer_group_id,
             'name' => $request->name,
             'company_name' => $request->company_name,
@@ -27,7 +30,6 @@ class CustomerRepository extends Repository
             'country' => $request->country,
             'user_id' => $user->id
         ]);
-        return $create;
     }
 
     public static function updateByRequest(CustomerRequest $request, Customer $customer)
@@ -51,8 +53,7 @@ class CustomerRepository extends Repository
 
     public static function search($search)
     {
-
-        $products = self::query()
+        $products = self::query()->where('shop_id', mainShop()->id)
             ->when($search, function ($query) use ($search) {
                 $query->where('name', 'Like', "%{$search}%");
                 $query->orWhere('email', 'Like', "%{$search}%");

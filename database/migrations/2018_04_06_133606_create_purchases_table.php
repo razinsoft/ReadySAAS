@@ -2,6 +2,7 @@
 
 use App\Models\Media;
 use App\Models\Purchase;
+use App\Models\Shop;
 use App\Models\Supplier;
 use App\Models\Tax;
 use App\Models\User;
@@ -21,8 +22,9 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create((new Purchase())->getTable(), function (Blueprint $table) {
             $table->id();
+            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
             $table->string('reference_no');
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignId('created_by')->nullable()->constrained((new User())->getTable());
             $table->foreignId('warehouse_id')->constrained((new Warehouse())->getTable());
             $table->foreignId('supplier_id')->constrained((new Supplier())->getTable());
             $table->foreignId('tax_id')->nullable()->constrained((new Tax())->getTable());

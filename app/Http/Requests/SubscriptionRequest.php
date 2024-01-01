@@ -26,6 +26,7 @@ class SubscriptionRequest extends FormRequest
             'description' => 'required|string',
             'price' => 'required|numeric',
             'shop_limit' => 'required|integer',
+            'product_limit' => 'required|integer',
             'recurring_type' => 'required|in:Onetime,Weekly,Monthly,Yearly',
             'status' => 'required|in:Active,Inactive',
         ];

@@ -14,6 +14,8 @@ class ExpenseCategoryRepository extends Repository
     public static function storeByRequest(Request $request)
     {
         $create = self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'name' => $request->name,
             'code' => $request->code,
         ]);

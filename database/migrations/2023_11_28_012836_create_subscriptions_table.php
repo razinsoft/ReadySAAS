@@ -17,6 +17,7 @@ return new class extends Migration
             $table->float('price');
             $table->longText('description')->nullable();
             $table->integer('shop_limit');
+            $table->integer('product_limit');
             $table->string('recurring_type');
             $table->string('status');
             $table->timestamps();

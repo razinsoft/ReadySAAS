@@ -29,7 +29,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $warehouse->name }}</td>
                                         <td>{{ $warehouse->phone }}</td>
-                                        <td>{{ $warehouse->email }}</td>
+                                        <td>{{ $warehouse->email ?? 'N/A' }}</td>
                                         <td>{{ $warehouse->address }}</td>
                                         <td>{{ $warehouse->purchases->sum('total_qty') }}</td>
                                         <td>

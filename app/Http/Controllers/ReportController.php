@@ -10,12 +10,13 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function summary(){
-        $purchases = PurchaseRepository::query()->whereMonth('created_at', date('m'))->get();
-        $sales = SaleRepository::query()->whereMonth('created_at', date('m'))->get();
-        $transactions = TransactionRepository::query()->whereMonth('created_at', date('m'))->where('transection_type','Credit')->get();
+    public function summary()
+    {
+        $purchases = PurchaseRepository::query()->where('shop_id', mainShop()->id)->whereMonth('created_at', date('m'))->get();
+        $sales = SaleRepository::query()->where('shop_id', mainShop()->id)->whereMonth('created_at', date('m'))->get();
+        $transactions = TransactionRepository::query()->where('shop_id', mainShop()->id)->whereMonth('created_at', date('m'))->where('transection_type', 'Credit')->get();
 
-       //purchase
+        //purchase
         $totalPurchasesAmount = $purchases->sum('grand_total');
         $totalPaidAmount = $purchases->sum('paid_amount');
         $totalPurchasesTax = $purchases->sum('total_tax');
@@ -30,18 +31,33 @@ class ReportController extends Controller
 
         //transactions
         $totalPaymentRecieved = $transactions->sum('amount');
-        $totalPaymentRecievedCash = $transactions->where('payment_method','Cash')->sum('amount');
-        $totalPaymentRecievedBank = $transactions->where('payment_method','Bank')->sum('amount');
-        $totalPaymentRecievedCashCount = $transactions->where('payment_method','Cash')->count();
-        $totalPaymentRecievedBankCount = $transactions->where('payment_method','Bank')->count();
+        $totalPaymentRecievedCash = $transactions->where('payment_method', 'Cash')->sum('amount');
+        $totalPaymentRecievedBank = $transactions->where('payment_method', 'Bank')->sum('amount');
+        $totalPaymentRecievedCashCount = $transactions->where('payment_method', 'Cash')->count();
+        $totalPaymentRecievedBankCount = $transactions->where('payment_method', 'Bank')->count();
 
         $monthlyTotalProductSales = ProductSaleRepository::query()->whereMonth('created_at', date('m'))->get();
         $monthlyProfit = 0;
-        foreach($monthlyTotalProductSales as $productSales){
-            $monthlyProfit += ($productSales->product->price - $productSales->product->cost)*$productSales->qty;
+        foreach ($monthlyTotalProductSales as $productSales) {
+            $monthlyProfit += ($productSales->product->price - $productSales->product->cost) * $productSales->qty;
         }
 
-        return view('report.summary',compact('totalPurchasesAmount','totalPurchaseProducts','totalPaidAmount','totalPurchasesTax','totalPurchasesDiscount',
-        'totalSaleAmount','totalSaleTax','totalSaleDiscount','totalSaleProducts','totalPaymentRecieved','totalPaymentRecievedCash','totalPaymentRecievedBank','totalPaymentRecievedCashCount','totalPaymentRecievedBankCount','monthlyProfit'));
+        return view('report.summary', compact(
+            'totalPurchasesAmount',
+            'totalPurchaseProducts',
+            'totalPaidAmount',
+            'totalPurchasesTax',
+            'totalPurchasesDiscount',
+            'totalSaleAmount',
+            'totalSaleTax',
+            'totalSaleDiscount',
+            'totalSaleProducts',
+            'totalPaymentRecieved',
+            'totalPaymentRecievedCash',
+            'totalPaymentRecievedBank',
+            'totalPaymentRecievedCashCount',
+            'totalPaymentRecievedBankCount',
+            'monthlyProfit'
+        ));
     }
 }

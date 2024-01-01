@@ -15,7 +15,6 @@ class UserSeeder extends Seeder
     {
         $this->createSuperAdmin();
         $this->createAdmin();
-        $this->createOwner();
         $this->createStore();
     }
     private function createSuperAdmin()
@@ -33,17 +32,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@example.com',
         ]);
-
         $userAdmin->assignRole('admin');
-    }
-    private function createOwner()
-    {
-        $customerUser = User::factory()->create([
-            'name' => 'Owner',
-            'email' => 'owner@example.com',
-        ]);
-
-        $customerUser->assignRole('owner');
     }
     private function createStore()
     {
@@ -51,7 +40,6 @@ class UserSeeder extends Seeder
             'name' => 'Store',
             'email' => 'store@example.com',
         ]);
-
         $staffUser->assignRole('store');
     }
 }

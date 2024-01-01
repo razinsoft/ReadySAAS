@@ -31,7 +31,34 @@ class CurrencySeeder extends Seeder
                 'symbol' => '৳'
             ]
         ];
-        foreach($currencys as $currency){
+        foreach ($currencys as $currency) {
+            CurrencyRepository::create($currency);
+        }
+
+        $shopCurrencys = [
+            [
+                'shop_id' => 1,
+                'created_by' => 2,
+                'name' => 'US Dollar',
+                'code' => 'USD',
+                'symbol' => '$'
+            ],
+            [
+                'shop_id' => 1,
+                'created_by' => 2,
+                'name' => 'Euro',
+                'code' => 'EURO',
+                'symbol' => '€'
+            ],
+            [
+                'shop_id' => 1,
+                'created_by' => 2,
+                'name' => 'Taka',
+                'code' => 'TAKA',
+                'symbol' => '৳'
+            ]
+        ];
+        foreach ($shopCurrencys as $currency) {
             CurrencyRepository::create($currency);
         }
     }

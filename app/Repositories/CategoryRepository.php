@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Http\Requests\CategoryRequest;
@@ -13,7 +14,7 @@ class CategoryRepository extends Repository
     {
         return Category::class;
     }
-    
+
     public static function storeByRequest(CategoryRequest $request)
     {
         $thumbnailId = null;
@@ -25,8 +26,10 @@ class CategoryRepository extends Repository
             );
             $thumbnailId = $thumbnail->id;
         }
-
+        
         return self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'name' => $request->name,
             'parent_id' => $request->parent_id,
             'thumbnail_id' => $thumbnailId,
@@ -46,7 +49,7 @@ class CategoryRepository extends Repository
             $thumbnailId = $thumbnail->id;
         }
 
-       return self::update($category, [
+        return self::update($category, [
             'name' => $request->name,
             'parent_id' => $request->parent_id,
             'thumbnail_id' => $thumbnailId ? $thumbnailId : $category->thumbnail_id,

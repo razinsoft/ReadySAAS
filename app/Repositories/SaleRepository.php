@@ -82,8 +82,9 @@ class SaleRepository extends Repository
         $user = auth()->user();
 
         $sale = self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => mainShop()->id,
             'reference_no' => $referenceNo,
-            'user_id' => $user->id,
             'customer_id' => $request->customer_id,
             'item' => collect($request->product_ids)->count(),
             'total_qty' => collect($request->qty)->count(),
