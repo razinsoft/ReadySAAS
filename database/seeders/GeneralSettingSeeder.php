@@ -15,7 +15,7 @@ class GeneralSettingSeeder extends Seeder
     public function run(): void
     {
         GeneralSetting::create([
-            'site_title' => 'Ready SOS',
+            'site_title' => 'ReadyPOS',
             'currency_id' => 1,
             'currency_position' => 'Prefix',
             'date_format' => 'd-m-Y',
@@ -31,7 +31,7 @@ class GeneralSettingSeeder extends Seeder
         $shopGeneralSettings = [
             [
                 'shop_id' => 1,
-                'site_title' => 'ReadySOS Shop',
+                'site_title' => 'ReadyPOS Shop',
                 'currency_id' => 1,
                 'currency_position' => 'Prefix',
                 'date_format' => 'd-m-Y',
@@ -39,7 +39,7 @@ class GeneralSettingSeeder extends Seeder
                 'address' => fake()->address(),
                 'email' => fake()->email(),
                 'phone' => fake()->phoneNumber(),
-                'developed_by' => 'ReadySOS Shop',
+                'developed_by' => 'ReadyPOS Shop',
                 'direction' => 'ltr',
                 'lang' => 'en',
             ],

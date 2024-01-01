@@ -18,7 +18,7 @@ class ShopSeeder extends Seeder
             [
                 'user_id' => 2,
                 'shop_category_id' => 1,
-                'name' => 'ReadySOS Shop',
+                'name' => 'ReadyPOS Shop',
                 'status' => Status::ACTIVE->value
             ],
             [
