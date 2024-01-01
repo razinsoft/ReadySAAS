@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repositories\CurrencyRepository;
-use App\Repositories\GeneralSettingRepository;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,14 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer('*', function ($view) {
-            $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
-            if (mainShop()) {
-                $generalSettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
-            }
-            $currency = $generalSettings?->defaultCurrency;
-            $view->with('general_settings', $generalSettings);
-            $view->with('currency', $currency);
-        });
+        Schema::defaultStringLength(191);
+         if (!file_exists(base_path('storage/installed')) && !request()->is('install') && !request()->is('install/*')) {
+            header("Location: install");
+            exit;
+        }
     }
 }
