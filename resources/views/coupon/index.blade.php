@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <span class="list-title">{{ __('coupons') }}</span>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#create-modal"><i class="fa fa-plus"></i>
+                    <button class="btn common-btn" data-toggle="modal" data-target="#create-modal"><i class="fa fa-plus"></i>
                         {{ __('add_coupon') }}</button>
                 </div>
                 <div class="card-body">
@@ -67,7 +67,7 @@
                                         <td>{{ $coupon->user->name }}</td>
                                         <td>
                                             <a data-toggle="modal" data-target="#editModal" href="#"
-                                                class="edit-btn btn btn-sm btn-info"
+                                                class="edit-btn btn btn-sm common-btn"
                                                 data-action="{{ route('coupons.update', $coupon->id) }}"
                                                 data-name="{{ $coupon->name }}" data-code="{{ $coupon->code }}"
                                                 data-type="{{ $coupon->type }}" data-amount="{{ $coupon->amount }}"

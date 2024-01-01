@@ -5519,7 +5519,7 @@ ul.timeline-3 > li {
     line-height: 120%;
     letter-spacing: 0.08px;
     border-radius: 5px;
-    background: #29aae1;
+    background: var(--theme-color);
     width: 100%;
     padding: 8px 24px 8px 16px;
 }
@@ -6024,11 +6024,11 @@ table.dataTable {
 
 .subscription-container .title {
     font-size: 2rem;
-    color: #29aae1;
+    color: var(--theme-color);
 }
 
 .subscription-container .price {
-    color: #29aae1 !important;
+    color: var(--theme-color) !important;
     font-weight: 700;
     font-size: 2.2rem;
     margin: 15px 0;
@@ -6056,7 +6056,7 @@ table.dataTable {
 .subscribe-button {
     display: inline-block;
     padding: 15px 0;
-    background-color: #29aae1;
+    background-color: var(--theme-color);
     color: #fff;
     text-decoration: none;
     border-radius: 30px;
@@ -6066,10 +6066,6 @@ table.dataTable {
     font-weight: 500;
     transition: 0.2s ease;
     border: 1px solid;
-}
-
-.subscribe-button:hover {
-    background: #4089f3;
 }
 
 .description-content {
@@ -6084,7 +6080,7 @@ table.dataTable {
     cursor: pointer;
     border: none;
     background-color: transparent;
-    color: #29aae1;
+    color: var(--theme-color);
     text-decoration: underline;
 }
 

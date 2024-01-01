@@ -22,23 +22,23 @@ class ShopCategorySeeder extends Seeder
             ],
             [
                 'name' => 'Super Shop or Grocery Shop',
-                'primary_color' => '#EF4444',
-                'secondary_color' => '#ef444421',
+                'primary_color' => '#50B94C',
+                'secondary_color' => '#50b94c29',
             ],
             [
                 'name' => 'Pharmacy',
-                'primary_color' => '#4ADE80',
-                'secondary_color' => '#4ade8036',
+                'primary_color' => '#3E8F89',
+                'secondary_color' => '#3e8f8929',
             ],
             [
                 'name' => 'Electronics/Hardware/Mobile Shop',
-                'primary_color' => '#3a416f',
-                'secondary_color' => '#3a416f38',
+                'primary_color' => '#000000',
+                'secondary_color' => '#0000001f',
             ],
             [
                 'name' => 'Restaurant',
-                'primary_color' => '#E11D48',
-                'secondary_color' => '#e11d4824',
+                'primary_color' => '#FFCF2D',
+                'secondary_color' => '#ffcf2d26',
             ],
             [
                 'name' => 'Clothing Shop',

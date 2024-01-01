@@ -35,11 +35,11 @@
                                         <td>{{ $account->note ?? 'N/A' }}</td>
                                         <td>
                                             <a data-toggle="modal" data-target="#addMoney_{{ $account->id }}"
-                                                href="#" class="btn btn-sm btn-info mb-2"><i
+                                                href="#" class="btn btn-sm common-btn mb-2"><i
                                                     class="fa fa-plus-circle"></i></a>
 
                                             <a data-toggle="modal" data-target="#editModal" href="#"
-                                                class="edit-btn btn btn-sm btn-info mb-2"
+                                                class="edit-btn btn btn-sm common-btn mb-2"
                                                 data-action="{{ route('account.update', $account->id) }}"
                                                 data-account-no="{{ $account->account_no }}"
                                                 data-name="{{ $account->name }}" data-note="{{ $account->note }}"><i

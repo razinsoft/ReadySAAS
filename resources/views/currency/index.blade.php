@@ -30,7 +30,7 @@
                                         <td>{{ $currency->code }}</td>
                                         <td>
                                             <a data-toggle="modal" data-target="#editeModal_{{ $currency->id }}"
-                                                href="#" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
+                                                href="#" class="btn btn-sm common-btn"><i class="fa fa-edit"></i></a>
 
                                             <a id="delete" href="{{ route('currency.delete', $currency->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

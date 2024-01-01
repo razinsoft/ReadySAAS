@@ -31,7 +31,7 @@
                                             <a href="#" data-toggle="modal" data-target="#brandEditModal"
                                                 data-action="{{ route('brand.update', $brand->id) }}"
                                                 data-title="{{ $brand->title }}" data-image="{{ $brand->thumbnail_id }}"
-                                                class="btn btn-sm btn-info edit-btn"><i class="fa fa-edit"></i></a>
+                                                class="btn btn-sm common-btn edit-btn"><i class="fa fa-edit"></i></a>
                                             <a id="delete" href="{{ route('brand.delete', $brand->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                         </td>

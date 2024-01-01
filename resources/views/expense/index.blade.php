@@ -50,7 +50,7 @@
                                         <td>{{ $expense->note ?? 'N/A' }}</td>
                                         <td>
                                             <button data-toggle="modal" data-target="#editModal_{{ $expense->id }}"
-                                                class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
+                                                class="btn btn-sm common-btn"><i class="fa fa-edit"></i></button>
                                             <a id="delete" href="{{ route('expense.destroy', $expense->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
 

@@ -39,7 +39,7 @@
                                     <td>
                                         <a data-action="{{ route('category.update', $category->id) }}"
                                             data-name="{{ $category->name }}" data-parent-id="{{ $category->parent_id }}"
-                                            class="categoryEditBtn btn btn-sm btn-info text-white"><i
+                                            class="categoryEditBtn btn btn-sm common-btn text-white"><i
                                                 class="fa fa-edit"></i></a>
                                         <a id="delete" href="{{ route('category.delete', $category->id) }}"
                                             class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

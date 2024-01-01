@@ -27,7 +27,7 @@
             cursor: pointer;
         }
 
-        .btn-info {
+        .common-btn {
             background-color: #999;
             color: #FFF;
         }
@@ -112,7 +112,7 @@
             <table>
                 <tr>
                     <td>
-                        <a href="{{ route('sale.pos') }}" class="btn btn-info"><i class="fa fa-arrow-left"></i>Back To
+                        <a href="{{ route('sale.pos') }}" class="btn common-btn"><i class="fa fa-arrow-left"></i>Back To
                             Order</a>
                     </td>
                     <td>

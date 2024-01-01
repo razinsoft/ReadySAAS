@@ -114,7 +114,7 @@
                                             data-description="{{ $shopCategory->description }}"
                                             data-status="{{ $shopCategory->status->value }}"
                                             data-color="{{ $shopCategory->primary_color }}"
-                                            class="shopCategoryEditBtn btn btn-sm btn-info text-white"><i
+                                            class="shopCategoryEditBtn btn btn-sm common-btn text-white"><i
                                                 class="fa fa-edit"></i></a>
                                         <a id="delete" href="{{ route('shop.category.delete', $shopCategory->id) }}"
                                             class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

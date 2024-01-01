@@ -217,7 +217,7 @@
                         <a class="menu {{ $request->routeIs('sale.*') ? 'active' : '' }}" data-bs-toggle="collapse"
                             href="#saleMenu">
                             <span>
-                                <img src="/icons/sales.svg" class="menu-icon" alt="icon" />
+                                <img src="/icons/Activity.svg" class="menu-icon" alt="icon" />
                                 {{ __('sales') }}
                             </span>
                             <img src="/icons/arrowDown.svg" alt="" class="downIcon">
@@ -269,7 +269,7 @@
                         <a class="menu {{ $request->routeIs('expenseCategory.*', 'expense.*') ? 'active' : '' }}"
                             data-bs-toggle="collapse" href="#expenseMenu">
                             <span>
-                                <img src="/icons/profit.svg" class="menu-icon" alt="icon" />
+                                <img src="/icons/money-dollar.svg" class="menu-icon" alt="icon" />
                                 {{ __('expense') }}
                             </span>
                             <img src="/icons/arrowDown.svg" alt="" class="downIcon">
@@ -366,7 +366,7 @@
                         <a class="menu {{ $request->routeIs('subscription.*', 'subscription-purchase.*') ? 'active' : '' }}"
                             data-bs-toggle="collapse" href="#subscriptionMenu">
                             <span>
-                                <img src="/icons/subscription.svg" class="menu-icon" alt="icon" />
+                                <img src="/icons/money-coin.svg" class="menu-icon" alt="icon" />
                                 {{ __('subscriptions') }}
                             </span>
                             <img src="/icons/arrowDown.svg" alt="" class="downIcon">
@@ -458,9 +458,7 @@
         </div>
         @canany(['subscription-purchase.index'])
             @php
-                $subscription = auth()
-                    ->user()
-                    ?->shop?->currentSubscriptions();
+                $subscription = mainShop()->currentSubscriptions();
             @endphp
             @if ($subscription)
                 <div class="subscription-box">

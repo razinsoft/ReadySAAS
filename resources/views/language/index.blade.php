@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="{{ route('language.edit', $language->id) }}" class="btn btn-info btn-sm">
+                            <a href="{{ route('language.edit', $language->id) }}" class="btn common-btn btn-sm">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </a>
                             @if ($language->name != 'en')

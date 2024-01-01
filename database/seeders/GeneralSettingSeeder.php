@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\GeneralSetting;
+use App\Models\Media;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -113,7 +114,12 @@ class GeneralSettingSeeder extends Seeder
                 'lang' => 'en',
             ],
         ];
-        foreach ($shopGeneralSettings as $shopGeneralSetting) {
+        $images = ['logo.png', 'groceryLogo.png', 'pharmaLogo.png', 'mobileShopLogo.png', 'restaurantLogo.png', 'logo.png'];
+        foreach ($shopGeneralSettings as $key => $shopGeneralSetting) {
+            $image = Media::factory()->create([
+                'src' => 'logo/' . $images[$key],
+                'path' => 'logo/',
+            ])->id;
             GeneralSetting::create([
                 'shop_id' => $shopGeneralSetting['shop_id'],
                 'site_title' => $shopGeneralSetting['site_title'],
@@ -127,6 +133,7 @@ class GeneralSettingSeeder extends Seeder
                 'developed_by' => $shopGeneralSetting['developed_by'],
                 'direction' => $shopGeneralSetting['direction'],
                 'lang' => $shopGeneralSetting['lang'],
+                'logo_id' => $image
             ]);
         }
     }

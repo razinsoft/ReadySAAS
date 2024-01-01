@@ -31,7 +31,7 @@
                                                 data-action="{{ route('customer_group.update', $customer_group->id) }}"
                                                 data-name="{{ $customer_group->name }}"
                                                 data-percentage="{{ $customer_group->percentage }}" href="#"
-                                                class="btn btn-sm btn-info edit-btn"><i class="fa fa-edit"></i></a>
+                                                class="btn btn-sm common-btn edit-btn"><i class="fa fa-edit"></i></a>
                                             <a id="delete"
                                                 href="{{ route('customer_group.delete', $customer_group->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

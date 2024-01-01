@@ -52,7 +52,7 @@ class ShopSeeder extends Seeder
                 'status' => Status::ACTIVE->value
             ],
         ];
-        
+
         foreach ($shops as $shop) {
             Shop::create([
                 'user_id' => $shop['user_id'],
