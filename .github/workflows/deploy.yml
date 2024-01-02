@@ -18,25 +18,14 @@ jobs:
       - name: Deployment
         uses: appleboy/ssh-action@master
         with:
-          host: 64.227.191.10
+          host: ${{ secrets.IP }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          username: root
+          username: ${{ secrets.USERNAME }}
           port: 22
           script: |
-            cd /var/www/html/ReadyPOS/
+            cd /var/www/html/staging/readysaas
+            git add .
+            git commit -m 'commit when diploing from ci'
             git pull origin dev
-            php artisan config:clear
-            php artisan cache:clear
-            #========your custom command here===========
 
-            #------>uncomment the command for migrate
-            #php artisan migrate --force
-
-            #------>if you run a seeder class just replace the seeder class name
-            #php artisan db:seed PermissionSeeder --force
-            #php artisan db:seed RolePermissionSeeder --force
-
-            #------>if set public permission any directory just replace directory path on the command
-            #chmod -R 777 lang
-            #chmod -R 777 .env
-            #chmod -R 777 storage
+            bash deploy.sh
