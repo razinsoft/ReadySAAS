@@ -12,7 +12,7 @@ class BrandController extends Controller
 
     public function index()
     {
-        $brands = BrandRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $brands = BrandRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         return view('brand.index', compact('brands'));
     }
 

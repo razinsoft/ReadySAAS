@@ -27,8 +27,8 @@ class ShopCategorySeeder extends Seeder
             ],
             [
                 'name' => 'Pharmacy',
-                'primary_color' => '#3E8F89',
-                'secondary_color' => '#3e8f8929',
+                'primary_color' => '#FD151B',
+                'secondary_color' => '#fd151b1f',
             ],
             [
                 'name' => 'Electronics/Hardware/Mobile Shop',

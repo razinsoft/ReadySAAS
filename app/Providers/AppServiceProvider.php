@@ -23,12 +23,14 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
-            if (mainShop()) {
-                $generalSettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
+            $mainShop = auth()->user()?->userShop?->shop;
+            if ($mainShop) {
+                $generalSettings = GeneralSettingRepository::query()->where('shop_id', $mainShop->id)->first();
             }
             $currency = $generalSettings?->defaultCurrency;
             $view->with('general_settings', $generalSettings);
             $view->with('currency', $currency);
+            $view->with('mainShop', $mainShop);
         });
     }
 }

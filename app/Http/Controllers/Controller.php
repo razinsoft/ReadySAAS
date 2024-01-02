@@ -22,4 +22,9 @@ class Controller extends BaseController
         }
         return response()->json($content, $statusCode, $headers, $options);
     }
+
+    protected function mainShop()
+    {
+        return auth()->user()?->userShop?->shop;
+    }
 }

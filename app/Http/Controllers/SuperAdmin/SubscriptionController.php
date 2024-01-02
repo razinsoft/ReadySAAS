@@ -27,9 +27,9 @@ class SubscriptionController extends Controller
         return back()->with('success', 'Subscription is created successfully');
     }
 
-    public function update(Subscription $subscription, SubscriptionRequest $request)
+    public function update(SubscriptionRequest $request, Subscription $subscription)
     {
-        SubscriptionRepository::updateByRequest($subscription, $request);
+        SubscriptionRepository::updateByRequest($request, $subscription);
         return back()->with('success', 'Subscription is updated successfully');
     }
 
@@ -42,8 +42,8 @@ class SubscriptionController extends Controller
     public function report()
     {
         $shopSubscriptions = ShopSubscriptionRepository::getAll();
-        if (mainShop()) {
-            $shopSubscriptions = ShopSubscriptionRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        if ($this->mainShop()) {
+            $shopSubscriptions = ShopSubscriptionRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         }
         return view('subscription.report', compact('shopSubscriptions'));
     }

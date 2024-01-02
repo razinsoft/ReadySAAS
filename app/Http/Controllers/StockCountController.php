@@ -12,10 +12,10 @@ class StockCountController extends Controller
 {
     public function index()
     {
-        $warehouses = WarehouseRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
-        $brands = BrandRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
-        $categories = CategoryRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
-        $stockCounts = StockCountRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $warehouses = WarehouseRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
+        $brands = BrandRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
+        $categories = CategoryRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
+        $stockCounts = StockCountRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
 
         return view('stockCount.index', compact('warehouses', 'brands', 'categories', 'stockCounts'));
     }

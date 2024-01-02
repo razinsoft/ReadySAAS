@@ -36,7 +36,7 @@ class ProductRepository extends Repository
         
         return self::create([
             'created_by' => auth()->id(),
-            'shop_id' => mainShop()->id,
+            'shop_id' => self::mainShop()->id,
             'type' => $request->type,
             'name' => $request->name,
             'code' => $request->code,
@@ -123,7 +123,7 @@ class ProductRepository extends Repository
     public static function search($search)
     {
         $products = self::query()
-            ->where('shop_id', mainShop()->id)->when($search, function ($query) use ($search) {
+            ->where('shop_id', self::mainShop()->id)->when($search, function ($query) use ($search) {
                 $query->where('name', 'Like', "%{$search}%")
                     ->orWhere('code', 'Like', "%{$search}%");
             });

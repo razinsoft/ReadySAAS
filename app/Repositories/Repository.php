@@ -64,4 +64,9 @@ abstract class Repository
     {
         return $model->update($data);
     }
+
+    public static function mainShop()
+    {
+        return auth()->user()?->userShop?->shop;
+    }
 }
