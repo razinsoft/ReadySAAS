@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function index()
     {
         $status = request()->status;
-        $products = ProductRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->when($status, function ($query) use ($status) {
+        $products = ProductRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->when($status, function ($query) use ($status) {
             $query->where('type', $status);
         })->get();
 
@@ -36,11 +36,11 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = CategoryRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $brands = BrandRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $units = UnitRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $categories = CategoryRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $brands = BrandRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $units = UnitRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
         $barcodeSymbologyes = BarcodeSymbology::cases();
         $productTypes = ProductTypes::cases();
         $taxMethods = TaxMethods::cases();
@@ -50,7 +50,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $subscription = auth()->user()?->shop?->currentSubscriptions()?->subscription;
-        $stores = ProductRepository::query()->where('shop_id', mainShop()->id)->get();
+        $stores = ProductRepository::query()->where('shop_id', $this->mainShop()->id)->get();
         if ($stores->count() == $subscription->product_limit) {
             return back()->withError('You have extend your limit');
         }
@@ -90,11 +90,11 @@ class ProductController extends Controller
             }
         }
 
-        $categories = CategoryRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $brands = BrandRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $units = UnitRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $categories = CategoryRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $brands = BrandRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $units = UnitRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
         $barcodeSymbologyes = BarcodeSymbology::cases();
         $productTypes = ProductTypes::cases();
         $taxMethods = TaxMethods::cases();
@@ -254,7 +254,7 @@ class ProductController extends Controller
                     $thumbnail = Media::factory()->create();
                     Product::create([
                         'created_by' => auth()->id(),
-                        'shop_id' => mainShop()->id,
+                        'shop_id' => $this->mainShop()->id,
                         'name' => $row[0],
                         'code' => $row[1],
                         'type' => ucfirst($row[2]),
@@ -281,7 +281,7 @@ class ProductController extends Controller
     {
         $request = request();
         $products = ProductRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $this->mainShop()->id)->first();
         return view('product.productPrint', compact('products', 'generalsettings'));
     }
 }

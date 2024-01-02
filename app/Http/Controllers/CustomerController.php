@@ -16,23 +16,22 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = CustomerRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $customers = CustomerRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         return view('customer.index', compact('customers'));
     }
     public function create()
     {
-        $customerGroups = CustomerGroupRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         return view('customer.create', compact('customerGroups'));
     }
     public function store(CustomerRequest $request)
     {
-        $user = UserRepository::storeByRequest($request);
-        CustomerRepository::storeByRequest($request, $user);
+        CustomerRepository::storeByRequest($request);
         return back()->with('success', 'Customer is created successfully!');
     }
     public function edit(Customer $customer)
     {
-        $customerGroups = CustomerGroupRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         return view('customer.edit', compact('customer', 'customerGroups'));
     }
     public function update(CustomerRequest $request, Customer $customer)

@@ -39,7 +39,7 @@ class PaymentGatewayController extends Controller
 
     public function process(Request $request, SubscriptionRequest $subscriptionRequest)
     {
-        $generalsettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
+        $generalsettings = GeneralSettingRepository::query()->whereNull('shop_id')->first();
         try {
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             Stripe\Charge::create([
@@ -49,7 +49,7 @@ class PaymentGatewayController extends Controller
                 "description" => $subscriptionRequest->subscription->description,
             ]);
 
-            $shopSubscription = ShopSubscriptionRepository::query()->where(['is_current' => IsHas::YES->value, 'shop_id' => mainShop()->id])->first();
+            $shopSubscription = ShopSubscriptionRepository::query()->where(['is_current' => IsHas::YES->value, 'shop_id' => $this->mainShop()->id])->first();
 
             if ($shopSubscription) {
                 $shopSubscription->update([

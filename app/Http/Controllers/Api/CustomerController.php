@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerRequest;
+use App\Http\Resources\CustomerGroupResource;
 use App\Http\Resources\CustomerResource;
+use App\Models\Customer;
+use App\Repositories\CustomerGroupRepository;
 use App\Repositories\CustomerRepository;
-use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -23,10 +25,22 @@ class CustomerController extends Controller
     }
     public function store(CustomerRequest $request)
     {
-        $user = UserRepository::storeByRequest($request);
-        $customer = CustomerRepository::storeByRequest($request, $user);
+        $customer = CustomerRepository::storeByRequest($request);
         return $this->json('Customer successfully stored', [
             'customer' => CustomerResource::make($customer),
+        ]);
+    }
+    public function details(Customer $customer)
+    {
+        return $this->json('Customer Details', [
+            'customers' => CustomerResource::make($customer),
+        ]);
+    }
+    public function customerGroups()
+    {
+        $customerGroups = CustomerGroupRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
+        return $this->json('customer groups', [
+            'customerGroups' => CustomerGroupResource::collection($customerGroups),
         ]);
     }
 }

@@ -16,7 +16,7 @@ class StoreRepository extends Repository
     {
         return self::create([
             'created_by' => auth()->id(),
-            'shop_id' => mainShop()->id,
+            'shop_id' => self::mainShop()->id,
             'user_id' => $shopManager->id,
             'name' => $request->store_name,
             'description' => $request->description,

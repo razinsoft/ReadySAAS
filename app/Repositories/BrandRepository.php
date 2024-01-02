@@ -24,7 +24,7 @@ class BrandRepository extends Repository
         }
         $create = self::create([
             'created_by' => auth()->id(),
-            'shop_id' => mainShop()->id,
+            'shop_id' => self::mainShop()->id,
             'title' => $request->title,
             'thumbnail_id' => $thumbnailId
         ]);

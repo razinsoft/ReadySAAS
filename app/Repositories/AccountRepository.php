@@ -15,7 +15,7 @@ class AccountRepository extends Repository
     {
         $account = self::create([
             'created_by' => auth()->id(),
-            'shop_id' => mainShop()->id,
+            'shop_id' => self::mainShop()->id,
             'name' => $request->name,
             'account_no' => $request->account_no,
             'note' => $request->note,

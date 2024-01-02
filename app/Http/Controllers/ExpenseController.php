@@ -27,13 +27,13 @@ class ExpenseController extends Controller
             $endDate = date("m/d/Y", $endSeconds);
             $hasDate = true;
         }
-        $expenses = ExpenseRepository::query()->where('shop_id', mainShop()->id)->when($hasDate, function ($query) use ($startDate, $endDate) {
+        $expenses = ExpenseRepository::query()->where('shop_id', $this->mainShop()->id)->when($hasDate, function ($query) use ($startDate, $endDate) {
             $query->whereBetween('created_at', [$startDate, $endDate]);
         })->get();
 
-        $warehouses =  WarehouseRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
-        $exCategories = ExpenseCategoryRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
-        $accounts = AccountRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $warehouses =  WarehouseRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
+        $exCategories = ExpenseCategoryRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
+        $accounts = AccountRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         return view('expense.index', compact('accounts', 'expenses', 'warehouses', 'exCategories', 'startDate', 'endDate'));
     }
 

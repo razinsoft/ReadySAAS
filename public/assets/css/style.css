@@ -2206,8 +2206,8 @@ li.sub-menu.active::before {
 }
 
 .branding-logo img {
-    width: 250px;
-    height: 80px;
+    width: 200px;
+    height: auto;
 }
 
 .branding-logo-forMobile {

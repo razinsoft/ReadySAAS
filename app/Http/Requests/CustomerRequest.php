@@ -21,24 +21,19 @@ class CustomerRequest extends FormRequest
      */
     public function rules(): array
     {
-        $method = request()->isMethod('put');
-        $isPassword = 'required';
-        if ($method) {
-            $isPassword = 'nullable';
-        }
         return [
             'customer_group_id' => 'nullable|integer',
             'name' => 'required|string|max:191',
-            'email' => 'required|email',
-            'phone_number' => 'nullable|numeric',
-            'address' => 'required|string|max:191',
+            'email' => 'nullable|email|unique:customers,email,' . $this->customers?->id,
+            'phone_number' => 'required|numeric',
+            'address' => 'nullable|string|max:191',
             'country' => 'nullable|string|max:191',
             'city' => 'nullable|string|max:191',
             'company_name' => 'nullable|string|max:191',
             'tax_no' => 'nullable|string|max:191',
             'state' => 'nullable|string|max:191',
             'post_code' => 'nullable|string|max:191',
-            'password' => $isPassword . '|min:6',
+            'password' => 'nullable|min:6',
         ];
     }
 }
