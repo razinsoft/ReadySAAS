@@ -42,7 +42,10 @@ Route::middleware('auth:api')->group(function () {
     });
     Route::controller(CustomerController::class)->group(function () {
         Route::get('/customer/search', 'search');
+        Route::get('/customer/details/{customer}', 'details');
         Route::post('/customer/store', 'store');
+        Route::get('/customer/groups', 'customerGroups');
+        Route::get('/customer/groups', 'customerGroups');
     });
     Route::controller(WalletController::class)->group(function () {
         Route::get('/accounts', 'accounts');

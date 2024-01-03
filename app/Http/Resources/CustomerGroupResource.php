@@ -17,7 +17,7 @@ class CustomerGroupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'percentage' => $this->percentage
+            'percentage' => (int) $this->percentage
         ];
     }
 }

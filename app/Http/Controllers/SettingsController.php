@@ -15,9 +15,9 @@ class SettingsController extends Controller
     {
         $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
         $currencies = CurrencyRepository::query()->whereNull('shop_id')->get();
-        if (mainShop()) {
-            $generalSettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
-            $currencies = CurrencyRepository::query()->where('shop_id', mainShop()->id)->get();
+        if ($this->mainShop()) {
+            $generalSettings = GeneralSettingRepository::query()->where('shop_id', $this->mainShop()->id)->first();
+            $currencies = CurrencyRepository::query()->where('shop_id', $this->mainShop()->id)->get();
         }
         
         $dateFormats = DateFormat::cases();

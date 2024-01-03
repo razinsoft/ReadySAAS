@@ -13,7 +13,7 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        $suppliers = SupplierRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $suppliers = SupplierRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         return view('supplier.index', compact('suppliers'));
     }
 
@@ -63,7 +63,7 @@ class SupplierController extends Controller
                 if ($key > 0) {
                     Supplier::create([
                         'created_by' => auth()->id(),
-                        'shop_id' => mainShop()->id,
+                        'shop_id' => $this->mainShop()->id,
                         'name' => $row[0],
                         'company_name' => $row[1],
                         'vat_number' => $row[2],

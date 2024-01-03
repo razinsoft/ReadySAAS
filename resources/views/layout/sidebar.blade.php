@@ -458,7 +458,7 @@
         </div>
         @canany(['subscription-purchase.index'])
             @php
-                $subscription = mainShop()->currentSubscriptions();
+                $subscription = $mainShop->currentSubscriptions();
             @endphp
             @if ($subscription)
                 <div class="subscription-box">

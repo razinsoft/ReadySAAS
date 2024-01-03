@@ -16,7 +16,7 @@ class WarehouseRepository extends Repository
     {
         $create = self::create([
             'created_by' => auth()->id(),
-            'shop_id' => mainShop()->id,
+            'shop_id' => self::mainShop()->id,
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,

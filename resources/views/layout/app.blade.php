@@ -43,9 +43,9 @@
 </head>
 <style>
     :root {
-        --theme-color: {{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }};
-        --theme-secondary-color: {{ mainShop()?->shopCategory?->secondary_color ?? '#eaf7fc' }};
-        --bs-btn-bg: {{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }};
+        --theme-color: {{ $mainShop?->shopCategory?->primary_color ?? '#29aae1' }};
+        --theme-secondary-color: {{ $mainShop?->shopCategory?->secondary_color ?? '#eaf7fc' }};
+        --bs-btn-bg: {{ $mainShop?->shopCategory?->primary_color ?? '#29aae1' }};
     }
 </style>
 
@@ -255,7 +255,7 @@
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var svgContent = xhr.responseText;
                         svgContent = svgContent.replace(/stroke="#9395A2"/g,
-                            'stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"'
+                            'stroke="{{ $mainShop?->shopCategory?->primary_color ?? '#29aae1' }}"'
                         );
                         svgImage.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
                             svgContent);
@@ -278,7 +278,7 @@
                             if (xhr.readyState === 4 && xhr.status === 200) {
                                 var svgContent = xhr.responseText;
                                 svgContent = svgContent.replace(/stroke="#9395A2"/g,
-                                    'stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"'
+                                    'stroke="{{ $mainShop?->shopCategory?->primary_color ?? '#29aae1' }}"'
                                 );
                                 svgImage.src = 'data:image/svg+xml;charset=utf-8,' +
                                     encodeURIComponent(svgContent);
@@ -298,7 +298,7 @@
                             if (xhr.readyState === 4 && xhr.status === 200) {
                                 var svgContent = xhr.responseText;
                                 svgContent = svgContent.replace(
-                                    /stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"/g,
+                                    /stroke="{{ $mainShop?->shopCategory?->primary_color ?? '#29aae1' }}"/g,
                                     'stroke="#9395A2"');
                                 svgImage.src = 'data:image/svg+xml;charset=utf-8,' +
                                     encodeURIComponent(svgContent);
@@ -316,7 +316,7 @@
                             if (xhr.readyState === 4 && xhr.status === 200) {
                                 var svgContent = xhr.responseText;
                                 svgContent = svgContent.replace(/stroke="#9395A2"/g,
-                                    'stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"'
+                                    'stroke="{{ $mainShop?->shopCategory?->primary_color ?? '#29aae1' }}"'
                                 );
                                 svgImage.src = 'data:image/svg+xml;charset=utf-8,' +
                                     encodeURIComponent(svgContent);
@@ -334,7 +334,7 @@
                             if (xhr.readyState === 4 && xhr.status === 200) {
                                 var svgContent = xhr.responseText;
                                 svgContent = svgContent.replace(/stroke="#9395A2"/g,
-                                    'stroke="{{ mainShop()?->shopCategory?->primary_color ?? '#29aae1' }}"'
+                                    'stroke="{{ $mainShop?->shopCategory?->primary_color ?? '#29aae1' }}"'
                                 );
                                 svgImage.src = 'data:image/svg+xml;charset=utf-8,' +
                                     encodeURIComponent(svgContent);

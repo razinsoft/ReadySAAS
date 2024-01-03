@@ -10,7 +10,7 @@ class AccountsController extends Controller
 {
     public function index()
     {
-        $accounts = AccountRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $accounts = AccountRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         return view('account.index', compact('accounts'));
     }
 
@@ -48,7 +48,7 @@ class AccountsController extends Controller
 
     public function balanceSheet()
     {
-        $accounts = AccountRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $accounts = AccountRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         return view('account.balance_sheet', compact('accounts'));
     }
 

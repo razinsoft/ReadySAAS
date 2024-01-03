@@ -19,13 +19,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $staffs = mainShop()->staffs;
+        $staffs = $this->mainShop()->staffs;
         return view('user.index', compact('staffs'));
     }
 
     public function create()
     {
-        $roles = RolesRepository::query()->where('shop_id', mainShop()->id)->orderByDesc('id')->get();
+        $roles = RolesRepository::query()->where('shop_id', $this->mainShop()->id)->orderByDesc('id')->get();
         return view('user.create', compact('roles'));
     }
 
@@ -42,7 +42,7 @@ class UserController extends Controller
         }
         $request['email_verified_at'] = now();
         $user = UserRepository::storeByRequest($request);
-        $user->shopUser()->attach(mainShop()->id);
+        $user->shopUser()->attach($this->mainShop()->id);
         WalletRepository::create([
             'user_id' => $user->id,
         ]);

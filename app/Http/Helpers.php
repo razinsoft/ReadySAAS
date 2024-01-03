@@ -3,15 +3,12 @@
 use App\Repositories\GeneralSettingRepository;
 use Carbon\Carbon;
 
-function mainShop()
-{
-    return auth()->user()?->userShop?->shop;
-}
 function dateFormat($date)
 {
     $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
-    if (mainShop()) {
-        $generalSettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
+    $mainShop = auth()->user()?->userShop?->shop;
+    if ($mainShop) {
+        $generalSettings = GeneralSettingRepository::query()->where('shop_id', $mainShop->id)->first();
     }
     $format = $generalSettings->date_format->value ?? 'd-m-Y';
     $date = Carbon::parse($date)->format($format);
@@ -25,8 +22,9 @@ function dateFormat($date)
 function numberFormat($number)
 {
     $generalSettings = GeneralSettingRepository::query()->whereNull('shop_id')->latest()->first();
-    if (mainShop()) {
-        $generalSettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
+    $mainShop = auth()->user()?->userShop?->shop;
+    if ($mainShop) {
+        $generalSettings = GeneralSettingRepository::query()->where('shop_id', $mainShop->id)->first();
     }
     $symbol = $generalSettings->defaultCurrency->symbol ?? '$';
     if (isset($generalSettings->currency_position) && ($generalSettings->currency_position->value == "Prefix")) {

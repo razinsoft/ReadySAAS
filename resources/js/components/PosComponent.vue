@@ -446,8 +446,7 @@
 
                                             <div class="grid md:grid-cols-2 gap-4 px-5 py-3 w-full">
                                                 <div>
-                                                    <label class="text-slate-500" for="customer_group_id">Customer Group
-                                                        <span class="text-red-500">*</span></label>
+                                                    <label class="text-slate-500" for="customer_group_id">Customer Group</label>
                                                     <select id="customer_group_id" v-model="form.customer_group_id
                                                         "
                                                         class="border-slate-200 bg-slate-50 rounded-lg text-slate-400 focus:ring-slate-300 focus:border-transparent focus:ring-1 w-full mt-2"
@@ -489,7 +488,8 @@
                                                     }}</span>
                                                 </div>
                                                 <div>
-                                                    <label class="text-slate-500" for="phone_number">Phone Number</label>
+                                                    <label class="text-slate-500" for="phone_number">Phone Number <span
+                                                            class="text-red-500">*</span></label>
                                                     <input type="number" id="phone_number" v-model="form.phone_number
                                                             "
                                                         class="border-slate-200 bg-slate-50 rounded-lg placeholder:text-slate-400 focus:ring-slate-300 focus:border-transparent focus:ring-1 w-full mt-2"
@@ -506,8 +506,7 @@
                                                     </span>
                                                 </div>
                                                 <div>
-                                                    <label class="text-slate-500" for="email">Email <span
-                                                            class="text-red-500">*</span></label>
+                                                    <label class="text-slate-500" for="email">Emai</label>
                                                     <input type="email" id="email" v-model="form.email"
                                                         class="border-slate-200 bg-slate-50 rounded-lg placeholder:text-slate-400 focus:ring-slate-300 focus:border-transparent focus:ring-1 w-full mt-2"
                                                         :class="{
@@ -544,8 +543,7 @@
                                                     }}</span>
                                                 </div>
                                                 <div class="col-span-2">
-                                                    <label class="text-slate-500" for="address">Address
-                                                        <span class="text-red-500">*</span></label>
+                                                    <label class="text-slate-500" for="address">Address</label>
                                                     <input type="text" id="address" v-model="form.address"
                                                         class="border-slate-200 bg-slate-50 rounded-lg placeholder:text-slate-400 focus:ring-slate-300 focus:border-transparent focus:ring-1 w-full mt-2"
                                                         :class="{
@@ -557,8 +555,7 @@
                                                     }}</span>
                                                 </div>
                                                 <div>
-                                                    <label class="text-slate-500" for="country">Country
-                                                        <span class="text-red-500">*</span></label>
+                                                    <label class="text-slate-500" for="country">Country</label>
                                                     <input type="text" id="country" v-model="form.country"
                                                         class="border-slate-200 bg-slate-50 rounded-lg placeholder:text-slate-400 focus:ring-slate-300 focus:border-transparent focus:ring-1 w-full mt-2"
                                                         :class="{
@@ -571,8 +568,7 @@
                                                 </div>
 
                                                 <div>
-                                                    <label class="text-slate-500" for="city">City
-                                                        <span class="text-red-500">*</span></label>
+                                                    <label class="text-slate-500" for="city">City</label>
                                                     <input type="text" id="city" v-model="form.city"
                                                         class="border-slate-200 bg-slate-50 rounded-lg placeholder:text-slate-400 focus:ring-slate-300 focus:border-transparent focus:ring-1 w-full mt-2"
                                                         :class="{

@@ -30,7 +30,7 @@ class PurchaseController extends Controller
         $endDate = $request->end_date;
         $hasDate = $startDate && $endDate ? true : false;
 
-        $purchases = PurchaseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)
+        $purchases = PurchaseRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)
             ->when($warehouseId, function ($query) use ($warehouseId) {
                 $query->where('warehouse_id', $warehouseId);
             })
@@ -39,17 +39,17 @@ class PurchaseController extends Controller
             })->get();
 
         $paymentMethods = PaymentMethod::cases();
-        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
         return view('purchase.index', compact('accounts', 'warehouses', 'purchases', 'paymentMethods'));
     }
 
     public function create()
     {
-        $suppliers = SupplierRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $suppliers = SupplierRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
         $paymentMethods = PaymentMethod::cases();
 
         return view('purchase.create', compact('accounts', 'suppliers', 'warehouses', 'taxs', 'paymentMethods'));
@@ -101,10 +101,10 @@ class PurchaseController extends Controller
 
     public function edit(Purchase $purchase)
     {
-        $suppliers = SupplierRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
-        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', mainShop()->id)->get();
+        $suppliers = SupplierRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $warehouses = WarehouseRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $taxs = TaxRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
+        $accounts = AccountRepository::query()->orderByDesc('id')->where('shop_id', $this->mainShop()->id)->get();
         $payment_method = $purchase->payments()->latest()->first()?->paying_method->value;
         $paymentMethods = PaymentMethod::cases();
         return view('purchase.edit', compact('warehouses', 'suppliers', 'taxs', 'purchase', 'accounts', 'payment_method', 'paymentMethods'));
@@ -216,7 +216,7 @@ class PurchaseController extends Controller
     public function purchasePrint(){
         $request = request();
         $purchases = PurchaseRepository::query()->limit($request->length)->get();
-        $generalsettings = GeneralSettingRepository::query()->where('shop_id', mainShop()->id)->first();
+        $generalsettings = GeneralSettingRepository::query()->where('shop_id', $this->mainShop()->id)->first();
         return view('purchase.purchasePrint', compact('purchases','generalsettings'));
     }
 }

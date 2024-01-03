@@ -27,7 +27,7 @@ class MoneyTransferRepository extends Repository
 
         $create = self::create([
             'created_by' => auth()->id(),
-            'shop_id' => mainShop()->id,
+            'shop_id' => self::mainShop()->id,
             'reference_no' => 'mtr-' . date("Ymd") . '-' . date("his"),
             'from_account_id' => $request->from_account_id,
             'to_account_id' => $request->to_account_id,
