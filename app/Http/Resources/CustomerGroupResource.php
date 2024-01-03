@@ -17,7 +17,7 @@ class CustomerGroupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'percentage' => (int) $this->percentage
+            'dicountPercent' => (float) number_format($this->percentage)
         ];
     }
 }

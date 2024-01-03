@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function json(string $message = null, $data = [], $statusCode = 200, array $headers = [], $options = 0)
+    protected function json(string $message = null, $data = [], $statusCode = 200, array $headers = [], $options = JSON_PRESERVE_ZERO_FRACTION)
     {
         $content = [];
         if ($message) {
