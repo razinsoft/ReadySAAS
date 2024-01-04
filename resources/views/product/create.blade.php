@@ -41,8 +41,7 @@
                                             title="{{ __('code') }}" :required="true"></x-inputGroup>
                                     </div>
                                     <div class="col-md-4">
-                                        <x-select name="barcode_symbology"
-                                            title="{{ __('barcode_symbology') }}"
+                                        <x-select name="barcode_symbology" title="{{ __('barcode_symbology') }}"
                                             placeholder="{{ __('select_a_option') }}">
                                             @foreach ($barcodeSymbologyes as $barcodeSymbology)
                                                 <option value="{{ $barcodeSymbology->value }}">
@@ -91,7 +90,8 @@
                                         </x-select>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <x-select name="category_id" title="{{ __('category') }}" placeholder="{{ __('select_a_option') }}">
+                                        <x-select name="category_id" title="{{ __('category') }}"
+                                            placeholder="{{ __('select_a_option') }}">
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -113,11 +113,13 @@
                                             </div>
                                             <div class="col-md-4  mb-3">
                                                 <x-select name="sale_unit_id" title="{{ __('sale_unit') }}"
-                                                    placeholder="{{ __('select_a_sale_unit') }}" :required="false"></x-select>
+                                                    placeholder="{{ __('select_a_sale_unit') }}"
+                                                    :required="false"></x-select>
                                             </div>
                                             <div class="col-md-4  mb-3">
                                                 <x-select name="purchase_unit_id" title="{{ __('purchase_unit') }}"
-                                                    placeholder="{{ __('select_a_purchase_unit') }}" :required="false"></x-select>
+                                                    placeholder="{{ __('select_a_purchase_unit') }}"
+                                                    :required="false"></x-select>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -130,8 +132,9 @@
                                                     placeholder="{{ __('enter_your_selling_price') }}" />
                                             </div>
                                             <div class="col-md-4  mb-3">
-                                                <x-input name="alert_quantity" title="{{ __('alert_quantity') }}" type="number"
-                                                    placeholder="{{ __('enter_your_alert_quantity') }}" :required="false" />
+                                                <x-input name="alert_quantity" title="{{ __('alert_quantity') }}"
+                                                    type="number" placeholder="{{ __('enter_your_alert_quantity') }}"
+                                                    :required="false" />
                                             </div>
                                         </div>
                                     </div>
@@ -156,8 +159,8 @@
                                         </x-select>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <x-select name="tax_method" title="{{ __('tax_method') }}" placeholder="{{ __('select_a_option') }}"
-                                            :required="false">
+                                        <x-select name="tax_method" title="{{ __('tax_method') }}"
+                                            placeholder="{{ __('select_a_option') }}" :required="false">
                                             @foreach ($taxMethods as $taxMethod)
                                                 <option value="{{ $taxMethod->value }}">{{ $taxMethod->value }}</option>
                                             @endforeach
@@ -176,14 +179,16 @@
                                         <div class="form-check">
                                             <input name="is_batch" type="checkbox" id="is-batch" value="1"
                                                 class="form-check-input">
-                                            <label class="form-check-label" for="is-batch">{{ __('this_product_has_batch_and_expired_date') }}</label>
+                                            <label class="form-check-label"
+                                                for="is-batch">{{ __('this_product_has_batch_and_expired_date') }}</label>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2" id="variant-option">
                                         <div class="form-check">
                                             <input name="is_variant" type="checkbox" id="is-variant" value="1"
                                                 class="form-check-input">
-                                            <label class="form-check-label" for="is-variant">{{ __('this_product_has_variant') }}</label>
+                                            <label class="form-check-label"
+                                                for="is-variant">{{ __('this_product_has_variant') }}</label>
                                         </div>
                                     </div>
                                     <div class="col-md-12" id="variant-section">
@@ -211,7 +216,8 @@
                                         <div class="form-check">
                                             <input name="promotion" type="checkbox" id="promotion" value="1"
                                                 class="form-check-input">
-                                            <label class="form-check-label" for="promotion">{{ __('add_promotional_price') }}</label>
+                                            <label class="form-check-label"
+                                                for="promotion">{{ __('add_promotional_price') }}</label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -219,16 +225,16 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <x-input name="promotion_price" title="{{ __('promotional_price') }}"
-                                                        placeholder="{{ __('enter_your_promotion_price') }}" type="number"
-                                                        :required="false"></x-input>
+                                                        placeholder="{{ __('enter_your_promotion_price') }}"
+                                                        type="number" :required="false"></x-input>
                                                 </div>
                                                 <div class="col-md-4" id="start_date">
-                                                    <x-input name="starting_date" title="{{ __('start_date') }}" type="date"
-                                                        placeholder="" :required="false"></x-input>
+                                                    <x-input name="starting_date" title="{{ __('start_date') }}"
+                                                        type="date" placeholder="" :required="false"></x-input>
                                                 </div>
                                                 <div class="col-md-4 mb-3" id="last_date">
-                                                    <x-input name="last_date" title="{{ __('end_date') }}" type="date"
-                                                        placeholder="" :required="false"></x-input>
+                                                    <x-input name="last_date" title="{{ __('end_date') }}"
+                                                        type="date" placeholder="" :required="false"></x-input>
 
                                                 </div>
                                             </div>
@@ -253,10 +259,12 @@
                                     <div class="col-md-6">
                                         <div class="row  mt-3">
                                             <div class="col-12 col-md-6">
-                                                <button type="reset" class="btn mb-sm-2 reset-btn w-100">{{ __('reset') }}</button>
+                                                <button type="reset"
+                                                    class="btn mb-sm-2 reset-btn w-100">{{ __('reset') }}</button>
                                             </div>
                                             <div class="col-12 col-md-6">
-                                                <button type="submit" class="btn submit-btn w-100">{{ __('submit') }}</button>
+                                                <button type="submit"
+                                                    class="btn common-btn w-100">{{ __('submit') }}</button>
                                             </div>
                                         </div>
                                     </div>

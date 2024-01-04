@@ -49,7 +49,7 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        $subscription = auth()->user()?->shop?->currentSubscriptions()?->subscription;
+        $subscription = $this->mainShop()?->currentSubscriptions()?->subscription;
         $stores = ProductRepository::query()->where('shop_id', $this->mainShop()->id)->get();
         if ($stores->count() == $subscription->product_limit) {
             return back()->withError('You have extend your limit');

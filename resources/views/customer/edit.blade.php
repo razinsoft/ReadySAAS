@@ -28,10 +28,10 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            @if ($errors->has('customer_group_id'))
+                                            @error('customer_group_id')
                                                 <span class="text-danger">{{ $errors->first('customer_group_id') }}
                                                 </span>
-                                            @endif
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -40,10 +40,10 @@
                                             </label>
                                             <input type="text" name="name" value="{{ $customer->name }}"
                                                 placeholder="{{ __('enter_your_customer_name') }}" class="form-control">
-                                            @if ($errors->has('name'))
+                                                @error('name')
                                                 <span class="text-danger">{{ $errors->first('name') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -51,34 +51,34 @@
                                             <label class="mb-2">{{ __('company_name') }} </label>
                                             <input type="text" name="company_name" value="{{ $customer->company_name }}"
                                                 placeholder="{{ __('enter_your_customer_company_name') }}" class="form-control">
-                                            @if ($errors->has('company_name'))
+                                                @error('company_name')
                                                 <span class="text-danger">{{ $errors->first('company_name') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label class="mb-2">{{ __('email_address') }} <span
-                                                class="text-danger">*</span></label>
+                                            <label class="mb-2">{{ __('email_address') }}</label>
                                             <input type="email" name="email" value="{{ $customer->email }}"
                                                 placeholder="{{ __('enter_your_customer_email_address') }}" class="form-control">
-                                            @if ($errors->has('email'))
+                                                @error('email')
                                                 <span class="text-danger">{{ $errors->first('email') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label class="mb-2">{{ __('phone_number') }}</label>
+                                            <label class="mb-2">{{ __('phone_number') }} <span
+                                                class="text-danger">*</span></label>
                                             <input type="text" name="phone_number"
                                                 placeholder="{{ __('enter_your_customer_phone_number') }}"
                                                 value="{{ $customer->phone_number }}" class="form-control">
-                                            @if ($errors->has('phone_number'))
+                                                @error('phone_number')
                                                 <span class="text-danger">{{ $errors->first('phone_number') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -87,22 +87,21 @@
                                             <input type="text" name="tax_no" class="form-control"
                                                 placeholder="{{ __('enter_your_customer_tax_number') }}"
                                                 value="{{ $customer->tax_no }}">
-                                            @if ($errors->has('tax_no'))
+                                                @error('tax_no')
                                                 <span class="text-danger">{{ $errors->first('tax_no') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
-                                            <label class="mb-2">{{ __('address') }} <span
-                                                    class="text-danger">*</span></label>
+                                            <label class="mb-2">{{ __('address') }} </label>
                                             <input type="text" name="address" placeholder="{{ __('enter_your_customer_address') }}"
                                                 value="{{ $customer->address }}" class="form-control">
-                                            @if ($errors->has('address'))
+                                                @error('address')
                                                 <span class="text-danger">{{ $errors->first('address') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -110,10 +109,10 @@
                                             <label class="mb-2">{{ __('city') }}</label>
                                             <input type="text" name="city" placeholder="{{ __('enter_your_customer_city') }}"
                                                 value="{{ $customer->city }}" class="form-control">
-                                            @if ($errors->has('city'))
+                                                @error('city')
                                                 <span class="text-danger">{{ $errors->first('city') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -121,10 +120,10 @@
                                             <label class="mb-2">{{ __('state') }}</label>
                                             <input type="text" name="state" value="{{ $customer->state }}"
                                                 placeholder="{{ __('enter_your_customer_state') }}" class="form-control">
-                                            @if ($errors->has('state'))
+                                                @error('state')
                                                 <span class="text-danger">{{ $errors->first('state') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -133,10 +132,10 @@
                                             <input type="text" name="postal_code"
                                                 value="{{ $customer->postal_code }}"
                                                 placeholder="{{ __('enter_your_customer_post_code') }}" class="form-control">
-                                            @if ($errors->has('postal_code'))
+                                                @error('postal_code')
                                                 <span class="text-danger">{{ $errors->first('postal_code') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -144,10 +143,10 @@
                                             <label class="mb-2">{{ __('country') }}</label>
                                             <input type="text" name="country" value="{{ $customer->country }}"
                                                 placeholder="{{ __('enter_your_customer_country') }}" class="form-control">
-                                            @if ($errors->has('country'))
+                                                @error('country')
                                                 <span class="text-danger">{{ $errors->first('country') }}
                                                 </span>
-                                            @endif
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-12">

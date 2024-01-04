@@ -55,7 +55,6 @@ class CustomerController extends Controller
         $request->validate([
             'file' => 'required|file'
         ]);
-        $authUser = auth()->user();
         $file = $request->file('file');
         $csvData = array_map('str_getcsv', file($file));
         try {
@@ -70,8 +69,8 @@ class CustomerController extends Controller
                         'password' => Hash::make($row[10]),
                     ]);
                     Customer::create([
-                        'created_by' => $authUser->id,
-                        'shop_id' => $authUser->shop->id,
+                        'created_by' => auth()->id(),
+                        'shop_id' => $this->mainShop()->id,
                         'customer_group_id' => $customerGroup?->id,
                         'user_id' => $user?->id,
                         'name' => $row[1],

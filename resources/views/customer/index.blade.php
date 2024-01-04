@@ -37,7 +37,7 @@
                                         <td>{{ $customer->customerGroup->name ?? 'N/A' }}</td>
                                         <td>{{ $customer->name }}</td>
                                         <td>{{ $customer->company_name ?? 'N/A' }}</td>
-                                        <td>{{ $customer->email }}</td>
+                                        <td>{{ $customer->email ?? 'N/A' }}</td>
                                         <td>{{ $customer->phone_number }}</td>
                                         <td>{{ $customer->tax_no ?? 'N/A' }}</td>
                                         <td>

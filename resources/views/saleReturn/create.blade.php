@@ -192,7 +192,7 @@
                                             class="btn mb-sm-2 reset-btn w-100">{{ __('back') }}</a>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <button type="submit" class="btn submit-btn w-100">{{ __('return') }}</button>
+                                        <button type="submit" class="btn common-btn w-100">{{ __('return') }}</button>
                                     </div>
                                 </div>
                             </div>

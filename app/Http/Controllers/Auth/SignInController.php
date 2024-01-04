@@ -20,7 +20,7 @@ class SignInController extends Controller
     public function signin(SigninRequest $loginRequest)
     {
         $user = $this->isAuthenticate($loginRequest);
-        $shop = $user?->shop;
+        $shop = $user?->userShop?->shop;
         $loginRequest->only('email', 'password');
 
         if (!$user) {

@@ -372,7 +372,7 @@
                                         <div class="col-12 col-md-6"></div>
                                         <div class="col-12 col-md-6">
                                             <button type="submit"
-                                                class="btn submit-btn w-100">{{ __('submit') }}</button>
+                                                class="btn common-btn w-100">{{ __('submit') }}</button>
                                         </div>
                                     </div>
                                 </div>

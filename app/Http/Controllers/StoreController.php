@@ -25,7 +25,7 @@ class StoreController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $subscription = auth()->user()?->shop?->currentSubscriptions()?->subscription;
+        $subscription = $this->mainShop()?->currentSubscriptions()?->subscription;
         $stores = StoreRepository::query()->where('shop_id', $this->mainShop()->id)->get();
         if ($stores->count() == $subscription->shop_limit) {
             return back()->withError('You have extend your limit');

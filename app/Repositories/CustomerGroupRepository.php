@@ -15,7 +15,7 @@ class CustomerGroupRepository extends Repository
     {
         return self::create([
             'created_by' => auth()->id(),
-            'shop_id' => mainShop()->id,
+            'shop_id' => self::mainShop()->id,
             'name' => $request->name,
             'percentage' => $request->percentage,
         ]);
