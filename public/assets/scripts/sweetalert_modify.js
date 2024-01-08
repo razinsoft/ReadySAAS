@@ -21,7 +21,7 @@ $(document).on("click", "#delete", function (e) {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Confirm",
     }).then((result) => {
         if (result.value) {
             window.location.href = link;
@@ -41,7 +41,7 @@ $(document).on("click", "#permission", function (e) {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes",
+        confirmButtonText: "Confirm",
     }).then((result) => {
         if (result.value) {
             window.location.href = link;
@@ -61,7 +61,7 @@ $(document).on("click", "#trash", function (e) {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, trash it!",
+        confirmButtonText: "Confirm",
     }).then((result) => {
         if (result.value) {
             window.location.href = link;
@@ -81,7 +81,7 @@ $(document).on("click", "#restore", function (e) {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, restore it!",
+        confirmButtonText: "Confirm",
     }).then((result) => {
         if (result.value) {
             window.location.href = link;
@@ -100,7 +100,7 @@ $(document).on("click", "#course_status", function (e) {
         title: `Are You Sure?`,
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: `Yes`,
+        confirmButtonText: `Confirm`,
         denyButtonText: `No`,
     }).then((result) => {
         if (result.value) {

@@ -19,7 +19,7 @@
                                     <b class="offer">You can create {{ $subscription->shop_limit }} branche and also create
                                         {{ $subscription->product_limit }} products for a branch.</b>
                                     <p class="description">{{ $subscription->description }}.</p>
-                                    <button type="button" data-action="{{ route('subscription-purchase.update', $subscription->id) }}"
+                                    <button type="button" data-action="{{ route('subscription.purchase.update', $subscription->id) }}"
                                         class="subscribe-button">Subscribe Now</button>
                                 </div>
                             </div>

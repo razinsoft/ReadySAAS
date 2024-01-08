@@ -67,8 +67,8 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
     });
     // Unit
     Route::controller(SubscriptionPurchaseController::class)->group(function () {
-        Route::get('subscription-purchase', 'index')->name('subscription-purchase.index');
-        Route::get('subscription-purchase/update/{subscription}', 'update')->name('subscription-purchase.update');
+        Route::get('subscription-purchase', 'index')->name('subscription.purchase.index');
+        Route::get('subscription-purchase/update/{subscription}', 'update')->name('subscription.purchase.update');
     });
     // Payment Gateway
     Route::controller(PaymentGatewayController::class)->group(function () {
@@ -82,7 +82,7 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
         Route::post('role/store', 'store')->name('role.store');
         Route::put('role/update/{role}', 'update')->name('role.update');
         Route::get('role/permission/{id}', 'permission')->name('role.permission');
-        Route::post('role/set-permission', 'setPermission')->name('role.setPermission');
+        Route::post('role/set-permission', 'setPermission')->name('role.set.permission');
     });
     // Unit
     Route::controller(UnitController::class)->group(function () {
@@ -99,7 +99,7 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
         Route::get('category/delete/{category}', 'delete')->name('category.delete');
         Route::post('category/import', 'import')->name('category.import');
         Route::get('category/print', 'categoryPrint')->name('category.print');
-        Route::get('download/sample', 'downloadSample')->name('download.sample');
+        Route::get('download/sample', 'downloadSample')->name('download.category.sample');
     });
     //Brand
     Route::controller(BrandController::class)->group(function () {
@@ -143,12 +143,12 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
         Route::get('product/destroy/{product}', 'destroy')->name('product.destroy');
         Route::get('product/gencode', 'generateCode')->name('product.generate.code');
         Route::get('product/search', 'productSearch')->name('product.search');
-        Route::get('product/item', 'productItem')->name('product.item');
+        Route::get('product/details', 'productDetails')->name('product.details');
         Route::post('product/barcode/generate', 'barcodeGenerate')->name('product.barcode.generate');
         Route::get('barcode-print', 'printBarcode')->name('barcode.print');
-        Route::get('products/saleunit/', 'saleUnit')->name('product.saleUnit');
+        Route::get('products/saleunit/', 'saleUnit')->name('product.sale.unit');
         Route::post('product/import', 'import')->name('product.import');
-        Route::get('product/sample/download', 'productDownloadSample')->name('product.download.sample');
+        Route::get('product/sample/download', 'productDownloadSample')->name('download.product.sample');
         Route::get('product/print', 'productPrint')->name('product.print');
     });
     //Customer
@@ -170,10 +170,8 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
         Route::get('purchase/edit/{purchase}', 'edit')->name('purchase.edit');
         Route::put('purchase/update/{purchase}', 'update')->name('purchase.update');
         Route::get('purchase/destroy/{purchase}', 'destroy')->name('purchase.destroy');
-        Route::get('purchases/product/search', 'productSearch')->name('product_purchase.search');
-        Route::get('purchases/product/item', 'productItem')->name('product_purchase.item');
-        Route::post('purchases/add_payment/{id}', 'addPayment')->name('purchase.add-payment');
-        Route::get('purchases/deletepayment/{payment}', 'deletePayment')->name('purchase.delete-payment');
+        Route::post('purchase/add_payment/{id}', 'addPayment')->name('purchase.add.payment');
+        Route::get('purchase/deletepayment/{payment}', 'deletePayment')->name('purchase.delete.payment');
         Route::get('purchase/batch', 'batch')->name('purchase.batch');
         Route::get('purchase/print', 'purchasePrint')->name('purchase.print');
     });
@@ -188,14 +186,14 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
         Route::get('user/profile/{user}', 'profile')->name('profile.index');
         Route::put('user/update-profile/{user}', 'profileUpdate')->name('profile.update');
         Route::post('user/changepass/{user}', 'changePassword')->name('user.password');
-        Route::get('user/genpass', 'generatePassword')->name('genPassword');
+        Route::get('user/genpass', 'generatePassword')->name('generate.password');
     });
     //customer group
     Route::controller(CustomerGroupController::class)->group(function () {
-        Route::get('customer-group', 'index')->name('customer_group.index');
-        Route::post('customer-group/store', 'store')->name('customer_group.store');
-        Route::post('customer-group/update/{customerGroup}', 'update')->name('customer_group.update');
-        Route::get('customer-group/delete/{customerGroup}', 'delete')->name('customer_group.delete');
+        Route::get('customer-group', 'index')->name('customer.group.index');
+        Route::post('customer-group/store', 'store')->name('customer.group.store');
+        Route::post('customer-group/update/{customerGroup}', 'update')->name('customer.group.update');
+        Route::get('customer-group/delete/{customerGroup}', 'delete')->name('customer.group.delete');
     });
     //Sales
     Route::controller(SaleController::class)->group(function () {
@@ -208,8 +206,8 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
     });
     //Stock Count
     Route::controller(StockCountController::class)->group(function () {
-        Route::get('stock/count', 'index')->name('stockCount.index');
-        Route::post('stock/count/store', 'store')->name('stockCount.store');
+        Route::get('stock/count', 'index')->name('stock.count.index');
+        Route::post('stock/count/store', 'store')->name('stock.count.store');
     });
     //Report
     Route::controller(ReportController::class)->group(function () {
@@ -217,10 +215,10 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
     });
     //Sale Returns
     Route::controller(SaleReturnController::class)->group(function () {
-        Route::get('sale-returns', 'index')->name('sale_returns.index');
-        Route::post('sale-returns/search', 'search')->name('sale_returns.search');
-        Route::get('sale-returns/details/{sale}', 'details')->name('sale_returns.details');
-        Route::post('sale-return/product/store/{sale}', 'returnProduct')->name('sale_returns.product_store');
+        Route::get('sale-returns', 'index')->name('sale.return.index');
+        Route::post('sale-returns/search', 'search')->name('sale.return.search');
+        Route::get('sale-returns/details/{sale}', 'details')->name('sale.return.details');
+        Route::post('sale-return/product/store/{sale}', 'returnProduct')->name('sale.return.product.store');
     });
     //General Setting
     Route::controller(SettingsController::class)->group(function () {
@@ -246,10 +244,10 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
     });
     //Coupon
     Route::controller(CouponController::class)->group(function () {
-        Route::get('coupons', 'index')->name('coupons.index');
-        Route::post('coupon/store', 'store')->name('coupons.store');
-        Route::post('coupon/update/{coupon}', 'update')->name('coupons.update');
-        Route::get('coupon/destroy/{coupon}', 'destroy')->name('coupons.destroy');
+        Route::get('coupons', 'index')->name('coupon.index');
+        Route::post('coupon/store', 'store')->name('coupon.store');
+        Route::post('coupon/update/{coupon}', 'update')->name('coupon.update');
+        Route::get('coupon/destroy/{coupon}', 'destroy')->name('coupon.destroy');
     });
 
     //accounting
@@ -263,10 +261,10 @@ Route::middleware(['auth', 'check_permission', 'subscriptionExpireCheck'])->grou
     });
     //Money Transfer
     Route::controller(MoneyTransferController::class)->group(function () {
-        Route::get('money-transfers', 'index')->name('moneyTransfer.index');
-        Route::post('money-transfers/store', 'store')->name('moneyTransfer.store');
-        Route::post('money-transfers/update/{moneyTransfer}', 'update')->name('moneyTransfer.update');
-        Route::get('money-transfers/destroy/{moneyTransfer}', 'destroy')->name('moneyTransfer.destroy');
+        Route::get('money-transfers', 'index')->name('money.transfer.index');
+        Route::post('money-transfers/store', 'store')->name('moneyT.tansfer.store');
+        Route::post('money-transfers/update/{moneyTransfer}', 'update')->name('money.transfer.update');
+        Route::get('money-transfers/destroy/{moneyTransfer}', 'destroy')->name('money.transfer.destroy');
     });
     //Currency
     Route::controller(CurrencyController::class)->group(function () {

@@ -109,7 +109,7 @@
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: "{{ route('genPassword') }}",
+                url: "{{ route('generate.password') }}",
                 success: function(res) {
                     if (res) {
                         $("#getPass").val(res);

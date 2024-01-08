@@ -3,7 +3,7 @@
 @section('content')
     <section class="forms">
         <div class="container-fluid">
-            <form action="{{ route('sale_returns.product_store', $sale->id) }}" method="POST" id="purchase-form"
+            <form action="{{ route('sale.return.product_store', $sale->id) }}" method="POST" id="purchase-form"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="row">

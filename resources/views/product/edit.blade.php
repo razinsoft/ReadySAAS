@@ -428,7 +428,7 @@
             var unitID = $(this).val();
             if (unitID) {
                 $.ajax({
-                    url: "{{ route('product.saleUnit') }}",
+                    url: "{{ route('product.sale.unit') }}",
                     type: "GET",
                     data: {
                         id: unitID,

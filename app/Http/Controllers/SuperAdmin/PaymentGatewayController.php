@@ -62,7 +62,7 @@ class PaymentGatewayController extends Controller
             return to_route('root')->with('success', 'Stripe payment successfully done');
         } catch (Exception $ex) {
             SubscriptionRequestRepository::requestFailed($subscriptionRequest);
-            return to_route('subscription-purchase.index')->withError('Something is wrong please try again');;
+            return to_route('subscription.purchase.index')->withError('Something is wrong please try again');;
         }
     }
 

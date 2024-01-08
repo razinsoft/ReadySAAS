@@ -34,7 +34,7 @@
                                         <td>{{ numberFormat($money_transfer->amount) }}</td>
                                         <td>
                                             <a id="delete"
-                                                href="{{ route('moneyTransfer.destroy', $money_transfer->id) }}"
+                                                href="{{ route('money.transfer.destroy', $money_transfer->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -50,7 +50,7 @@
     <div id="create-money-transfer-modal" tabindex="-1" data-backdrop="static" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
         <div role="document" class="modal-dialog modal-dialog-centered">
-            <form action="{{ route('moneyTransfer.store') }}" method="POST">
+            <form action="{{ route('money.transfer.store') }}" method="POST">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header card-header-color">

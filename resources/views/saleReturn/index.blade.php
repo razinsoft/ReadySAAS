@@ -53,7 +53,7 @@
         aria-hidden="true" class="modal fade text-left">
         <div role="document" class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="{{ route('sale_returns.search') }}" method="POST">
+                <form action="{{ route('sale.return.search') }}" method="POST">
                     @csrf
                     <div class="modal-header card-header-color">
                         <span id="returnModalLabel"
