@@ -40,6 +40,7 @@ class PaymentGatewayController extends Controller
     public function process(Request $request, SubscriptionRequest $subscriptionRequest)
     {
         $generalsettings = GeneralSettingRepository::query()->whereNull('shop_id')->first();
+
         try {
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             Stripe\Charge::create([
@@ -48,8 +49,8 @@ class PaymentGatewayController extends Controller
                 "source" => $request->stripeToken,
                 "description" => $subscriptionRequest->subscription->description,
             ]);
-
-            $shopSubscription = ShopSubscriptionRepository::query()->where(['is_current' => IsHas::YES->value, 'shop_id' => $this->mainShop()->id])->first();
+            
+            $shopSubscription = ShopSubscriptionRepository::query()->where(['is_current' => IsHas::YES->value,'shop_id' => $this->mainShop()->id])->first();
 
             if ($shopSubscription) {
                 $shopSubscription->update([
@@ -61,7 +62,7 @@ class PaymentGatewayController extends Controller
             return to_route('root')->with('success', 'Stripe payment successfully done');
         } catch (Exception $ex) {
             SubscriptionRequestRepository::requestFailed($subscriptionRequest);
-            return to_route('subscription-purchase.index')->withError('Something is wrong please try again');;
+            return to_route('subscription.purchase.index')->withError('Something is wrong please try again');;
         }
     }
 

@@ -3,7 +3,7 @@
 @section('content')
     <section class="forms">
         <div class="container-fluid">
-            <form action="{{ route('sale_returns.product_store', $sale->id) }}" method="POST" id="purchase-form"
+            <form action="{{ route('sale.return.product_store', $sale->id) }}" method="POST" id="purchase-form"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -192,7 +192,7 @@
                                             class="btn mb-sm-2 reset-btn w-100">{{ __('back') }}</a>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <button type="submit" class="btn submit-btn w-100">{{ __('return') }}</button>
+                                        <button type="submit" class="btn common-btn w-100">{{ __('return') }}</button>
                                     </div>
                                 </div>
                             </div>

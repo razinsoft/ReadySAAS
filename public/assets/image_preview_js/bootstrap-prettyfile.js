@@ -19,7 +19,7 @@
 				$el.after('\
 				<div class="input-append input-group"">\
 					<span class="input-group-btn">\
-						<button class="btn submit-btn" type="button">' + text + '</button>\
+						<button class="btn common-btn" type="button">' + text + '</button>\
 					</span>\
 					<input class="input-large form-control" type="text">\
 				</div>\

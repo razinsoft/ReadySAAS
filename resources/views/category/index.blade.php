@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <a href="{{ route('download.sample') }}"
+                                <a href="{{ route('download.category.sample') }}"
                                     class="btn common-btn w-100">{{ __('download') }}</a>
                             </div>
                         </div>

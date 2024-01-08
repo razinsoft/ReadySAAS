@@ -45,7 +45,7 @@
                                                     :required="false" />
                                             </div>
                                             <div class="col-md-2">
-                                                <button type="button" class="btn submit-btn w-100" data-toggle="modal"
+                                                <button type="button" class="btn common-btn w-100" data-toggle="modal"
                                                     data-target="#attachDocumentModal"
                                                     style="margin-top:31px">{{ __('preview') }}</button>
                                             </div>
@@ -344,7 +344,7 @@
                                             class="btn mb-sm-2 reset-btn w-100">{{ __('back') }}</a>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <button type="submit" class="btn submit-btn w-100">{{ __('update_and_Save') }}</button>
+                                        <button type="submit" class="btn common-btn w-100">{{ __('update_and_Save') }}</button>
                                     </div>
                                 </div>
                             </div>

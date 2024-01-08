@@ -33,7 +33,7 @@ $("#searchProduct").on("keyup", function () {
 function selecteItem(id) {
     $("#productList").hide();
     $.ajax({
-        url: "/product/item",
+        url: "/product/details",
         type: "GET",
         data: {
             id: id,

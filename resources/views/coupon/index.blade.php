@@ -68,7 +68,7 @@
                                         <td>
                                             <a data-toggle="modal" data-target="#editModal" href="#"
                                                 class="edit-btn btn btn-sm common-btn"
-                                                data-action="{{ route('coupons.update', $coupon->id) }}"
+                                                data-action="{{ route('coupon.update', $coupon->id) }}"
                                                 data-name="{{ $coupon->name }}" data-code="{{ $coupon->code }}"
                                                 data-type="{{ $coupon->type }}" data-amount="{{ $coupon->amount }}"
                                                 data-minimum_amount="{{ $coupon->min_amount }}"
@@ -77,7 +77,7 @@
                                                 data-expired_date="{{ $coupon->expired_at }}"><i
                                                     class="fa fa-edit"></i></a>
 
-                                            <a id="delete" href="{{ route('coupons.destroy', $coupon->id) }}"
+                                            <a id="delete" href="{{ route('coupon.destroy', $coupon->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -98,7 +98,7 @@
                     <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
                             aria-hidden="true"><i class="fa fa-times text-white"></i></span></button>
                 </div>
-                <form action="{{ route('coupons.store') }}" method="POST">
+                <form action="{{ route('coupon.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">

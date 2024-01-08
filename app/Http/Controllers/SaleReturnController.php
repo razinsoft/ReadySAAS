@@ -23,7 +23,7 @@ class SaleReturnController extends Controller
         if (!$sale) {
             return back()->with('error', 'Invalid invoice no! Please Provied a valid invoice no');
         }
-        return to_route('sale_returns.details', $sale->id);
+        return to_route('sale.return.details', $sale->id);
     }
     public function details(Sale $sale)
     {

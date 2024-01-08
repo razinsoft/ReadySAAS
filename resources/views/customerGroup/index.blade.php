@@ -28,12 +28,12 @@
                                         <td>{{ $customer_group->percentage }}</td>
                                         <td class="">
                                             <a data-toggle="modal" data-target="#editeModal"
-                                                data-action="{{ route('customer_group.update', $customer_group->id) }}"
+                                                data-action="{{ route('customer.group.update', $customer_group->id) }}"
                                                 data-name="{{ $customer_group->name }}"
                                                 data-percentage="{{ $customer_group->percentage }}" href="#"
                                                 class="btn btn-sm common-btn edit-btn"><i class="fa fa-edit"></i></a>
                                             <a id="delete"
-                                                href="{{ route('customer_group.delete', $customer_group->id) }}"
+                                                href="{{ route('customer.group.delete', $customer_group->id) }}"
                                                 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -49,7 +49,7 @@
         aria-hidden="true" class="modal fade text-left">
         <div role="document" class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="{{ route('customer_group.store') }}" method="POST">
+                <form action="{{ route('customer.group.store') }}" method="POST">
                     @csrf
                     <div class="modal-header card-header-color">
                         <span id="exampleModalLabel"

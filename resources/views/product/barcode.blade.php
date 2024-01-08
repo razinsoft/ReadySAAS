@@ -189,7 +189,7 @@
         function selecteItem(id) {
             $('#productList').hide()
             $.ajax({
-                url: "{{ route('product.item') }}",
+                url: "{{ route('product.details') }}",
                 type: 'GET',
                 data: {
                     id: id

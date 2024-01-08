@@ -12,7 +12,7 @@ $('#searchProduct').on("keyup", function () {
         $('#productList').html('');
     }
     $.ajax({
-        url: "/purchases/product/search",
+        url: "/product/search",
         type: 'GET',
         data: {
             search: value
@@ -34,7 +34,7 @@ $('#searchProduct').on("keyup", function () {
 function selecteItem(id) {
     $('#productList').hide()
     $.ajax({
-        url: "/purchases/product/item",
+        url: "/product/details",
         type: 'GET',
         data: {
             id: id

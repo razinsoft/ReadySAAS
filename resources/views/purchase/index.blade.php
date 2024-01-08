@@ -268,7 +268,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form
-                                                                action="{{ route('purchase.add-payment', $purchase->id) }}"
+                                                                action="{{ route('purchase.add.payment', $purchase->id) }}"
                                                                 method="POST" class="payment-form">
                                                                 @csrf
                                                                 <div class="row mb-3">
@@ -414,7 +414,7 @@
                                                                                     <div class="dropdown-menu"
                                                                                         aria-labelledby="dropdownMenuLink">
                                                                                         <a id="delete"
-                                                                                            href="{{ route('purchase.delete-payment', $payment->id) }}"
+                                                                                            href="{{ route('purchase.delete.payment', $payment->id) }}"
                                                                                             class="dropdown-item"><i
                                                                                                 class="fa fa-trash"></i>
                                                                                             {{ __('delete') }}</a>

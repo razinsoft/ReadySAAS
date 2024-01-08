@@ -83,7 +83,7 @@
         aria-hidden="true" class="modal fade text-left">
         <div role="document" class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="{{ route('stockCount.store') }}" method="POST">
+                <form action="{{ route('stock.count.store') }}" method="POST">
                     @csrf
                     <div class="modal-header card-header-color">
                         <span id="exampleModalLabel"

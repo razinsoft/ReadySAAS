@@ -55,21 +55,6 @@ class PurchaseController extends Controller
         return view('purchase.create', compact('accounts', 'suppliers', 'warehouses', 'taxs', 'paymentMethods'));
     }
 
-    public function productSearch(Request $request)
-    {
-        $products = ProductRepository::search($request->search)->get();
-        return $this->json('message', [
-            'products' => $products
-        ]);
-    }
-    public function productItem(Request $request)
-    {
-        $product = ProductRepository::query()->where('id', $request->id)->first();
-        return $this->json('message', [
-            'product' => ProductResource::make($product)
-        ]);
-    }
-
     public function store(PurchaseRequest $request)
     {
         if ($request->grand_total < $request->paid_amount) {

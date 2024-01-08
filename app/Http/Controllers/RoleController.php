@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RoleRequest;
 use Illuminate\Http\Request;
 use App\Repositories\RolesRepository;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -29,12 +30,9 @@ class RoleController extends Controller
     public function permission($id)
     {
         $role = RolesRepository::find($id);
-        $allPermissions = Role::findByName($role->name)->permissions;
-        foreach ($allPermissions as $permission)
-            $permissions[] = $permission->name;
-        if (empty($permissions))
-            $permissions[] = 'dummy text';
-        return view('role.permission', compact('role', 'permissions'));
+        $rolePermissions = Role::findByName($role->name)->permissions->pluck('name')->toArray();
+        $permissions = Permission::all();
+        return view('role.permission', compact('role', 'permissions', 'rolePermissions'));
     }
 
     public function setPermission(Request $request)

@@ -372,7 +372,7 @@
                                         <div class="col-12 col-md-6"></div>
                                         <div class="col-12 col-md-6">
                                             <button type="submit"
-                                                class="btn submit-btn w-100">{{ __('submit') }}</button>
+                                                class="btn common-btn w-100">{{ __('submit') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -428,7 +428,7 @@
             var unitID = $(this).val();
             if (unitID) {
                 $.ajax({
-                    url: "{{ route('product.saleUnit') }}",
+                    url: "{{ route('product.sale.unit') }}",
                     type: "GET",
                     data: {
                         id: unitID,
